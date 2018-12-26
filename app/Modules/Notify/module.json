@@ -1,0 +1,6 @@
+{
+    "name": "Notify",
+    "slug": "notify",
+    "version": "1.0",
+    "description": "This is the module than handles any notification within the system. Notifications may include email, sms and internal messages"
+}
