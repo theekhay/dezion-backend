@@ -27,7 +27,7 @@ class CreateMemberTypesTable extends Migration
 
             $table->integer('type')->default(111);
 
-            $table->json('excluded_branches')->nullable();
+            $table->string('excluded_branches')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
