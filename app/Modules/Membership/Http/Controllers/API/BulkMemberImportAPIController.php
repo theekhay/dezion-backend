@@ -118,7 +118,7 @@ class BulkMemberImportAPIController extends AppBaseController
             catch ( \Maatwebsite\Excel\Validators\ValidationException $e) {
                 $failures = $e->failures();
 
-                $error = [];
+                $error = []; //should store the errors
 
                 foreach ($failures as $failure) {
                     $row = $failure->row();
