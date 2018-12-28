@@ -17,16 +17,21 @@ Route::get('/membership', function (Request $request) {
     // return $request->membership();
 })->middleware('auth:api');
 
+Route::post('admin/login/{church_key?}', 'AdministratorAPIController@login');
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::post('members/import', 'BulkMemberImportAPIController@import');
     Route::post('members/export', 'BulkMemberImportAPIController@export');
 
+
     Route::resource('member_types', 'MemberTypeAPIController');
     Route::resource('member_details', 'MemberDetailAPIController');
     Route::resource('bulk_member_imports', 'BulkMemberImportAPIController');
+    Route::resource('admin', 'AdministratorAPIController');
 });
+
+
 
 
 

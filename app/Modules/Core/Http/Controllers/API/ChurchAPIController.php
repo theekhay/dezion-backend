@@ -6,9 +6,15 @@ namespace App\Modules\Core\Http\Controllers\API;
 use App\Modules\Core\Http\Requests\API\CreateChurchAPIRequest;
 use App\Modules\Core\Http\Requests\API\UpdateChurchAPIRequest;
 use Illuminate\Http\Request;
+use App\Modules\Core\Http\Requests\RegisterChurchAPIRequest;
 
 //models
 use App\Modules\Core\Models\Church;
+use App\Modules\Core\Models\OperationMode;
+use App\Modules\Core\Models\MasterBranch;
+use App\Modules\Core\Models\Branch;
+use App\Modules\Membership\Models\MemberDetail;
+use App\Modules\Membership\Models\Administrator;
 
 //Repos
 use App\Modules\Core\Repositories\ChurchRepository;
@@ -23,6 +29,8 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -123,7 +131,7 @@ class ChurchAPIController extends AppBaseController
      */
     public function store(CreateChurchAPIRequest $request)
     {
-        $church = Church::create( $request->all() + [ 'created_by' => Auth::id() ] );
+        $church = Church::create( $request->all() );
 
         if( $church ) {
             return $this->sendResponse( new ChurchResource( Church::find($church->id) ), 'church created successfully' );
@@ -294,4 +302,65 @@ class ChurchAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Church deleted successfully');
     }
+
+
+    public function registerChurch( RegisterChurchAPIRequest $request)
+    {
+        $church = new Church([
+
+            'name' => $request->church_name,
+            'mode' => OperationMode::LIVE,
+            'activation_key' => Church::generateAppKey()
+        ]);
+
+
+
+        //$adminBranches =  AdminBranches( $admin )->assign();
+
+        try{
+
+            DB::beginTransaction();
+
+            $church->save();
+
+            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id]);
+            $branch->save();
+
+            $details = ['firstname' => $request->firstname,
+                    'surname' => $request->surname,
+                    'email' => $request->email,
+                    'telephone' => $request->telephone,];
+
+            $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
+            $member->save();
+
+            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
+            $admin->save();
+
+           // $adminBranches->save();
+
+           //notify admin
+
+            DB::commit();
+
+            return $this->sendResponse($church, "church has been registered succesfully. Kindly check your email for instructions to proceed");
+        }
+        catch( Exception $e)
+        {
+            DB::rollBack();
+            return $this->sendError("unable to  process this request at the moment.");
+        }
+    }
+
+
+    public function test()
+    {
+       // $branch = new MasterBranch(['name' => 'no name', 'church_id' => 1 ]);
+        //['name' => 'no name', 'church_id' => 1 ]
+       // $branch->name = "no name";
+       // $branch->save();
+
+       echo json_encode(['activation_key' => Church::resolveChurchKey('550977b-c7e3-4c01-bc65-50b18625a10b')] );
+    }
+
 }

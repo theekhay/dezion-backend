@@ -1,43 +1,43 @@
 <?php
 
-namespace App\Modules\Core\Http\Controllers\API;
+namespace App\Modules\Membership\Http\Controllers\API;
 
-use App\Modules\Core\Http\Requests\API\CreateBranchAPIRequest;
-use App\Modules\Core\Http\Requests\API\UpdateBranchAPIRequest;
+//requests
+use App\Modules\Membership\Http\Requests\API\CreateAdministratorAPIRequest;
+use App\Modules\Membership\Http\Requests\API\UpdateAdministratorAPIRequest;
 use Illuminate\Http\Request;
 
 //models
-use App\Modules\Core\Models\Branch;
+use App\Modules\Membership\Models\Administrator;
+use App\Modules\Core\Models\Church;
 
 //repo
-use App\Modules\Core\Repositories\BranchRepository;
+use App\Modules\Membership\Repositories\AdministratorRepository;
 
 //controllers
 use App\Http\Controllers\AppBaseController;
 
-//resources
-use App\Modules\Core\Http\Resources\BranchResource;
 
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-
 use Illuminate\Support\Facades\Auth;
 
-
 /**
- * Class BranchController
- * @package App\Modules\Core\Http\Controllers\API
+ * Class AdministratorController
+ * @package App\Modules\Membership\Http\Controllers\API
  */
 
-class BranchAPIController extends AppBaseController
+class AdministratorAPIController extends AppBaseController
 {
-    /** @var  BranchRepository */
-    private $branchRepository;
+    //use Notifiable, HasApiTokens;
 
-    public function __construct(BranchRepository $branchRepo)
+    /** @var  AdministratorRepository */
+    private $administratorRepository;
+
+    public function __construct(AdministratorRepository $administratorRepo)
     {
-        $this->branchRepository = $branchRepo;
+        $this->administratorRepository = $administratorRepo;
     }
 
     /**
@@ -45,10 +45,10 @@ class BranchAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/branches",
-     *      summary="Get a listing of the Branches.",
-     *      tags={"Branch"},
-     *      description="Get all Branches",
+     *      path="/administrators",
+     *      summary="Get a listing of the Administrators.",
+     *      tags={"Administrator"},
+     *      description="Get all Administrators",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -62,7 +62,7 @@ class BranchAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/Branch")
+     *                  @SWG\Items(ref="#/definitions/Administrator")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -74,31 +74,29 @@ class BranchAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->branchRepository->pushCriteria(new RequestCriteria($request));
-        $this->branchRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $branches = $this->branchRepository->all();
+        $this->administratorRepository->pushCriteria(new RequestCriteria($request));
+        $this->administratorRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $administrators = $this->administratorRepository->all();
 
-        // return $this->sendResponse($branches->toArray(), 'Branches retrieved successfully');
-
-        return $this->sendResponse(  BranchResource::collection( $branches ), 'all branches' );
+        return $this->sendResponse($administrators->toArray(), 'Administrators retrieved successfully');
     }
 
     /**
-     * @param CreateBranchAPIRequest $request
+     * @param CreateAdministratorAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/branches",
-     *      summary="Store a newly created Branch in storage",
-     *      tags={"Branch"},
-     *      description="Store Branch",
+     *      path="/administrators",
+     *      summary="Store a newly created Administrator in storage",
+     *      tags={"Administrator"},
+     *      description="Store Administrator",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="Branch that should be stored",
+     *          description="Administrator that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Branch")
+     *          @SWG\Schema(ref="#/definitions/Administrator")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -111,7 +109,7 @@ class BranchAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Branch"
+     *                  ref="#/definitions/Administrator"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -121,11 +119,13 @@ class BranchAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateBranchAPIRequest $request)
+    public function store(CreateAdministratorAPIRequest $request)
     {
         $input = $request->all();
-        $branches = $this->branchRepository->create($input);
-        return $this->sendResponse( new BranchResource($branches), 'Branch saved successfully');
+
+        $administrators = $this->administratorRepository->create($input);
+
+        return $this->sendResponse($administrators->toArray(), 'Administrator saved successfully');
     }
 
     /**
@@ -133,14 +133,14 @@ class BranchAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/branches/{id}",
-     *      summary="Display the specified Branch",
-     *      tags={"Branch"},
-     *      description="Get Branch",
+     *      path="/administrators/{id}",
+     *      summary="Display the specified Administrator",
+     *      tags={"Administrator"},
+     *      description="Get Administrator",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Branch",
+     *          description="id of Administrator",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -156,7 +156,7 @@ class BranchAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Branch"
+     *                  ref="#/definitions/Administrator"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -168,28 +168,30 @@ class BranchAPIController extends AppBaseController
      */
     public function show($id)
     {
-        $branch = $this->branchRepository->findWithoutFail($id);
+        /** @var Administrator $administrator */
+        $administrator = $this->administratorRepository->findWithoutFail($id);
 
-        if (empty($branch))  return $this->sendError('Branch not found');
+        if (empty($administrator)) {
+            return $this->sendError('Administrator not found');
+        }
 
-        return $this->sendResponse( new BranchResource( $branch ), 'Branch Detail retrieved successfully' );
+        return $this->sendResponse($administrator->toArray(), 'Administrator retrieved successfully');
     }
-
 
     /**
      * @param int $id
-     * @param UpdateBranchAPIRequest $request
+     * @param UpdateAdministratorAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/branches/{id}",
-     *      summary="Update the specified Branch in storage",
-     *      tags={"Branch"},
-     *      description="Update Branch",
+     *      path="/administrators/{id}",
+     *      summary="Update the specified Administrator in storage",
+     *      tags={"Administrator"},
+     *      description="Update Administrator",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Branch",
+     *          description="id of Administrator",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -197,9 +199,9 @@ class BranchAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="Branch that should be updated",
+     *          description="Administrator that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/Branch")
+     *          @SWG\Schema(ref="#/definitions/Administrator")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -212,7 +214,7 @@ class BranchAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/Branch"
+     *                  ref="#/definitions/Administrator"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -222,17 +224,20 @@ class BranchAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateBranchAPIRequest $request)
+    public function update($id, UpdateAdministratorAPIRequest $request)
     {
         $input = $request->all();
 
-        $branch = $this->branchRepository->findWithoutFail($id);
+        /** @var Administrator $administrator */
+        $administrator = $this->administratorRepository->findWithoutFail($id);
 
-        if (empty($branch)) return $this->sendError('Branch not found');
+        if (empty($administrator)) {
+            return $this->sendError('Administrator not found');
+        }
 
-        $branch = $this->branchRepository->update($input, $id);
+        $administrator = $this->administratorRepository->update($input, $id);
 
-        return $this->sendResponse(new BranchResource( $branch ), 'Branch updated successfully');
+        return $this->sendResponse($administrator->toArray(), 'Administrator updated successfully');
     }
 
     /**
@@ -240,14 +245,14 @@ class BranchAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/branches/{id}",
-     *      summary="Remove the specified Branch from storage",
-     *      tags={"Branch"},
-     *      description="Delete Branch",
+     *      path="/administrators/{id}",
+     *      summary="Remove the specified Administrator from storage",
+     *      tags={"Administrator"},
+     *      description="Delete Administrator",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of Branch",
+     *          description="id of Administrator",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -275,15 +280,38 @@ class BranchAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Branch $branch */
-        $branch = $this->branchRepository->findWithoutFail($id);
+        /** @var Administrator $administrator */
+        $administrator = $this->administratorRepository->findWithoutFail($id);
 
-        if (empty($branch)) {
-            return $this->sendError('Branch not found');
+        if (empty($administrator)) {
+            return $this->sendError('Administrator not found');
         }
 
-        $branch->delete();
+        $administrator->delete();
 
-        return $this->sendResponse($id, 'Branch deleted successfully');
+        return $this->sendResponse($id, 'Administrator deleted successfully');
+    }
+
+
+    public function login( $church_key )
+    {
+
+        $church = Church::resolveChurchKey($church_key);
+
+        if( null == $church || empty( $church_key ) )
+            return $this->sendError('Unable to resolve this church request. Kindly  check your url.', 404);
+
+
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id] ) )
+        {
+            $user = Auth::user();
+
+            $success['token'] =  $user->createToken('MyApp')->accessToken;
+            return response()->json(['success' => $success], 200);
+        }
+        else
+        {
+            return response()->json(['error'=>'Invalid username/password combination'], 401);
+        }
     }
 }

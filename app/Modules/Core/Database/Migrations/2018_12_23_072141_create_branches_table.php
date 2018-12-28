@@ -29,6 +29,8 @@ class CreateBranchesTable extends Migration
             $table->integer('deleted_by')->nullable();
             $table->date('date_established')->nullable();
 
+            $table->integer('type')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
 

@@ -4,6 +4,7 @@ namespace App\Modules\Membership\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AddCreatedBy;
 
 /**
  * @SWG\Definition(
@@ -31,7 +32,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class MemberDetail extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy;
+
 
     public $table = 'member_details';
 

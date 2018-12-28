@@ -6,6 +6,10 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Modules\Membership\Models\MemberType;
+use App\Modules\Membership\Models\Administrator;
+use Illuminate\Support\Str;
+
+use App\Traits\AddCreatedBy;
 
 /**
  * @SWG\Definition(
@@ -33,7 +37,7 @@ use App\Modules\Membership\Models\MemberType;
  */
 class Church extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy;
 
     public $table = 'churches';
 
@@ -42,7 +46,7 @@ class Church extends Model
 
 
     public $fillable = [
-        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by',
+        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key'
     ];
 
     /**
@@ -64,7 +68,6 @@ class Church extends Model
         'name' => 'required|string|unique:churches,name',
         'code' => 'nullable|unique:churches,code|max:10|alpha_num',
         'date_established' => 'nullable|date|before_or_equal:today'
-        //'created_by' => 'required',
     ];
 
 
@@ -74,7 +77,7 @@ class Church extends Model
      */
     public function getBranches()
     {
-        return $this->hasMany(Branch::class, 'church_id')->where('active', true);
+        return $this->hasMany(AdminBranch::class, 'church_id')->where('active', true);
     }
 
 
@@ -83,8 +86,62 @@ class Church extends Model
      */
     public function getMemberTypes()
     {
-        return $this->hasMany(MemberType::class, 'church_id')->where('active', true)->orWhere('type', MemberType::SYSTEM_DEFINED);
+        return $this->hasMany(MemberType::class, 'church_id')->where('active', true)->orWhere('type', MemberType::SYSTEM_DEFINED );
     }
 
+
+
+    /**
+     * Generate an appkey for the church.
+     */
+    public static function generateAppKey() : String
+    {
+
+        do{
+            $church_key = (string) Str::uuid();
+        }
+        while
+        (
+            static::ChurchKeyExists($church_key)
+        );
+
+        return $church_key;
+
+    }
+
+
+
+    /**
+     * check if church key is unique.
+     * @return boolean
+     */
+    private static function ChurchKeyExists( String $church_key) : bool
+    {
+        return self::where('activation_key', $church_key)->count() > 0 ;
+    }
+
+
+    /**
+     * Get the administrators for a church
+     * @return Administrators
+     */
+    public function getAdministrators()
+    {
+        return $this->hasMany(Administrator::class );
+    }
+
+
+    /**
+     * Returns the church the app key belongs to
+     * @param Key
+     * @return Church
+     */
+    public static function resolveChurchKey( $key)
+    {
+        $church = Church::where('activation_key' , $key )->first();
+
+        return ! empty( $church ) ? $church :  NULL;
+
+    }
 
 }

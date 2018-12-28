@@ -23,8 +23,10 @@ class CreateChurchesTable extends Migration
             $table->text('logo')->nullable();
             $table->string('slogan')->nullable();
 
-            $table->string('activation_key')->nullable();
+            $table->string('activation_key')->unique();
             $table->date('date_established')->nullable();
+
+            $table->integer('mode');
 
             $table->integer('deleted_by')->nullable();
 

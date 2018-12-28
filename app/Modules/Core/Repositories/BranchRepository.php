@@ -3,6 +3,7 @@
 namespace App\Modules\Core\Repositories;
 
 use App\Modules\Core\Models\Branch;
+use App\Modules\Core\Models\AdminBranch;
 use InfyOm\Generator\Common\BaseRepository;
 
 /**
@@ -20,7 +21,7 @@ class BranchRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        
+
     ];
 
     /**
@@ -28,6 +29,6 @@ class BranchRepository extends BaseRepository
      **/
     public function model()
     {
-        return Branch::class;
+        return AdminBranch::class;
     }
 }

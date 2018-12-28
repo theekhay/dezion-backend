@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
            ChurchTableSeeder::class,
            MemberTypeTableSeeder::class,
            MemberDetailTableSeeder::class,
+           AdministratorTableSeeder::class,
         ]);
     }
 }

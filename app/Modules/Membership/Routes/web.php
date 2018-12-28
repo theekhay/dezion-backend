@@ -23,3 +23,5 @@ Route::resource('memberTypes', 'MemberTypeController');
 Route::resource('memberDetails', 'MemberDetailController');
 
 Route::resource('bulkMemberImports', 'BulkMemberImportController');
+
+Route::resource('administrators', 'AdministratorController');
