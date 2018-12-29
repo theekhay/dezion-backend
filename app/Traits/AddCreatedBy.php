@@ -22,7 +22,7 @@ Trait AddCreatedBy
     {
         parent::boot();
 
-       if( self::$enabled )
+       if( ! self::$enabled )
             self::created_by();
     }
 
