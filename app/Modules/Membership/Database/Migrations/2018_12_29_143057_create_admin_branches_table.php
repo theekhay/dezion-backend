@@ -19,7 +19,7 @@ class CreateAdminBranchesTable extends Migration
             $table->integer('admin_id');
             $table->integer('created_by');
             $table->integer('branch_id');
-            $table->boolean('active')->default(true);
+            $table->boolean('active')->default(true); //
             $table->unique(['branch_id', 'admin_id']);
 
             $table->timestamps();
