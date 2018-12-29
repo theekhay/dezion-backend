@@ -9,5 +9,6 @@ $factory->define(App\Modules\Membership\Models\MemberType::class, function (Fake
         'active' => $faker->numberBetween( 0, 1),
         'church_id' => random_int(1 ,8),
         'created_by' => 1,
+
     ];
 });

@@ -10,7 +10,7 @@ $module = "Modules/Membership/";
 
 /**
  * This creates the name space from the files generatd in the above defined module.
- * This was needed because the files were getting wrong namespaced
+ * This was needed because the files were getting wrongly namespaced
  */
 $nspace =  str_replace('/', '\\', $module);
 

@@ -2,20 +2,45 @@
 
 namespace App\Modules\Membership\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Eloquent as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @SWG\Definition(
+ *      definition="AdminBranch",
+ *      required={""},
+ *      @SWG\Property(
+ *          property="id",
+ *          description="id",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
+ *          property="created_at",
+ *          description="created_at",
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @SWG\Property(
+ *          property="updated_at",
+ *          description="updated_at",
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */
 class AdminBranch extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes;
 
     public $table = 'admin_branches';
-
+    
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        'admin_id', 'branches'
+        
     ];
 
     /**
@@ -24,7 +49,7 @@ class AdminBranch extends Model
      * @var array
      */
     protected $casts = [
-        'branches' => 'array',
+        
     ];
 
     /**
@@ -33,14 +58,8 @@ class AdminBranch extends Model
      * @var array
      */
     public static $rules = [
-
-        'firstname' => 'required|string|alpha',
-        'surname' => 'required|string|alpha',
-        'email' => 'required|email|unique_with:administrators,church_id',
-        'telephone' => 'required|numeric|unique_with:administrators,church_id',
-        'church_id' => 'required|numeric|exists:churches,id',
-        'member_id' => 'nullable|numeric|exists:member_details,id',
-        'username' => 'nullable|alpha|unique_with:administrators,church_id',
-        'password' => 'required|min',
+        
     ];
+
+    
 }

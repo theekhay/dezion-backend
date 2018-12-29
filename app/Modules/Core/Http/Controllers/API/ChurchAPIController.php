@@ -356,6 +356,17 @@ class ChurchAPIController extends AppBaseController
     }
 
 
+
+    /**
+     * Gets the member types for a church
+     */
+    public function churchMemberTypes()
+    {
+        $church =  Administrator::find(Auth::id() )->getChurch;
+        $memberTypes = $church->getMemberTypes;
+        return $this->sendResponse($memberTypes, 'member types retrieved succefully');
+    }
+
     public function test()
     {
        // $branch = new MasterBranch(['name' => 'no name', 'church_id' => 1 ]);

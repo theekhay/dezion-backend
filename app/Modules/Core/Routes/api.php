@@ -22,6 +22,7 @@ Route::post('v1/churches/register', 'ChurchAPIController@registerChurch');
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::get('churches/test', 'ChurchAPIController@test');
+    Route::get('churches/member/types', 'ChurchAPIController@churchMemberTypes');
 
     Route::resource('churches', 'ChurchAPIController');
     Route::resource('branches', 'BranchAPIController');

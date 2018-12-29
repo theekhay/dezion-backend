@@ -17,7 +17,7 @@ Route::get('/membership', function (Request $request) {
     // return $request->membership();
 })->middleware('auth:api');
 
-Route::post('admin/login/{church_key?}', 'AdministratorAPIController@login');
+Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
@@ -35,3 +35,6 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 
 
 
+
+
+Route::resource('admin_branches', 'AdminBranchAPIController');

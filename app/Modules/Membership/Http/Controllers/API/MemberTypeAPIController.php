@@ -289,4 +289,7 @@ class MemberTypeAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Member Type deleted successfully');
     }
+
+
+
 }

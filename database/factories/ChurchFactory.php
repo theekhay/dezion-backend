@@ -12,6 +12,9 @@ $factory->define(App\Modules\Core\Models\Church::class, function (Faker $faker) 
         'mode' => 111,
         'created_by_email' => $faker->email,
         'created_by_telephone' => $faker->e164PhoneNumber,
+        'activation_key' => $faker->uuid,
+        'created_by_email' => $faker->email,
+        'created_by_telephone' => $faker->e164PhoneNumber,
 
     ];
 });

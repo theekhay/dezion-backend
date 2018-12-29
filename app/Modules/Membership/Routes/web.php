@@ -25,3 +25,5 @@ Route::resource('memberDetails', 'MemberDetailController');
 Route::resource('bulkMemberImports', 'BulkMemberImportController');
 
 Route::resource('administrators', 'AdministratorController');
+
+Route::resource('adminBranches', 'AdminBranchController');

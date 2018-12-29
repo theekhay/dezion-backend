@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateAdminBranchesTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -17,9 +17,12 @@ class CreateAdminBranchesTable extends Migration
             $table->increments('id');
 
             $table->integer('admin_id');
-            $table->string('branches');
-
+            $table->integer('created_by');
+            $table->integer('branch_id');
+            $table->boolean('active')->default(true);
+            $table->unique(['branch_id', 'admin_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +33,6 @@ class CreateAdminBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_branches');
+        Schema::drop('admin_branches');
     }
 }

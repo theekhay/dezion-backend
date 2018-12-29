@@ -4,6 +4,8 @@ namespace App\Modules\Membership\Models;
 
 use Eloquent as Model;
 use App\Modules\Core\Models\Church;
+use App\Modules\Core\Models\Branch;
+use App\Modules\Membership\Models\AdminBranch;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
@@ -74,9 +76,33 @@ class Administrator extends User
     ];
 
 
+    /**
+     * Gets the church the admin belongs to
+     * @return Church
+     */
     public function getChurch()
     {
-        return $this->belongsTo( Church::class );
+        return $this->belongsTo( Church::class, 'id' );
+    }
+
+
+    /**
+     * Gets the branches an admin has access to
+     * @return AdminBranch
+     */
+    public function branches()
+    {
+        return $this->hasMany( AdminBranch::class, 'admin_id' );
+    }
+
+
+    /**
+     * Checks if an admin is authorized for a branch
+     * @return bool
+     */
+    public function canAccess( Branch $branch ) : bool
+    {
+        AdminBranch::where(['branch_id', $branch->id, 'admin_id' => Auth::id()])->count() > 0 ;
     }
 
 }
