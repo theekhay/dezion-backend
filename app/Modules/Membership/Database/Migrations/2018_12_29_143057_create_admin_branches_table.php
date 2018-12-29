@@ -21,6 +21,7 @@ class CreateAdminBranchesTable extends Migration
             $table->integer('branch_id');
             $table->boolean('active')->default(true);
             $table->unique(['branch_id', 'admin_id']);
+
             $table->timestamps();
             $table->softDeletes();
         });
