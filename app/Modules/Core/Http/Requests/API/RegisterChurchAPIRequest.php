@@ -32,7 +32,7 @@ class RegisterChurchAPIRequest extends FormRequest
             'email' => 'required|email',
 
             'username' => 'alpha_num|unique_with:administrators,church_id',
-            'password' => 'required',
+            'password' => 'required|min:8',
             'c_password' => 'required|same:password',
         ];
     }
