@@ -22,7 +22,12 @@ Trait AddCreatedBy
     {
         parent::boot();
 
-       if( ! self::$enabled )
+        /**
+         * @prop $enaabled should be true for this to work
+         * but false during seeding.
+         * work find a better fix later
+         */
+       if( self::$enabled )
             self::created_by();
     }
 
@@ -43,7 +48,7 @@ Trait AddCreatedBy
     protected static function created_by()
     {
         static::creating(function ($model) {
-            $model->{self::createdByField()} = Auth::id();
+            $model->{self::createdByField()} =  empty( Auth::id() ) ? 1 : Auth::id();
         });
     }
 

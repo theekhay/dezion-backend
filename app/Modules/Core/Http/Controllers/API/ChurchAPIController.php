@@ -310,7 +310,7 @@ class ChurchAPIController extends AppBaseController
 
             'name' => $request->church_name,
             'mode' => OperationMode::LIVE,
-            'activation_key' => Church::generateAppKey()
+            'activation_key' => Church::generateAppKey(),
         ]);
 
 

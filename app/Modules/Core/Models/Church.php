@@ -37,7 +37,7 @@ use App\Traits\AddCreatedBy;
  */
 class Church extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy ;
 
     public $table = 'churches';
 
