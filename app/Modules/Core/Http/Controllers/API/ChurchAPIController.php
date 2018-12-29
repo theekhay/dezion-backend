@@ -321,9 +321,6 @@ class ChurchAPIController extends AppBaseController
 
             $church->save();
 
-            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
-            $admin->save();
-
             $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id]);
             $branch->save();
 
@@ -336,6 +333,10 @@ class ChurchAPIController extends AppBaseController
 
             $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
             $member->save();
+
+            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
+            $admin->save();
+
 
 
 
