@@ -311,11 +311,9 @@ class ChurchAPIController extends AppBaseController
             'name' => $request->church_name,
             'mode' => OperationMode::LIVE,
             'activation_key' => Church::generateAppKey(),
+            'created_by_email' => $request->email,
+            'created_by_telephone' => $request->telephone,
         ]);
-
-
-
-        //$adminBranches =  AdminBranches( $admin )->assign();
 
         try{
 
@@ -323,8 +321,13 @@ class ChurchAPIController extends AppBaseController
 
             $church->save();
 
+            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
+            $admin->save();
+
             $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id]);
             $branch->save();
+
+
 
             $details = ['firstname' => $request->firstname,
                     'surname' => $request->surname,
@@ -334,8 +337,7 @@ class ChurchAPIController extends AppBaseController
             $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
             $member->save();
 
-            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
-            $admin->save();
+
 
            // $adminBranches->save();
 

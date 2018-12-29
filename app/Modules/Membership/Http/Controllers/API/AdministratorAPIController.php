@@ -306,6 +306,8 @@ class AdministratorAPIController extends AppBaseController
         {
             $user = Auth::user();
 
+            //session(['church' => $church]);
+
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json(['success' => $success], 200);
         }

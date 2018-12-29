@@ -26,6 +26,9 @@ class CreateChurchesTable extends Migration
             $table->string('activation_key')->unique();
             $table->date('date_established')->nullable();
 
+            $table->string('created_by_email');
+            $table->string('created_by_telephone');
+
             $table->integer('mode');
 
             $table->integer('deleted_by')->nullable();

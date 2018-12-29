@@ -46,7 +46,7 @@ class Church extends Model
 
 
     public $fillable = [
-        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key'
+        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key', 'created_by_email', 'created_by_telephone'
     ];
 
     /**
@@ -68,6 +68,7 @@ class Church extends Model
         'name' => 'required|string|unique:churches,name',
         'code' => 'nullable|unique:churches,code|max:10|alpha_num',
         'date_established' => 'nullable|date|before_or_equal:today'
+
     ];
 
 

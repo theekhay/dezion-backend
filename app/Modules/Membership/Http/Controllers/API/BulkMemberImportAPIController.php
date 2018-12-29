@@ -110,7 +110,8 @@ class BulkMemberImportAPIController extends AppBaseController
                 if( ! in_array( strtolower( $ext), BulkMemberImport::$allowedFileFormats ) )
                     throw new exception('Invalid file type. The file you are trying to import is not supported');
 
-                (new MemberDetailImport(['member_type_id' => $request->member_type_id, 'branch_id' => 1, 'batch' => $batch ]) )->import( request()->file('import'));
+                    //import the file
+                ( new MemberDetailImport(['member_type_id' => $request->member_type_id, 'branch_id' => 1, 'batch' => $batch ]) )->import( request()->file('import'));
 
                 return response()->json(['status' => 'success', 'message' => "Import succesful" ], 200);
 
