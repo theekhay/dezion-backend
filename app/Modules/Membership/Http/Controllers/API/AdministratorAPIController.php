@@ -302,7 +302,7 @@ class AdministratorAPIController extends AppBaseController
             return $this->sendError('Unable to resolve this church request. Kindly  check your url.', 404);
 
 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id] ) )
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id ] ) )
         {
             $user = Auth::user();
 
