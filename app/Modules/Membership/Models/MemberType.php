@@ -5,6 +5,9 @@ namespace App\Modules\Membership\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//traits
+use App\Traits\AddCreatedBy;
+
 /**
  * @SWG\Definition(
  *      definition="MemberType",
@@ -31,7 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class MemberType extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy;
 
     public $table = 'member_types';
 
@@ -60,7 +63,7 @@ class MemberType extends Model
     public static $rules = [
 
         'church_id' => 'required|numeric|exists:churches,id',
-        'name' => 'required|alpha_dash|unique_with:member_types,church_id|not_in:First timers,Members, members, firsttimers, first timers',
+        'name' => 'required|string|unique_with:member_types,church_id|not_in:First timers,Members, members, firsttimers, first timers',
         'excluded_branches' => 'nullable|json',
         'code' => 'nullable|unique_with:member_types,church_id|max:10|alpha_num',
     ];

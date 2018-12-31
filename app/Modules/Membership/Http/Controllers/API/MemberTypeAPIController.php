@@ -123,7 +123,7 @@ class MemberTypeAPIController extends AppBaseController
     public function store(CreateMemberTypeAPIRequest $request)
     {
         $input = $request->all();
-        $memberTypes = $this->memberTypeRepository->create($input + ['created_by' => Auth::id() ]);
+        $memberTypes = $this->memberTypeRepository->create($input);
         return $this->sendResponse( new MemberTypeResource($memberTypes), 'Member Type saved successfully');
     }
 

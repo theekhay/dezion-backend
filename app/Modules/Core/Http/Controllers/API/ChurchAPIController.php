@@ -374,7 +374,9 @@ class ChurchAPIController extends AppBaseController
        // $branch->name = "no name";
        // $branch->save();
 
-       echo json_encode(['activation_key' => Church::resolveChurchKey('550977b-c7e3-4c01-bc65-50b18625a10b')] );
+       $church = Church::find(2)->getMemberTypes;
+
+       echo json_encode(['activation_key' => $church ]);
     }
 
 }

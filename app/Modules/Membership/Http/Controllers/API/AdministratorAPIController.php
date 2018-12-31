@@ -301,15 +301,13 @@ class AdministratorAPIController extends AppBaseController
             return $this->sendError('Unable to resolve this church request. Kindly  check your url.', 404);
 
 
-        if(Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id ] ) )
+        if( Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id ] ) )
         {
             $admin = Auth::user();
 
-            session(['church' => $church]);
-            session(['branches' => $admin->branches()->get() ]);
-
             $success['token'] =  $admin->createToken('MyApp')->accessToken;
-            return response()->json(['success' => $success], 200);
+            $response = ['success' => $success, 'admin' => $admin] ;
+            return $this->sendResponse($response, 'Login succesful');
         }
         else
         {
