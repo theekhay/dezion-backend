@@ -66,7 +66,7 @@ class BulkMemberImport extends Model
 
         'member_type_id' => 'numeric|exists:member_types,id',
         'import' => 'file|mimes:csv,xlsx,xls',
-        'branch_id' => 'numeric|exists:branches,id'
+        'branch_id' => 'nullable|numeric|exists:branches,id'
     ];
 
 
