@@ -15,6 +15,9 @@ use App\Modules\Core\Models\MasterBranch;
 use App\Modules\Core\Models\Branch;
 use App\Modules\Membership\Models\MemberDetail;
 use App\Modules\Membership\Models\Administrator;
+use App\Modules\Membership\Models\AdminBranch as AssignBranch;
+use App\Modules\Core\Models\AdminBranch;
+use App\Modules\Membership\Models\ChurchAdmin;
 
 //Repos
 use App\Modules\Core\Repositories\ChurchRepository;
@@ -324,23 +327,20 @@ class ChurchAPIController extends AppBaseController
             $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id]);
             $branch->save();
 
-
-
-            $details = ['firstname' => $request->firstname,
-                    'surname' => $request->surname,
-                    'email' => $request->email,
-                    'telephone' => $request->telephone,];
+            $details = [
+                        'firstname' => $request->firstname,
+                        'surname' => $request->surname,
+                        'email' => $request->email,
+                        'telephone' => $request->telephone,
+                    ];
 
             $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
             $member->save();
 
-            $admin = new Administrator( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
+            $admin = new ChurchAdmin( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
             $admin->save();
 
-
-
-
-           // $adminBranches->save();
+            $admin->assignTo( $branch );
 
            //notify admin
 

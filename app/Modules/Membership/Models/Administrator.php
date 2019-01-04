@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Models\User;
 
+
 /**
  * @SWG\Definition(
  *      definition="Administrator",
@@ -46,7 +47,7 @@ class Administrator extends User
 
 
     public $fillable = [
-        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password'
+        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password', 'type'
     ];
 
     /**
@@ -98,11 +99,47 @@ class Administrator extends User
 
     /**
      * Checks if an admin is authorized for a branch
+     * superadmins and church admins have access to all branches in their church
      * @return bool
      */
     public function canAccess( Branch $branch ) : bool
     {
+        if( $this->type == AdminType::SuperAdmin || $this->type == AdminType::ChurchAdmin )
+            return true;
+
         AdminBranch::where(['branch_id', $branch->id, 'admin_id' => Auth::id()])->count() > 0 ;
     }
+
+
+    /**
+     * checks if an admin is a church admin
+     * @return bool
+     */
+    public function isChurchAdmin() : bool
+    {
+        return $this->type == AdminType::ChurchAdmin;
+    }
+
+
+    /**
+     * checks if an admin is a super admin
+     * @return bool
+     */
+    public function isSuperAdmin() : bool
+    {
+        return $this->type == AdminType::SuperAdmin;
+    }
+
+
+
+    /**
+     * Assigns an admin to a branch
+     * In the controller make sure this can only be perfomed by a church-level admin or a superadmin
+     */
+    // public function assignTo( Branch $branch)
+    // {
+    //     $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id]);
+    //     $adminBranch->save();
+    // }
 
 }

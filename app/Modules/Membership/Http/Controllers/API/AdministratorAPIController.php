@@ -305,6 +305,7 @@ class AdministratorAPIController extends AppBaseController
         {
             $admin = Auth::user();
 
+            //tokens should be created using the church's appkey
             $success['token'] =  $admin->createToken('MyApp')->accessToken;
             $response = ['success' => $success, 'admin' => $admin] ;
             return $this->sendResponse($response, 'Login succesful');

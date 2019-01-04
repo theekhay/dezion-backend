@@ -22,5 +22,5 @@ Route::post('login', 'UserController@login');
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
-    Route::get('details', 'UserController@details');
+
 });

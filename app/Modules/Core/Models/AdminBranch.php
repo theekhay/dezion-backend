@@ -6,7 +6,7 @@ use App\Modules\Core\Models\Branch;
 
 class AdminBranch extends Branch
 {
-    protected $type;
+    //protected $type;
 
     public function __construct($attributes = [] )
     {

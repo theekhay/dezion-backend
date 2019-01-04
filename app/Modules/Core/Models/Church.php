@@ -67,7 +67,7 @@ class Church extends Model
 
         'name' => 'required|string|unique:churches,name',
         'code' => 'nullable|unique:churches,code|max:10|alpha_num',
-        'date_established' => 'nullable|date|before_or_equal:today'
+        'date_established' => 'nullable|date|before_or_equal:today',
 
     ];
 
@@ -97,17 +97,12 @@ class Church extends Model
      */
     public static function generateAppKey() : String
     {
-
         do{
             $church_key = (string) Str::uuid();
         }
-        while
-        (
-            static::ChurchKeyExists($church_key)
-        );
+        while( static::ChurchKeyExists($church_key) );
 
         return $church_key;
-
     }
 
 

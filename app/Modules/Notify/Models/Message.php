@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Modules\Membership\Models;
+namespace App\Modules\Notify\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\AddCreatedBy;
-use App\Modules\Membership\Models\Administrator;
 
 /**
  * @SWG\Definition(
- *      definition="AdminBranch",
+ *      definition="Message",
  *      required={""},
  *      @SWG\Property(
  *          property="id",
@@ -31,20 +29,18 @@ use App\Modules\Membership\Models\Administrator;
  *      )
  * )
  */
-class AdminBranch extends Model
+class Message extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes;
 
-    public $table = 'admin_branches';
-
+    public $table = 'messages';
+    
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-
-        'admin_id', 'branch_id', 'created_by',
-
+        
     ];
 
     /**
@@ -53,7 +49,7 @@ class AdminBranch extends Model
      * @var array
      */
     protected $casts = [
-
+        
     ];
 
     /**
@@ -62,14 +58,8 @@ class AdminBranch extends Model
      * @var array
      */
     public static $rules = [
-
+        
     ];
 
-
-    public function admin()
-    {
-        return $this->belongsTo(Administrator::class, 'id', 'admin_id' );
-    }
-
-
+    
 }

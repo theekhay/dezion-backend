@@ -26,6 +26,8 @@ class CreateAdministratorsTable extends Migration
 
             $table->boolean('active')->default(1);
 
+            $table->integer('type');
+
             $table->integer('created_by');
             $table->integer('deleted_by')->nullable();
             $table->string('password');
