@@ -21,6 +21,7 @@ Route::get('/notify', function (Request $request) {
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::post('sms/send', 'MessageAPIController@sendSms');
+    Route::post('inapp/send', 'MessageAPIController@sendInApp');
 });
 
 

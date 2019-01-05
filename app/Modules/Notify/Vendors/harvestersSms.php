@@ -23,10 +23,11 @@ Class SmartSms implements INotify, ICheckBalance{
 
     public function __construct()
     {
-        //$this->username = 'care@harvesterng.org';
-        $this->username = 'ojo_tokunbo2002@yahoo.com';
-        //$this->password = 'membership';
-        $this->password = 'Tokunbo@123';
+       // $this->username = 'ojo_tokunbo2002@yahoo.com';
+       // $this->password = 'Tokunbo@123';
+
+        $this->username = 'care@harvestersng.org';
+        $this->password = 'membership';
         $this->sender = "test";
         $this->builder  = self::BASE_URL."username=" .$this->username. "&password=" .$this->password. "&sender=" .$this->sender;
     }
@@ -39,11 +40,11 @@ Class SmartSms implements INotify, ICheckBalance{
     }
 
 
-    public function send( String $message, String $recepients )
+    public function send( String $message, String $recipients )
     {
         if( ! empty( $recepients ) )
         {
-            $query = $this->builder. "&recipient=" .$recepients ."&message=".$message;
+            $query = $this->builder. "&recipient=" .$recipients ."&message=".$message;
            // $recepientsString = $this->recepientsToString( $recepients );
             $curl = curl_init();
 
@@ -76,17 +77,9 @@ Class SmartSms implements INotify, ICheckBalance{
     }
 
 
-    public function recepientsToString( Array $recepients)
-    {
-        return implode(',', $recepients);
-    }
 
 
 
-    public function recepientsToArray( Array $recepients)
-    {
-        return explode(',', $recepients);
-    }
 
 
     public function log()

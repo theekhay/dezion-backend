@@ -15,6 +15,9 @@ use App\Modules\Notify\Concerns\INotify;
 use App\Modules\Notify\Methods\Sms;
 
 use App\Modules\Notify\Vendors\SmartSms;
+use App\Modules\Notify\Models\InApp;
+
+use App\Modules\Notify\Methods\InApp as InAppMsg;
 
 
 /**
@@ -302,5 +305,22 @@ class MessageAPIController extends AppBaseController
     public function sendMail(){
 
 
+    }
+
+
+
+    public function sendInApp( Request $request)
+    {
+        $inapp = new InAppMsg();
+        $inapp->message = $request->message;
+        $inapp->recipient = $request->recipients;
+
+        try{
+            $resp = $inapp->send();
+        }
+        catch(Exception $e){
+            $this->sendResponse($resp, "problem sending message");
+        }
+        $this->sendResponse($resp, "check");
     }
 }
