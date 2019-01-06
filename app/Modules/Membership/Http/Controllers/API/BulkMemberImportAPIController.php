@@ -137,6 +137,9 @@ class BulkMemberImportAPIController extends AppBaseController
             }
 
         }
+        else{
+            return $this->sendError("No file selcted for import.");
+        }
     }
 
 
