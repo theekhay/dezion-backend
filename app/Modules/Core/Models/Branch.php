@@ -33,7 +33,7 @@ use App\Traits\AddCreatedBy;
  *      )
  * )
  */
-abstract class Branch extends Model
+Class Branch extends Model
 {
     use SoftDeletes, AddCreatedBy;
 
@@ -84,7 +84,7 @@ abstract class Branch extends Model
 
     public function getMembers()
     {
-        return $this->hasMany(MemberDetail::class, 'branch_id');
+        return $this->hasMany( MemberDetail::class, 'branch_id');
     }
 
 

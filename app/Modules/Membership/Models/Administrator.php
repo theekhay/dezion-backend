@@ -89,6 +89,7 @@ class Administrator extends User
 
     /**
      * Gets the branches an admin has access to
+     * These typically
      * @return AdminBranch
      */
     public function branches()

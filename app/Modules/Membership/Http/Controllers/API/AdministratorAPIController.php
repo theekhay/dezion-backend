@@ -22,6 +22,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Notify\Http\Resources\AdminResource;
 
 /**
  * Class AdministratorController
@@ -307,7 +308,7 @@ class AdministratorAPIController extends AppBaseController
 
             //tokens should be created using the church's appkey
             $success['token'] =  $admin->createToken('MyApp')->accessToken;
-            $response = ['success' => $success, 'admin' => $admin] ;
+            $response = ['success' => $success, 'admin' => new AdminResource($admin) ] ;
             return $this->sendResponse($response, 'Login succesful');
         }
         else

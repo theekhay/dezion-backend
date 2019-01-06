@@ -3,7 +3,7 @@
 namespace App\Modules\Notify\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Modules\Core\Http\Resources\BranchResource;
+use App\Modules\Membership\Http\Resources\AdminBranchResource;
 
 class AdminResource extends JsonResource
 {
@@ -26,8 +26,9 @@ class AdminResource extends JsonResource
             'telephone' => $this->telephone,
             'church_id' => $this->church_id,
             'member_id' => $this->member_id,
+            'type' => $this->type,
 
-            //'branch' = BranchResource::collection( $this->getMembers ),$this->branch(),
+            'branches' => AdminBranchResource::collection( $this->branches ),
         ];
     }
 }

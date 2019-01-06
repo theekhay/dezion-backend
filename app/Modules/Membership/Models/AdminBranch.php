@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Modules\Membership\Models\Administrator;
+use App\Modules\Core\Models\Branch;
 
 /**
  * @SWG\Definition(
@@ -66,9 +67,21 @@ class AdminBranch extends Model
     ];
 
 
+    /**
+     * Defies the relationship between an admin's branch and the admin person
+     */
     public function admin()
     {
         return $this->belongsTo(Administrator::class, 'id', 'admin_id' );
+    }
+
+
+    /**
+     * Defines the relationship between a branch and admin
+     */
+    public function getBranch()
+    {
+        return $this->belongsTo( Branch::class, 'id' );
     }
 
 
