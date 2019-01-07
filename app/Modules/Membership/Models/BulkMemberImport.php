@@ -59,12 +59,12 @@ class BulkMemberImport extends Model
      */
     public static $rules = [
 
-        // 'branch_id' => 'required|numeric|exists:branches,id',
-        // 'member_type_id' => 'required|numeric|exists:member_types,id',
-        // 'import' => 'required|file|mimes:csv,xlsx,xls',
-        // 'branch_id' => 'required|numeric|exists:branches,id'
+        'branch_id' => 'required|numeric|exists:branches,id',
+        'member_type_id' => 'required|numeric|exists:member_types,id',
+        'import' => 'required|file|mimes:csv,xlsx,xls',
+        'branch_id' => 'required|numeric|exists:branches,id'
 
-        'member_type_id' => 'numeric',
+        //'member_type_id' => 'numeric',
         // 'import' => 'file|mimes:csv,xlsx,xls',
         // 'branch_id' => 'nullable|numeric|exists:branches,id'
     ];
