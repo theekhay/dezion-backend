@@ -99,7 +99,8 @@ class BulkMemberImportAPIController extends AppBaseController
     {
         $batch = time();
 
-        if( $request->file('import') )
+        //if( $request->file('import') )
+        if( isset( $_FILES['import']) )
         {
             $filename = $_FILES['import']['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION); //get the extension
@@ -133,7 +134,7 @@ class BulkMemberImportAPIController extends AppBaseController
                 return $this->sendError($error);
             }
             catch( \Exception $e){
-                return $this->sendError("There was an error while trying to import this file!");
+                return $this->sendError("There was an error while trying to import this file!", 5);
             }
 
         }
