@@ -99,8 +99,7 @@ class BulkMemberImportAPIController extends AppBaseController
     {
         $batch = time();
 
-        //if( $request->file('import') )
-        if( isset( $_FILES['import']) )
+        if( $request->file('import') )
         {
             $filename = $_FILES['import']['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION); //get the extension
