@@ -296,10 +296,10 @@ class AdministratorAPIController extends AppBaseController
 
     public function login( $church_key = null )
     {
-        $church = Church::resolveChurchKey($church_key);
+      //  $church = Church::resolveChurchKey($church_key);
 
-        if( null == $church || empty( $church_key ) )
-            return $this->sendError('Unable to resolve this church request. Kindly  check your url.', 404);
+        // if( null == $church || empty( $church_key ) )
+        //     return $this->sendError('Unable to resolve this church request. Kindly  check your url.', 404);
 
 
         if( Auth::attempt(['email' => request('email'), 'password' => request('password'), 'church_id' => $church->id ] ) )
