@@ -169,9 +169,7 @@ class BranchAPIController extends AppBaseController
     public function show($id)
     {
         $branch = $this->branchRepository->findWithoutFail($id);
-
         if (empty($branch))  return $this->sendError('Branch not found');
-
         return $this->sendResponse( new BranchResource( $branch ), 'Branch Detail retrieved successfully' );
     }
 

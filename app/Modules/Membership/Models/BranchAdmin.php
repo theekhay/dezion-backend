@@ -26,4 +26,15 @@ class BranchAdmin extends Administrator
         $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id]);
         $adminBranch->save();
     }
+
+
+    /**
+     * Gets the branches an admin has access to
+     * These typically
+     * @return AdminBranch
+     */
+    public function branches()
+    {
+        return $this->hasMany( AdminBranch::class, 'admin_id' );
+    }
 }

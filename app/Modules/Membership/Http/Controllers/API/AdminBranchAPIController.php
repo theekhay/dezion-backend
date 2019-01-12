@@ -2,14 +2,31 @@
 
 namespace App\Modules\Membership\Http\Controllers\API;
 
+//requests
 use App\Modules\Membership\Http\Requests\API\CreateAdminBranchAPIRequest;
 use App\Modules\Membership\Http\Requests\API\UpdateAdminBranchAPIRequest;
-use App\Modules\Membership\Models\AdminBranch;
-use App\Modules\Membership\Repositories\AdminBranchRepository;
 use Illuminate\Http\Request;
+
+//models
+use App\Modules\Membership\Models\AdminBranch;
+use App\Modules\Core\Models\Branch;
+
+//repo
+use App\Modules\Membership\Repositories\AdminBranchRepository;
+
+//controllers
 use App\Http\Controllers\AppBaseController;
+
+//criteria
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
+
+//resourcws
+use App\Modules\Core\Http\Resources\BranchResource;
+use App\Modules\Membership\Http\Resources\AdminBranchResource;
+
+//others
+use Illuminate\Support\Facades\Auth;
 use Response;
 
 /**
@@ -61,11 +78,21 @@ class AdminBranchAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->adminBranchRepository->pushCriteria(new RequestCriteria($request));
-        $this->adminBranchRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $adminBranches = $this->adminBranchRepository->all();
+        // $this->adminBranchRepository->pushCriteria(new RequestCriteria($request));
+        // $this->adminBranchRepository->pushCriteria(new LimitOffsetCriteria($request));
+        // $adminBranches = $this->adminBranchRepository->all();
 
-        return $this->sendResponse($adminBranches->toArray(), 'Admin Branches retrieved successfully');
+        $admin = Auth::user();
+
+        if( $admin->isChurchAdmin() ){
+            $branches = $admin->toChurchAdmin()->branches()->get();
+            return $this->sendResponse( BranchResource::collection($branches), 'branches retreived succesfully' );
+        }
+        else{
+
+            $branches = $admin->branches()->paginate(50);
+            return $this->sendResponse( AdminBranchResource::collection($branches), 'branches retreived succesfully' );
+        }
     }
 
     /**

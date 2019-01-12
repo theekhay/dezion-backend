@@ -143,4 +143,12 @@ class Administrator extends User
     //     $adminBranch->save();
     // }
 
+    public function toChurchAdmin(){
+
+        if( $this->type = AdminType::ChurchAdmin){
+
+            return ChurchAdmin::find($this->id);
+
+        }
+    }
 }

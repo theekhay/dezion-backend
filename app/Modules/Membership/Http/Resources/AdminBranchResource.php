@@ -4,6 +4,7 @@ namespace App\Modules\Membership\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Core\Http\Resources\BranchResource;
+use App\Modules\Core\Models\Branch;
 
 class AdminBranchResource extends JsonResource
 {
@@ -21,7 +22,7 @@ class AdminBranchResource extends JsonResource
             'id' => $this->id,
             'admin_id' => $this->admin_id,
             'branch_id' => $this->branch_id,
-            'branch' => new BranchResource( $this->getBranch ),
+            'branch' => new BranchResource( Branch::findOrFail($this->branch_id) ),
         ];
     }
 }

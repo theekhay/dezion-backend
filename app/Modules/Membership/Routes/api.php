@@ -29,6 +29,7 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
     Route::resource('member_details', 'MemberDetailAPIController');
     Route::resource('bulk_member_imports', 'BulkMemberImportAPIController');
     Route::resource('admin', 'AdministratorAPIController');
+    Route::resource('admin_branches', 'AdminBranchAPIController');
 });
 
 
@@ -37,4 +38,4 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 
 
 
-Route::resource('admin_branches', 'AdminBranchAPIController');
+

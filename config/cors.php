@@ -18,7 +18,7 @@ return [
     'default_profile' => [
 
         //'allow_credentials' => false,
-        'allow_credentials' => true, //made this true to fix the import problem in the membership module
+        'allow_credentials' => true, //made this true to fix the import problem in the membership modules
 
 
         'allow_origins' => [

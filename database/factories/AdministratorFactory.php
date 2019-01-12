@@ -15,5 +15,6 @@ $factory->define(App\Modules\Membership\Models\Administrator::class, function (F
         'username' => random_int(0,3) == 3 ? $faker->name : NULL,
         'password' => Hash::make( $faker->firstname ),
         'created_by' => 1,
+        'type' => 322
     ];
 });
