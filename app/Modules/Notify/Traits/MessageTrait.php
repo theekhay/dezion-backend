@@ -1,25 +1,31 @@
 <?php
 
 namespace App\Modules\Notify\Traits;
+use App\Modules\Notify\Methods\InApp as InAppMsg;
+use App\Modules\Notify\Models\InApp;
 
-Trait Message{
+Trait MessageTrait{
 
-    // use InA
-
-
-    public function sendInApp( Request $request)
+    public function sendInApp($message)
     {
         $inapp = new InAppMsg();
-        $inapp->message = $request->message;
+        $inapp->message = $message;
         $inapp->recipient = $this->id;
 
         try{
-            $resp = $inapp->send();
+            $resp = $inapp->sendInApp();
         }
-        catch(Exception $e){
-            $this->sendResponse($resp, "problem sending message");
+        catch( \Exception $e){
+            return ['success'=> false, 'message' => $e->getMessage()];
         }
-        $this->sendResponse($resp, "check");
+
+        return ['success' => true];
+    }
+
+
+    public function unread(){
+        $unread_messages = InApp::where(['recipient' => $this->id, 'read' => false]);
+        return $unread_messages;
     }
 
 }

@@ -10,6 +10,7 @@ use App\Modules\Membership\Models\AdminBranch;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Models\User;
+use App\Modules\Notify\Traits\MessageTrait;
 
 
 /**
@@ -38,7 +39,7 @@ use App\Models\User;
  */
 class Administrator extends User
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, MessageTrait;
 
     public $table = 'administrators';
 

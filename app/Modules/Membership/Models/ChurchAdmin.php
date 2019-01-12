@@ -26,11 +26,11 @@ class ChurchAdmin extends Administrator
      * Assigns an admin to a branch
      * In the controller make sure this can only be perfomed by a church-level admin or a superadmin
      */
-    // public function assignTo( MasterBranch $branch)
-    // {
-    //     $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id] );
-    //     $adminBranch->save();
-    // }
+    public function assignTo( MasterBranch $branch)
+    {
+        $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id] );
+        $adminBranch->save();
+    }
 
 
     /**

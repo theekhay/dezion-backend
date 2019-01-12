@@ -23,6 +23,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use Illuminate\Support\Facades\Auth;
 use App\Modules\Notify\Http\Resources\AdminResource;
+use App\Modules\Membership\Models\ChurchAdmin;
 
 /**
  * Class AdministratorController
@@ -315,5 +316,14 @@ class AdministratorAPIController extends AppBaseController
         {
             return response()->json(['error'=>'Invalid username/password combination'], 401);
         }
+    }
+
+
+    public function test()
+    {
+        $admin = ChurchAdmin::find(4);
+        $resp = $admin->sendInApp("I am here for you");
+        $unread = $admin->unread();
+        echo \json_encode(['res' => $unread->get() ]);
     }
 }

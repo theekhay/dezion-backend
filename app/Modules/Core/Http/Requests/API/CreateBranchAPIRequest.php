@@ -5,6 +5,9 @@ namespace App\Modules\Core\Http\Requests\API;
 use App\Modules\Core\Models\Branch;
 use InfyOm\Generator\Request\APIRequest;
 
+use Illuminate\Support\Facades\Auth;
+use App\Modules\Membership\Models\AdminType;
+
 class CreateBranchAPIRequest extends APIRequest
 {
     /**
@@ -14,7 +17,8 @@ class CreateBranchAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        return true;
+        //return true;
+        return Auth::user()->type != AdminType::BranchAdmin;
     }
 
     /**

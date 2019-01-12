@@ -5,6 +5,7 @@ namespace App\Modules\Membership\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
+use App\Modules\Notify\Traits\MessageTrait;
 
 /**
  * @SWG\Definition(

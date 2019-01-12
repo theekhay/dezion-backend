@@ -58,4 +58,16 @@ Class InApp{
 
 
     }
+
+
+    public function sendInApp()
+    {
+        $message = new InAppModel();
+        $message->recipient = $this->recipient;
+        $message->sender = Auth::id();
+        $message->message = $this->message;
+        $message->reply_to = $this->replyTo;
+
+        $message->save();
+    }
 }
