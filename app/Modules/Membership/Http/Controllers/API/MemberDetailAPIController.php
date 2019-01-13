@@ -122,7 +122,7 @@ class MemberDetailAPIController extends AppBaseController
     public function store(CreateMemberDetailAPIRequest $request)
     {
         $input = $request->all();
-        $memberDetails = $this->memberDetailRepository->create($input + ['created_by' => Auth::id()] );
+        $memberDetails = $this->memberDetailRepository->create($input);
         return $this->sendResponse(new MemberDetailResource($memberDetails), 'Member Detail saved successfully');
     }
 
