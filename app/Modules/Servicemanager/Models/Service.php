@@ -43,7 +43,7 @@ class Service extends Model
 
 
     public $fillable = [
-        'name', 'code', 'branch_id', 'created_by', 'deleted_by', 'active'
+        'name', 'code', 'church_id', 'created_by', 'deleted_by', 'active'
     ];
 
     /**
