@@ -93,4 +93,14 @@ class MemberType extends Model
     }
 
 
+    /**
+     * Defines the relationship between members and member types
+     *
+     */
+    public function members()
+    {
+        return $this->hasMany( MemberDetail::class, 'member_type_id');
+    }
+
+
 }
