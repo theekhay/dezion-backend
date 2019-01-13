@@ -133,7 +133,7 @@ class BulkMemberImportAPIController extends AppBaseController
                 return $this->sendError($error);
             }
             catch( \Exception $e){
-                return $this->sendError("There was an error while trying to import this file!", 5);
+                return $this->sendError("There was an error while trying to import this file!", 500);
             }
 
         }
