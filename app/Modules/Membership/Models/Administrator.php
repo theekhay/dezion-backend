@@ -74,7 +74,7 @@ class Administrator extends User
         'church_id' => 'required|numeric|exists:churches,id',
         'member_id' => 'nullable|numeric|exists:member_details,id',
         'username' => 'nullable|alpha_dash|unique_with:administrators,church_id',
-        'password' => 'required|min',
+        'password' => 'required|min:8',
     ];
 
 

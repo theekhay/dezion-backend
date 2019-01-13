@@ -10,6 +10,7 @@ use App\Modules\Membership\Models\Administrator;
 use Illuminate\Support\Str;
 
 use App\Traits\AddCreatedBy;
+use App\Modules\Servicemanager\Models\ServiceDataCategory;
 
 /**
  * @SWG\Definition(
@@ -78,7 +79,7 @@ class Church extends Model
      */
     public function getBranches()
     {
-        return $this->hasMany(AdminBranch::class, 'church_id')->where('active', true);
+        return $this->hasMany( Branch::class, 'church_id')->where('active', true);
     }
 
 
@@ -123,7 +124,7 @@ class Church extends Model
      */
     public function getAdministrators()
     {
-        return $this->hasMany(Administrator::class );
+        return $this->hasMany(Administrator::class, 'church_id' );
     }
 
 
@@ -138,6 +139,16 @@ class Church extends Model
 
         return ! empty( $church ) ? $church :  NULL;
 
+    }
+
+
+    /**
+     * Defines the relationship between a church and its service Data category
+     *
+     */
+    public function serviceDataCategory()
+    {
+        return $this->hasMany( ServiceDataCategory::class, 'church_id');
     }
 
 }

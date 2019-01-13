@@ -4,6 +4,7 @@ namespace App\Modules\Core\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Membership\Http\Resources\MemberDetailResource;
+use App\Modules\Servicemanager\Http\Resources\ServiceResource;
 
 class BranchResource extends JsonResource
 {
@@ -25,6 +26,7 @@ class BranchResource extends JsonResource
             'date_established' => $this->date_established,
 
             'members' => MemberDetailResource::collection( $this->getMembers ),
+            'services' => ServiceResource::collection( $this->getServices ),
         ];
     }
 }

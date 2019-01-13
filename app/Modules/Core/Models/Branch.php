@@ -8,6 +8,7 @@ use App\Modules\Membership\Models\MemberDetail;
 use App\Modules\Core\Models\BranchType;
 
 use App\Traits\AddCreatedBy;
+use App\Modules\ServiceManager\Models\Service;
 
 /**
  * @SWG\Definition(
@@ -76,15 +77,33 @@ Class Branch extends Model
     // }
 
 
+    /**
+     * Defines the relationship between a branch and the church it belongs to
+     *
+     */
     public function getChurch()
     {
         return $this->belongsTo(App\Modules\Core\Models\Church::class);
     }
 
 
+    /**
+     * Defines the relationship between a branch and its members
+     *
+     */
     public function getMembers()
     {
         return $this->hasMany( MemberDetail::class, 'branch_id');
+    }
+
+
+    /**
+     * Defines the relationship between a branch and its services
+     *
+     */
+    public function getServices()
+    {
+        return $this->hasMany( Service::class, 'branch_id', 'id' );
     }
 
 

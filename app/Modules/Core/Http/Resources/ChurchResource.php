@@ -5,6 +5,7 @@ namespace App\Modules\Core\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Modules\Membership\Http\Resources\MemberTypeResource;
+use App\Modules\ServiceManager\Http\Resources\ServiceDataCategoryResource;
 
 class ChurchResource extends JsonResource
 {
@@ -35,6 +36,7 @@ class ChurchResource extends JsonResource
             //externaldata
             'branches' => BranchResource::collection( $this->getBranches ),
             'member-types' => MemberTypeResource::collection( $this->getMemberTypes ),
+            'service-data-categories' => ServiceDataCategoryResource::collection( $this->serviceDataCategory),
 
       ];
     }
