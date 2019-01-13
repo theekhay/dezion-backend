@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Core\Models\Branch;
 use App\Traits\AddCreatedBy;
+use App\Modules\Core\Models\Church;
 
 /**
  * @SWG\Definition(
@@ -62,7 +63,7 @@ class Service extends Model
     public static $rules = [
 
         'name' => 'required|alpha_dash|unique_with:services,branch_id',
-        'branch_id' => 'required|numeric|exists:branches,id',
+        'church_id' => 'required|numeric|exists:churches,id',
         'code' => 'nullable|max:10|unique_with:services,branch_id',
     ];
 
@@ -72,9 +73,9 @@ class Service extends Model
      * Defines the relationship between a service and a branch
      * each service belongs to a branch
      */
-    public function branch()
+    public function church()
     {
-        return $this->belongsTo( Branch::class);
+        return $this->belongsTo( Church::class);
     }
 
 

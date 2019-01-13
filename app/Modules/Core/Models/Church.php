@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 
 use App\Traits\AddCreatedBy;
 use App\Modules\Servicemanager\Models\ServiceDataCategory;
+use App\Modules\ServiceManager\Models\Service;
 
 /**
  * @SWG\Definition(
@@ -149,6 +150,16 @@ class Church extends Model
     public function serviceDataCategory()
     {
         return $this->hasMany( ServiceDataCategory::class, 'church_id');
+    }
+
+
+    /**
+     * Defines the relationship between a church and its services
+     *
+     */
+    public function getServices()
+    {
+        return $this->hasMany( Service::class, 'church_id', 'id' );
     }
 
 }
