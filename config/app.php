@@ -195,7 +195,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
         //for Debugar
-        Barryvdh\Debugbar\ServiceProvider::class,
+        //Barryvdh\Debugbar\ServiceProvider::class,
 
         //for bugsnag
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
