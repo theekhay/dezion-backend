@@ -259,7 +259,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         //for Debugar
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
         //for bugsnag
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
