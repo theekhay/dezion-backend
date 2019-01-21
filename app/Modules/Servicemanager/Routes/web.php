@@ -21,3 +21,9 @@ Route::group(['prefix' => 'servicemanager'], function () {
 Route::resource('services', 'ServiceController');
 
 Route::resource('serviceDataCategories', 'ServiceDataCategoryController');
+
+Route::resource('serviceDataComponents', 'ServiceDataComponentController');
+
+Route::resource('serviceDataCategoryProvisions', 'ServiceDataCategoryProvisionController');
+
+Route::resource('serviceDataComponentProvisions', 'ServiceDataComponentProvisionController');

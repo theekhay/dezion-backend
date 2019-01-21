@@ -26,17 +26,20 @@ use Response;
 //eports and imports
 // use App\Exports\YourExport;
 // use App\Imports\YourImport;
-// use Maatwebsite\Excel\Excel;
+//use Maatwebsite\Excel\Excel;
 
 use Maatwebsite\Excel\Importer;
 use Maatwebsite\Excel\Exporter;
 use App\Modules\Membership\Imports\MemberDetailImport;
+use Maatwebsite\Excel\HeadingRowImport;
 
 /**
  * Class BulkMemberImportController
  * @package App\Modules\Membership\Http\Controllers\API
  */
 
+
+ //UPDATE THIS CLASS TO CONTACT MANAGER CLASS
 class BulkMemberImportAPIController extends AppBaseController
 {
 
@@ -107,8 +110,8 @@ class BulkMemberImportAPIController extends AppBaseController
             try{
 
                 //check the file format
-                //if( ! in_array( strtolower( $ext), BulkMemberImport::$allowedFileFormats ) )
-                 //   throw new exception('Invalid file type. The file you are trying to import is not supported');
+                if( ! in_array( strtolower( $ext), BulkMemberImport::$allowedFileFormats ) )
+                   throw new exception('Invalid file type. The file you are trying to import is not supported');
 
                     //import the file
                 ( new MemberDetailImport(['member_type_id' => $request->member_type_id, 'branch_id' => $request->branch_id, 'batch' => $batch ]) )->import( request()->file('import'));
@@ -133,7 +136,8 @@ class BulkMemberImportAPIController extends AppBaseController
                 return $this->sendError($error);
             }
             catch( \Exception $e){
-                return $this->sendError("There was an error while trying to import this file!", 500);
+                //return $this->sendError("There was an error while trying to import this file!", 500);
+                return $this->sendError($e->getMessage(), 500);
             }
 
         }
@@ -152,6 +156,25 @@ class BulkMemberImportAPIController extends AppBaseController
     public function export()
     {
 
+    }
+
+
+
+
+
+
+    /**
+     * This checks that the headers are actually required for the import type
+     * for instance if you are importing for a member type, then the headers have to be defined for it to be imported
+     * if an undefined header is found, the user is prompted to first create it before proceeding with the import
+     * s
+     */
+    public function validate_headers()
+    {
+        // $headers = $this->validateHeaders();
+        // $defined_headers = $this->getDefinedHeaders();
+
+        // for
     }
 
 

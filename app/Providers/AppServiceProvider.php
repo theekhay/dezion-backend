@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
         \URL::forceScheme('https');
         Resource::WithoutWrapping();
         Schema::defaultStringLength(191) ;
+
+        //bugsnag error reporting
+        $this->app->alias('bugsnag.multi', \Illuminate\Contracts\Logging\Log::class);
+        $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
     }
 
     /**

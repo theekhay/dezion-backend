@@ -155,6 +155,7 @@ class Church extends Model
 
     /**
      * Defines the relationship between a church and its services
+     * @return Service
      *
      */
     public function getServices()

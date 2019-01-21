@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Core\Models\Branch;
 use App\Traits\AddCreatedBy;
 use App\Modules\Core\Models\Church;
+use App\Modules\Servicemanager\Models\ServiceDataCategory;
+use App\Modules\Servicemanager\Models\ServiceDataComponent;
+use App\Modules\Servicemanager\Models\ServiceDataCategoryProvision;
 
 /**
  * @SWG\Definition(
@@ -62,9 +65,9 @@ class Service extends Model
      */
     public static $rules = [
 
-        'name' => 'required|alpha_dash|unique_with:services,branch_id',
+        'name' => 'required|string|unique_with:services,church_id',
         'church_id' => 'required|numeric|exists:churches,id',
-        'code' => 'nullable|max:10|unique_with:services,branch_id',
+        'code' => 'nullable|alpha_dash|max:10|unique_with:services,church_id',
     ];
 
 
@@ -77,6 +80,25 @@ class Service extends Model
     {
         return $this->belongsTo( Church::class);
     }
+
+
+    /**
+     * Defines the link between a service and its data categoried
+     */
+    public function dataCategories()
+    {
+        return $this->hasMany( ServiceDataCategoryProvision::class, 'service_id' );
+    }
+
+
+    /**
+     * Defines the link between a service and its data components
+     * TODO come back to this function to make sure it is working
+     */
+    // public function dataComponents()
+    // {
+    //     return $this->hasManyThrough( ServiceDataComponent::class, ServiceDataCategoryProvision::class );
+    // }
 
 
 }

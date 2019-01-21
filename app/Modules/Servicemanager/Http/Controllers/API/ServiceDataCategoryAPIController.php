@@ -11,7 +11,8 @@ use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use App\Modules\ServiceManager\Http\Resources\ServiceDataCategoryResource;
+use App\Modules\Servicemanager\Http\Resources\ServiceDataCategoryResource;
+use App\Modules\ServiceManager\Models\Service;
 
 /**
  * Class ServiceDataCategoryController
@@ -64,9 +65,9 @@ class ServiceDataCategoryAPIController extends AppBaseController
     {
         $this->serviceDataCategoryRepository->pushCriteria(new RequestCriteria($request));
         $this->serviceDataCategoryRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $serviceDataCategories = $this->serviceDataCategoryRepository->all();
+        $serviceDataCategories = $this->serviceDataCategoryRepository->paginate(15);
 
-        return $this->sendResponse($serviceDataCategories->toArray(), 'Service Data Categories retrieved successfully');
+        return $this->sendResponse( ServiceDataCategoryResource::collection( $serviceDataCategories ), 'Service Data Categories retrieved successfully');
     }
 
     /**
@@ -161,7 +162,7 @@ class ServiceDataCategoryAPIController extends AppBaseController
             return $this->sendError('Service Data Category not found');
         }
 
-        return $this->sendResponse($serviceDataCategory->toArray(), 'Service Data Category retrieved successfully');
+        return $this->sendResponse( new ServiceDataCategoryResource($serviceDataCategory), 'Service Data Category retrieved successfully');
     }
 
     /**
@@ -277,4 +278,5 @@ class ServiceDataCategoryAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Service Data Category deleted successfully');
     }
+
 }

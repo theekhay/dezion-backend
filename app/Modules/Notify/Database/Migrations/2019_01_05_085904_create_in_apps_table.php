@@ -34,6 +34,6 @@ class CreateInAppsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('in_apps');
+        Schema::dropIfExists('in_app_messages');
     }
 }

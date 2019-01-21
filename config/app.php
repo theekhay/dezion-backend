@@ -194,6 +194,12 @@ return [
         //added for the excel library
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        //for Debugar
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+        //for bugsnag
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
     ],
 
     /*
@@ -251,6 +257,12 @@ return [
 
         //for the excel library
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+        //for Debugar
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+
+        //for bugsnag
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];

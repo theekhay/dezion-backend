@@ -21,7 +21,12 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::resource('services', 'ServiceAPIController');
     Route::resource('service_data_category', 'ServiceDataCategoryAPIController');
+    Route::resource('service_data_components', 'ServiceDataComponentAPIController');
+    Route::resource('service_data_category_provisions', 'ServiceDataCategoryProvisionAPIController');
+   // Route::resource('service_data_component_provisions', 'ServiceDataComponentProvisionAPIController');
 });
+
+
 
 
 

@@ -348,7 +348,7 @@ class ChurchAPIController extends AppBaseController
 
             return $this->sendResponse($church, "church has been registered succesfully. Kindly check your email for instructions to proceed");
         }
-        catch( Exception $e)
+        catch( \Exception $e)
         {
             DB::rollBack();
             return $this->sendError("unable to  process this request at the moment.");
