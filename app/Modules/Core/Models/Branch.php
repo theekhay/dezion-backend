@@ -10,6 +10,7 @@ use App\Modules\Core\Models\BranchType;
 use App\Traits\AddCreatedBy;
 use App\Traits\UuidTrait;
 use App\Traits\OnlyActive;
+use App\Traits\AddStatusTrait;
 
 /**
  * @SWG\Definition(
@@ -37,7 +38,7 @@ use App\Traits\OnlyActive;
  */
 Class Branch extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
 
     public $table = 'branches';
 
