@@ -15,6 +15,8 @@ class CreateWorkflowsTable extends Migration
     {
         Schema::create('workflows', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
             $table->timestamps();
             $table->softDeletes();
         });

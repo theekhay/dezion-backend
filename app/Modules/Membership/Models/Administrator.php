@@ -41,7 +41,7 @@ use App\Traits\OnlyActive;
  */
 class Administrator extends User
 {
-    use SoftDeletes, AddCreatedBy, MessageTrait, UuidTrait, OnlyActive;
+    use SoftDeletes, AddCreatedBy, MessageTrait, UuidTrait ;
 
     public $table = 'administrators';
 
@@ -50,7 +50,7 @@ class Administrator extends User
 
 
     public $fillable = [
-        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password', 'type'
+        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password', 'type', 'status'
     ];
 
     /**
@@ -122,6 +122,17 @@ class Administrator extends User
     public function isChurchAdmin() : bool
     {
         return $this->type == AdminType::ChurchAdmin;
+    }
+
+
+
+    /**
+     * checks if an admin is a branch admin
+     * @return bool
+     */
+    public function isBranchAdmin() : bool
+    {
+        return $this->type == AdminType::BranchAdmin;
     }
 
 

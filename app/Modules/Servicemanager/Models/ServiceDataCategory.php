@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Modules\Core\Models\Church;
 use App\Modules\ServiceManager\Models\Service;
+use App\Traits\UuidTrait;
+use App\Traits\AddStatusTrait;
+use App\Traits\OnlyActive;
 
 /**
  * @SWG\Definition(
@@ -34,7 +37,7 @@ use App\Modules\ServiceManager\Models\Service;
  */
 class ServiceDataCategory extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, AddStatusTrait, OnlyActive;
 
     public $table = 'service_data_categories';
 

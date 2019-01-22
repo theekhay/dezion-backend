@@ -10,6 +10,9 @@ use App\Modules\Core\Models\Church;
 use App\Modules\Servicemanager\Models\ServiceDataCategory;
 use App\Modules\Servicemanager\Models\ServiceDataComponent;
 use App\Modules\Servicemanager\Models\ServiceDataCategoryProvision;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
+use App\Traits\AddStatusTrait;
 
 /**
  * @SWG\Definition(
@@ -37,7 +40,7 @@ use App\Modules\Servicemanager\Models\ServiceDataCategoryProvision;
  */
 class Service extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
 
     public $table = 'services';
 

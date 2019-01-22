@@ -46,7 +46,7 @@ class AdminBranch extends Model
 
     public $fillable = [
 
-        'admin_id', 'branch_id', 'created_by',
+        'admin_id', 'branch_id', 'created_by', 'status',
 
     ];
 

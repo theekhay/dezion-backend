@@ -15,16 +15,17 @@ class CreateServiceDataCategoriesTable extends Migration
     {
         Schema::create('service_data_categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->integer('church_id');
             $table->string('name');
             $table->string('code')->nullable();
-            $table->boolean('active')->default(1);
+
             $table->integer('created_by');
             $table->integer('deleted_by')->nullable();
+            $table->integer('updated_by')->nullable();
 
-            $table->boolean('is_approved')->nullable();
-            $table->boolean('requires_approval')->nullable();
             $table->boolean('approved_by')->nullable();
 
             $table->string('allowed_branches')->default('*');

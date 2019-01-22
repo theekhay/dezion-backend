@@ -4,10 +4,7 @@ namespace App\Traits;
 
 Trait OnlyActive{
 
-    // public static ACTIVE = 1;
-    // public const INACTIVE = 0;
-
-    // public const LIVE = 111;
+    public  $useAdminApproval = true;
 
     public static function bootOnlyActive(){
 
@@ -23,7 +20,7 @@ Trait OnlyActive{
      */
     public function getActiveColumn()
     {
-        return 'active';
+        return 'status';
     }
 
 

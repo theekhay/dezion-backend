@@ -14,8 +14,16 @@ class CreateInAppAttachmentsTable extends Migration
     public function up()
     {
         Schema::create('in_app_attachments', function (Blueprint $table) {
+
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
+
+            $table->integer('message_id');
+            $table->string('attachment_path');
+
+            $table->integer('created_by');
+            $table->integer('deleted_by')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -44,7 +44,7 @@ Class Branch extends Model
     protected $dates = ['deleted_at'];
 
     public $fillable = [
-        'name', 'code', 'church_id', 'date_established', 'address', 'created_by', 'type'
+        'name', 'code', 'church_id', 'date_established', 'address', 'created_by', 'type', 'status'
     ];
 
     /**

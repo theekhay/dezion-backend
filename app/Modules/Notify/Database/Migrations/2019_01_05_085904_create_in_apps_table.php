@@ -23,6 +23,8 @@ class CreateInAppsTable extends Migration
             $table->integer('reply_to')->nullable();
             $table->boolean('read')->default(0);
 
+            $table->integer('deleted_by')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

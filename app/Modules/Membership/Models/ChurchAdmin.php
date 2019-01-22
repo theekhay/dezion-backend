@@ -7,6 +7,7 @@ use App\Modules\Membership\Models\Administrator;
 use App\Modules\Membership\Models\AdminType;
 use App\Modules\Core\Models\MasterBranch;
 use App\Modules\Core\Models\Branch;
+use App\Models\ModelStatus;
 
 class ChurchAdmin extends Administrator
 {
@@ -28,7 +29,7 @@ class ChurchAdmin extends Administrator
      */
     public function assignTo( MasterBranch $branch)
     {
-        $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id] );
+        $adminBranch = new AdminBranch([ 'admin_id' => $this->id, 'branch_id' => $branch->id, 'status' => ModelStatus::ACTIVE] );
         $adminBranch->save();
     }
 

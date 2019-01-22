@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 //traits
 use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
 
 /**
  * @SWG\Definition(
@@ -34,7 +36,7 @@ use App\Traits\AddCreatedBy;
  */
 class MemberType extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive;
 
     public $table = 'member_types';
 

@@ -35,6 +35,8 @@ use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Modules\Membership\Models\AdminStatus;
+use App\Models\ModelStatus;
 
 /**
  * Class ChurchController
@@ -316,6 +318,7 @@ class ChurchAPIController extends AppBaseController
             'activation_key' => Church::generateAppKey(),
             'created_by_email' => $request->email,
             'created_by_telephone' => $request->telephone,
+            'status' => ModelStatus::ACTIVE,
         ]);
 
         try{
@@ -324,7 +327,7 @@ class ChurchAPIController extends AppBaseController
 
             $church->save();
 
-            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id]);
+            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id, 'status' => ModelStatus::ACTIVE]);
             $branch->save();
 
             $details = [
@@ -337,7 +340,7 @@ class ChurchAPIController extends AppBaseController
             $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
             $member->save();
 
-            $admin = new ChurchAdmin( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'password' => Hash::make($request->password) ]) ;
+            $admin = new ChurchAdmin( $details + ['username' => $request->username, 'member_id' => $member->id, 'church_id' => $church->id, 'status' => AdminStatus::ACTIVE, 'password' => Hash::make($request->password) ]) ;
             $admin->save();
 
             $admin->assignTo( $branch );
@@ -348,7 +351,7 @@ class ChurchAPIController extends AppBaseController
 
             return $this->sendResponse($church, "church has been registered succesfully. Kindly check your email for instructions to proceed");
         }
-        catch( \Exception $e)
+        catch( Exception $e)
         {
             DB::rollBack();
             return $this->sendError("unable to  process this request at the moment.");
@@ -374,9 +377,10 @@ class ChurchAPIController extends AppBaseController
        // $branch->name = "no name";
        // $branch->save();
 
-       $church = Church::find(2)->getMemberTypes;
+      // $church = Church::find(2)->getMemberTypes;
 
-       echo json_encode(['activation_key' => $church ]);
+        $result =  Auth::user();
+       echo json_encode(['activation_key' => $result->isBranchAdmin() ]);
     }
 
 }

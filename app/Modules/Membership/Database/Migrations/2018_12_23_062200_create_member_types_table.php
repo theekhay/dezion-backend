@@ -15,12 +15,12 @@ class CreateMemberTypesTable extends Migration
     {
         Schema::create('member_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->string('name');
             $table->string('code')->nullable();
-
-            $table->boolean('active')->default('1');
             $table->integer('church_id');
 
             $table->integer('created_by');

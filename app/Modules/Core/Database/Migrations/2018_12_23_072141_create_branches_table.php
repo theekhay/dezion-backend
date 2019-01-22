@@ -15,12 +15,14 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
 
             $table->string('name');
             $table->integer('church_id');
             $table->string('code')->nullable();
-            $table->boolean('active')->default(1);
+
+            $table->integer('status');
+
             $table->integer('created_by');
             $table->string('address')->nullable();
 

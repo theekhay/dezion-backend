@@ -42,7 +42,7 @@ use App\Traits\OnlyActive;
  */
 class Church extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive ; //OnCreateTrait
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive ;
 
     public $table = 'churches';
 
@@ -51,7 +51,8 @@ class Church extends Model
 
 
     public $fillable = [
-        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key', 'created_by_email', 'created_by_telephone'
+        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key', 'created_by_email', 'created_by_telephone',
+        'status'
     ];
 
     /**
@@ -83,7 +84,7 @@ class Church extends Model
      */
     public function getBranches()
     {
-        return $this->hasMany( Branch::class, 'church_id')->where('active', true);
+        return $this->hasMany( Branch::class, 'church_id');
     }
 
 
@@ -94,7 +95,7 @@ class Church extends Model
      */
     public function getMemberTypes()
     {
-        return $this->hasMany(MemberType::class, 'church_id')->where('active', true)->orWhere('type', MemberType::SYSTEM_DEFINED );
+        return $this->hasMany(MemberType::class, 'church_id');
     }
 
 

@@ -15,6 +15,8 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->string('name');
             $table->string('code', 10)->nullable();
@@ -22,12 +24,12 @@ class CreateServicesTable extends Migration
 
             $table->integer('created_by');
             $table->integer('deleted_by')->nullable();
+            $table->integer('updated_by')->nullable();
 
             $table->string('schedule')->nullable(); //<-- this is supposed to be how often the service holds
 
             $table->string('enabled_for')->default('*');
 
-            $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

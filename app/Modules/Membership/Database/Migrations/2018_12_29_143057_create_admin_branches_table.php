@@ -15,12 +15,17 @@ class CreateAdminBranchesTable extends Migration
     {
         Schema::create('admin_branches', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->integer('admin_id');
+
             $table->integer('created_by');
+            $table->integer('deleted_by')->nullable();
+            $table->integer('updated_by')->nullable();
+
             $table->integer('branch_id');
-            $table->boolean('active')->default(true); //
             $table->unique(['branch_id', 'admin_id']);
 
             $table->timestamps();

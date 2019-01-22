@@ -15,11 +15,12 @@ class CreateServiceDataComponentsTable extends Migration
     {
         Schema::create('service_data_components', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->string('name');
             $table->string('code')->nullable();
             $table->integer('service_data_category_id');
-            $table->boolean('active')->default(1);
             $table->string('allowed_branches')->default('*'); //this has to be a JSON of branches
 
             $table->integer('deleted_by')->nullable();

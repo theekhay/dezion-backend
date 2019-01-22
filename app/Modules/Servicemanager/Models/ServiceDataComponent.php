@@ -6,6 +6,9 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Modules\Core\Models\Church;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
+use App\Traits\AddStatusTrait;
 
 /**
  * @SWG\Definition(
@@ -33,7 +36,7 @@ use App\Modules\Core\Models\Church;
  */
 class ServiceDataComponent extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
 
     public $table = 'service_data_components';
 

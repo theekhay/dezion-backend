@@ -26,6 +26,8 @@ class ServiceDataCategoryResource extends JsonResource
             'allowed_branches' => $this->allowed_branches,
             'active' => $this->active,
             'created_by' => $this->created_by,
+            'uuid' => $this->uuid,
+            'status' => $this->status,
 
             'data_components' => ServiceDataComponentResource::collection( $this->dataComponents ),
         ];

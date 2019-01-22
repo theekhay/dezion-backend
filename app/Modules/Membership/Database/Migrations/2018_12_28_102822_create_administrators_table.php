@@ -15,7 +15,7 @@ class CreateAdministratorsTable extends Migration
     {
         Schema::create('administrators', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
 
             $table->string('firstname');
             $table->string('surname');
@@ -25,7 +25,7 @@ class CreateAdministratorsTable extends Migration
             $table->string('email');
             $table->string('telephone');
 
-            $table->boolean('active')->default(1);
+            $table->integer('status');
 
             $table->integer('type');
 

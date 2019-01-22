@@ -15,10 +15,11 @@ class CreateServiceDataCategoryProvisionsTable extends Migration
     {
         Schema::create('service_data_category_provisions', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
 
             $table->integer('service_id');
             $table->integer('service_data_category_id');
-            $table->boolean('active')->default(1);
 
             $table->integer('deleted_by')->nullable();
             $table->integer('updated_by')->nullable();

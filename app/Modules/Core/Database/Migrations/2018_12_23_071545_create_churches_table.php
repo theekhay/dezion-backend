@@ -15,11 +15,13 @@ class CreateChurchesTable extends Migration
     {
         Schema::create('churches', function (Blueprint $table) {
             $table->increments('id');
-            $table->uuid('uuid');
+            $table->uuid('uuid')->unique();
 
             $table->string('name')->unique();
             $table->string('code')->nullable();
-            $table->boolean('active')->default(1);
+
+            $table->integer('status');
+
             $table->integer('created_by');
             $table->text('logo')->nullable();
             $table->string('slogan')->nullable();
