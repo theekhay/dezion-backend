@@ -15,6 +15,7 @@ class CreateInAppsTable extends Migration
     {
         Schema::create('in_app_messages', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
 
             $table->integer('sender');
             $table->integer('recipient');

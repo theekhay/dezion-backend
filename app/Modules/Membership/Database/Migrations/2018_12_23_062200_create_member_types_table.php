@@ -15,6 +15,7 @@ class CreateMemberTypesTable extends Migration
     {
         Schema::create('member_types', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
 
             $table->string('name');
             $table->string('code')->nullable();

@@ -16,7 +16,7 @@ class CreateMemberDetailsTable extends Migration
         Schema::create('member_details', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->uuid('uuid')->nullable(); //make this compulsory
+            $table->uuid('uuid');
 
             $table->integer('branch_id');
             $table->integer('member_type_id');

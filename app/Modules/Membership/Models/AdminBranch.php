@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Modules\Membership\Models\Administrator;
 use App\Modules\Core\Models\Branch;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
 
 /**
  * @SWG\Definition(
@@ -34,7 +36,7 @@ use App\Modules\Core\Models\Branch;
  */
 class AdminBranch extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive;
 
     public $table = 'admin_branches';
 

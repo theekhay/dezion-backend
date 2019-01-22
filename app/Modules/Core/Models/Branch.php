@@ -8,6 +8,8 @@ use App\Modules\Membership\Models\MemberDetail;
 use App\Modules\Core\Models\BranchType;
 
 use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
 
 /**
  * @SWG\Definition(
@@ -35,7 +37,7 @@ use App\Traits\AddCreatedBy;
  */
 Class Branch extends Model
 {
-    use SoftDeletes, AddCreatedBy;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive;
 
     public $table = 'branches';
 

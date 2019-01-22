@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Models\User;
 use App\Modules\Notify\Traits\MessageTrait;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
 
 
 /**
@@ -39,7 +41,7 @@ use App\Modules\Notify\Traits\MessageTrait;
  */
 class Administrator extends User
 {
-    use SoftDeletes, AddCreatedBy, MessageTrait;
+    use SoftDeletes, AddCreatedBy, MessageTrait, UuidTrait, OnlyActive;
 
     public $table = 'administrators';
 

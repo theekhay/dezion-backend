@@ -162,20 +162,4 @@ class BulkMemberImportAPIController extends AppBaseController
 
 
 
-
-    /**
-     * This checks that the headers are actually required for the import type
-     * for instance if you are importing for a member type, then the headers have to be defined for it to be imported
-     * if an undefined header is found, the user is prompted to first create it before proceeding with the import
-     * s
-     */
-    public function validate_headers()
-    {
-        // $headers = $this->validateHeaders();
-        // $defined_headers = $this->getDefinedHeaders();
-
-        // for
-    }
-
-
 }

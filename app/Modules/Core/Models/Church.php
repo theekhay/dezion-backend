@@ -12,6 +12,9 @@ use Illuminate\Support\Str;
 use App\Traits\AddCreatedBy;
 use App\Modules\Servicemanager\Models\ServiceDataCategory;
 use App\Modules\ServiceManager\Models\Service;
+use App\Traits\UuidTrait;
+use App\Traits\OnCreateTrait;
+use App\Traits\OnlyActive;
 
 /**
  * @SWG\Definition(
@@ -39,7 +42,7 @@ use App\Modules\ServiceManager\Models\Service;
  */
 class Church extends Model
 {
-    use SoftDeletes, AddCreatedBy ;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive ; //OnCreateTrait
 
     public $table = 'churches';
 
@@ -86,6 +89,8 @@ class Church extends Model
 
     /**
      * Defines the relationship between a church and membertypes
+     * returns the list of member types created for a church
+     * @return MemberType
      */
     public function getMemberTypes()
     {

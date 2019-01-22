@@ -15,6 +15,7 @@ class CreateAdminBranchesTable extends Migration
     {
         Schema::create('admin_branches', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
 
             $table->integer('admin_id');
             $table->integer('created_by');

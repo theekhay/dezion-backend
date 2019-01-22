@@ -15,6 +15,7 @@ class CreateInAppAttachmentsTable extends Migration
     {
         Schema::create('in_app_attachments', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid');
             $table->timestamps();
         });
     }
