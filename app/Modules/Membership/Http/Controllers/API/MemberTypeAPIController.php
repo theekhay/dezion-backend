@@ -300,7 +300,6 @@ class MemberTypeAPIController extends AppBaseController
             return $this->sendError('Member Type not found');
         }
         return $this->sendResponse( new MemberTypeResource($members->members()->paginate(50)), 'members in this member category retreived successfully');
-
     }
 
 

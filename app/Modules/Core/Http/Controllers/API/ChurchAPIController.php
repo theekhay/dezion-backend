@@ -372,7 +372,7 @@ class ChurchAPIController extends AppBaseController
      */
     public function churchMemberTypes()
     {
-        $church =  Administrator::find( Auth::id() )->getChurch;
+        $church =  Auth::user()->getChurch ;
         $memberTypes = $church->getMemberTypes;
         return $this->sendResponse($memberTypes, 'member types retrieved succefully');
     }
