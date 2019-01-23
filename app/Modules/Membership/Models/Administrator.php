@@ -86,7 +86,7 @@ class Administrator extends User
      */
     public function getChurch()
     {
-        return $this->belongsTo( Church::class, 'id' );
+        return $this->belongsTo( Church::class, 'church_id' );
     }
 
 

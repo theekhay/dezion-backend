@@ -37,7 +37,7 @@ use App\Traits\AddStatusTrait;
  */
 class MemberType extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait,  AddStatusTrait; //OnlyActive,
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
 
     public $table = 'member_types';
 

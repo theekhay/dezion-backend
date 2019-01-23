@@ -388,9 +388,9 @@ class ChurchAPIController extends AppBaseController
 
        $link = Route::getFacadeRoot()->current()->uri();
 
-        $result =  Auth::user();
+        $result =  Auth::user()->getChurch;
         $uri = $request->path();
-       echo json_encode(['activation_key' => $link ]);
+       echo json_encode(['activation_key' => $result ]);
     }
 
 }
