@@ -19,8 +19,15 @@ class AdminStatus extends Model
 
 
     /**
-     * These are resources that have been marked as inactive
-     * these should be done by the church admin
+     * When an admin signs up they would usually have to verify their email address
+     * The default status is 255 until they comfirm their email address.
+     */
+    public const PENDING_EMAIL_CONFIRMATION = 255;
+
+
+    /**
+     * These are admins that have been marked as inactive
+     * these should be done by the church admin or superadmin
      */
     public const INACTIVE = 266;
 }

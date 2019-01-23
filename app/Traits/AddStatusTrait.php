@@ -4,15 +4,21 @@ namespace App\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\ModelStatus;
+use Illuminate\Support\Facades\Route;
 
 Trait AddStatusTrait{
+
+
+    //
+    public static $except = [
+        'api/v1/churches/register'
+
+    ];
 
     public static function bootAddStatusTrait()
     {
         self::setStatus();
     }
-
-
 
 
      /**
@@ -29,7 +35,11 @@ Trait AddStatusTrait{
     {
         static::creating(function ($model) {
 
-            $model->{self::statusField()} =  ( Auth::user()->isBranchAdmin() ) ? ModelStatus::PENDING_APPROVAL : ModelStatus::ACTIVE;
+            if( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$except) ){
+
+                $model->{self::statusField()} =  ( Auth::user()->isBranchAdmin() ) ? ModelStatus::PENDING_APPROVAL : ModelStatus::ACTIVE;
+            }
+
         });
     }
 
