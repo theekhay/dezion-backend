@@ -23,6 +23,8 @@ use Maatwebsite\Excel\Validators\Failure;
 
 use App\Modules\Membership\Models\BulkMemberImport;
 
+use Ramsey\Uuid\Uuid;
+
 
 //class MemberDetailImport implements ToCollection, WithHeadingRow, WithValidation, WithChunkReading, WithBatchInserts
 Class MemberDetailImport implements ToModel, WithHeadingRow, WithValidation, WithChunkReading, WithBatchInserts
@@ -62,27 +64,15 @@ Class MemberDetailImport implements ToModel, WithHeadingRow, WithValidation, Wit
 
     public function model(array $row)
     {
-            // $memb =  [
-            //     'firstname'         => $row['firstname'],
-            //     'surname'           => $row['surname'],
-            //     'middlename'        => $row['middlename'],
-            //     'address'           => $row['address'],
-            //     'telephone'         => $row['telephone'],
-            //     'email'             => $row['email'],
+            $memeberData = []; //initialize an empty array
 
-            // ] + $this->data ;
-
-            $m = [];
-
-            foreach( $row as $k => $v)
+            foreach( $row as $heading => $value)
             {
-                $m[$k] = $v ;
+                $memeberData[$heading] = $value;
             }
 
 
-            $memb =  $m ;
-           return new MemberDetail($memb + $this->data + ['data' => json_encode($memb) ]);
-            //return new MemberDetail( $this->data + ['data' => json_encode($memb) ]);
+           return new MemberDetail($memeberData + $this->data + ['data' => json_encode($memeberData), 'uuid' => Uuid::uuid4()->toString() ]);
 
     }
 

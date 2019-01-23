@@ -46,7 +46,7 @@ class MemberDetail extends Model
     public $fillable = [
 
         'firstname', 'surname', 'email', 'address', 'telephone',
-        'middlename', 'created_by', 'batch', 'is_bulk', 'branch_id', 'member_type_id', 'data',
+        'middlename', 'created_by', 'batch', 'is_bulk', 'branch_id', 'member_type_id', 'data', 'uuid', 'name'
     ];
 
     /**
