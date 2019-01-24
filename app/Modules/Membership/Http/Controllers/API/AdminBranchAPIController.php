@@ -83,7 +83,7 @@ class AdminBranchAPIController extends AppBaseController
         // $adminBranches = $this->adminBranchRepository->all();
 
         $admin = Auth::user();
-        $branches = $admin->branches()->get();
+        $branches = $admin->branches();
         return $this->sendResponse( BranchResource::collection($branches), 'branches retreived succesfully' );
 
 
