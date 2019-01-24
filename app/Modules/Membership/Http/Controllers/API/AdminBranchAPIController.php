@@ -83,16 +83,20 @@ class AdminBranchAPIController extends AppBaseController
         // $adminBranches = $this->adminBranchRepository->all();
 
         $admin = Auth::user();
+        $branches = $admin->branches()->get();
+        return $this->sendResponse( BranchResource::collection($branches), 'branches retreived succesfully' );
 
-        if( $admin->isChurchAdmin() ){
-            $branches = $admin->toChurchAdmin()->branches()->get();
-            return $this->sendResponse( BranchResource::collection($branches), 'branches retreived succesfully' );
-        }
-        else{
 
-            $branches = $admin->branches()->paginate(50);
-            return $this->sendResponse( AdminBranchResource::collection($branches), 'branches retreived succesfully' );
-        }
+
+        // if( $admin->isChurchAdmin() ){
+        //     $branches = $admin->toChurchAdmin()->branches()->get();
+        //     return $this->sendResponse( BranchResource::collection($branches), 'branches retreived succesfully' );
+        // }
+        // else{
+
+        //     $branches = $admin->branches()->paginate(50);
+        //     return $this->sendResponse( AdminBranchResource::collection($branches), 'branches retreived succesfully' );
+        // }
     }
 
     /**

@@ -19,10 +19,11 @@ class AdminBranchResource extends JsonResource
         //return parent::toArray($request);
 
         return [
-            'id' => $this->id,
-            'admin_id' => $this->admin_id,
-            'branch_id' => $this->branch_id,
-            'branch' => new BranchResource( Branch::findOrFail($this->branch_id) ),
+            // 'id' => $this->id,
+            // 'admin_id' => $this->admin_id,
+            // 'branch_id' => $this->branch_id,
+            // 'branch' =>
+            new BranchResource( Branch::findOrFail($this->branch_id) ),
         ];
     }
 }

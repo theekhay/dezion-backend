@@ -5,6 +5,7 @@ namespace App\Modules\Membership\Models;
 use App\Modules\Membership\Models\Administrator;
 use App\Modules\Membership\Models\AdminType;
 use App\Modules\Membership\Models\AdminBranch;
+use App\Modules\Core\Models\Branch;
 
 class BranchAdmin extends Administrator
 {
@@ -37,4 +38,26 @@ class BranchAdmin extends Administrator
     {
         return $this->hasMany( AdminBranch::class, 'admin_id' );
     }
+
+
+    /**
+     * returns a collection of branches that a branch admin has access to.
+     * @return collection
+     */
+    public function getAdminbranches()
+    {
+        return Branch::whereIn( 'id', $this->pluckBranches() )->get();
+    }
+
+
+    /**
+     * Gets the list of branch_id an admin has been assigned to.
+     * @return array
+     */
+    public function pluckBranches()
+    {
+        return  $this->branches->pluck('branch_id');
+    }
+
+
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\AddCreatedBy;
 use App\Modules\Notify\Traits\MessageTrait;
 use App\Traits\UuidTrait;
+use App\Traits\WithOnlyBranchTrait;
 
 /**
  * @SWG\Definition(
@@ -34,7 +35,7 @@ use App\Traits\UuidTrait;
  */
 class MemberDetail extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait;
+    use SoftDeletes, AddCreatedBy, UuidTrait, WithOnlyBranchTrait;
 
 
     public $table = 'member_details';

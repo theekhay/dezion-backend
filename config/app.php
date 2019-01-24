@@ -189,7 +189,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
 
         //added for feixkiss unique-with vlaidator
-        Felixkiss\UniqueWithValidator\ServiceProvider::class,
+        //Felixkiss\UniqueWithValidator\ServiceProvider::class,
 
         //added for the excel library
         Maatwebsite\Excel\ExcelServiceProvider::class,
@@ -199,6 +199,10 @@ return [
 
         //for bugsnag
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+
+        //for
+        '\HttpAnalyzer\Laravel\HttpAnalyzerServiceProvider',
+
 
     ],
 

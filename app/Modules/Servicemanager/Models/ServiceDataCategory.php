@@ -10,6 +10,7 @@ use App\Modules\ServiceManager\Models\Service;
 use App\Traits\UuidTrait;
 use App\Traits\AddStatusTrait;
 use App\Traits\OnlyActive;
+use App\Traits\WithOnlyChurchTrait;
 
 /**
  * @SWG\Definition(
@@ -37,7 +38,7 @@ use App\Traits\OnlyActive;
  */
 class ServiceDataCategory extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait, AddStatusTrait, OnlyActive;
+    use SoftDeletes, AddCreatedBy, UuidTrait, AddStatusTrait, OnlyActive, WithOnlyChurchTrait;
 
     public $table = 'service_data_categories';
 
@@ -79,7 +80,7 @@ class ServiceDataCategory extends Model
      */
     public function church()
     {
-        return $this->belongsTo( Church::class );
+        return $this->belongsTo( Church::class, 'church_id' );
     }
 
 

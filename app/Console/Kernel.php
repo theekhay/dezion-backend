@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+
+        '\HttpAnalyzer\Laravel\DumpRecordedRequests',
+
     ];
 
     /**
@@ -26,6 +28,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        // you can set how often you want it to dump your requests to the Dashboard
+        // every minute is the most frequent mode
+        $schedule->command('http_analyzer:dump')->everyMinute();
     }
 
     /**

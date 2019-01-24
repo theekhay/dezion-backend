@@ -8,12 +8,13 @@ use App\Modules\Membership\Models\AdminType;
 use App\Modules\Core\Models\MasterBranch;
 use App\Modules\Core\Models\Branch;
 use App\Models\ModelStatus;
+use App\Traits\WithOnlyChurchTrait;
+use App\Modules\Core\Models\Church;
+use App\Modules\Membership\Concerns\IAdmin;
 
-class ChurchAdmin extends Administrator
+class ChurchAdmin extends Administrator implements IAdmin
 {
-
-    private $type;
-
+    use WithOnlyChurchTrait;
 
     public function __construct( $attributes = [] )
     {
@@ -36,9 +37,21 @@ class ChurchAdmin extends Administrator
 
     /**
      * gets all the branches accessible by a superadmin
+     * typically this should be all active branches created by the church the admin belongs to
      */
-    public function branches()
+    public function getAdminbranches()
     {
-        return Branch::where('church_id', $this->church_id);
+        return Branch::all();
     }
+
+
+    /**
+     * Gets the list of branch_id an admin has been assigned to.
+     * @return array
+     */
+    public function pluckBranches()
+    {
+        return  $this->getAdminbranches()->pluck('id');
+    }
+
 }

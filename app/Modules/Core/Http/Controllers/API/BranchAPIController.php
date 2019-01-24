@@ -284,4 +284,6 @@ class BranchAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Branch deleted successfully');
     }
+
+
 }

@@ -11,6 +11,7 @@ use App\Traits\AddCreatedBy;
 use App\Traits\UuidTrait;
 use App\Traits\OnlyActive;
 use App\Traits\AddStatusTrait;
+use App\Traits\WithOnlyChurchTrait;
 
 /**
  * @SWG\Definition(
@@ -38,7 +39,7 @@ use App\Traits\AddStatusTrait;
  */
 Class Branch extends Model
 {
-    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait, WithOnlyChurchTrait;
 
     public $table = 'branches';
 
@@ -85,7 +86,7 @@ Class Branch extends Model
      */
     public function getChurch()
     {
-        return $this->belongsTo(App\Modules\Core\Models\Church::class);
+        return $this->belongsTo( Church::class, 'church_id');
     }
 
 

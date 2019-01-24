@@ -23,6 +23,8 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::post('members/import', 'BulkMemberImportAPIController@import');
     Route::post('members/export', 'BulkMemberImportAPIController@export');
+
+    //gets the members in a membertype
     Route::get('member_type/members/{id}', 'MemberTypeAPIController@getMembers');
     Route::post('admin/notify/inapp', 'AdministratorAPIController@test'); //unomment
 

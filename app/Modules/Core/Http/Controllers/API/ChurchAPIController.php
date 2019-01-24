@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Modules\Membership\Models\BranchAdmin;
 
 
 
@@ -386,11 +387,15 @@ class ChurchAPIController extends AppBaseController
 
       // $church = Church::find(2)->getMemberTypes;
 
+      $branch = Branch::find(1);
+
        $link = Route::getFacadeRoot()->current()->uri();
 
         $result =  Auth::user()->getChurch;
         $uri = $request->path();
-       echo json_encode(['activation_key' => $result ]);
+
+        $admin = ChurchAdmin::find(6)->pluckBranches();
+       echo json_encode(['activation_key' => $admin ]);
     }
 
 }

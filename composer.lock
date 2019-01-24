@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dfabafe4cd6cb7cb5c9e69b7e815b54",
+    "content-hash": "f2df32fff4b10b2816295a8d35f03db4",
     "packages": [
         {
             "name": "appointer/swaggervel",
@@ -2388,6 +2388,48 @@
                 "server"
             ],
             "time": "2018-11-21T21:42:43+00:00"
+        },
+        {
+            "name": "lezhnev74/apideveloperio-laravel",
+            "version": "4.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lezhnev74/apideveloperio-laravel.git",
+                "reference": "75750efe3f8c440975f0876ddd51535f772cfe0d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lezhnev74/apideveloperio-laravel/zipball/75750efe3f8c440975f0876ddd51535f772cfe0d",
+                "reference": "75750efe3f8c440975f0876ddd51535f772cfe0d",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~6.0|~5.0",
+                "illuminate/support": "~5.4|~5.5|~5.6",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.4|^3.5|^3.6",
+                "phpunit/phpunit": "~5.0|~6.0|~7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HttpAnalyzer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitriy Lezhnev",
+                    "email": "lezhnev.work@gmail.com"
+                }
+            ],
+            "description": "Laravel package to track each http request/response and send them to apideveloper.io",
+            "time": "2018-02-09T12:15:10+00:00"
         },
         {
             "name": "maatwebsite/excel",

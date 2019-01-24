@@ -93,11 +93,11 @@ class Administrator extends User
     /**
      * Gets the branches an admin has access to
      * These typically
-     * @return AdminBranch
+     * @return
      */
     public function branches()
     {
-        return $this->hasMany( AdminBranch::class, 'admin_id' );
+       return $this->adminType()->getAdminbranches();
     }
 
 
@@ -165,4 +165,35 @@ class Administrator extends User
 
         }
     }
+
+
+
+    public function adminType()
+    {
+        if( $this->isSuperAdmin() ){
+            return SuperAdmin::find($this->id);
+        }
+
+        if( $this->isChurchAdmin() )
+            return ChurchAdmin::find($this->id);
+
+        if( $this->isBranchAdmin() ){
+            return BranchAdmin::find($this->id);
+        }
+    }
+
+
+    /**
+     * Gets a list of branch is an admin has access to
+     * this list varies based on the type of admin;
+     * SuperAdmin > ChurchAdmin > BranchAdmin
+     *
+     * @return array;
+     */
+    public function pluckAdminBranches()
+    {
+        return $this->adminType()->pluckBranches();
+    }
+
+
 }

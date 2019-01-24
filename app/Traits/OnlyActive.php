@@ -18,7 +18,7 @@ Trait OnlyActive{
      *
      * @return string
      */
-    public function getActiveColumn()
+    public static function getActiveColumn()
     {
         return 'status';
     }

@@ -14,8 +14,8 @@ class AdminType extends Model
     public const ChurchAdmin = 311;
 
     /**
-     * Branch level administrator
-     * These can have access to multiple branches
+     * Branch level administrator.
+     * These can have access to only the branches they are assigned to by the church Admin
      */
     public const BranchAdmin = 322;
 
