@@ -4,6 +4,9 @@ namespace App\Modules\Ministry\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\UuidTrait;
+use App\Traits\AddCreatedBy;
+use App\Traits\AddStatusTrait;
 
 /**
  * @SWG\Definition(
@@ -31,7 +34,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Team extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, UuidTrait, AddCreatedBy, AddStatusTrait;
 
     public $table = 'teams';
 
@@ -62,7 +65,7 @@ class Team extends Model
         'code' => 'nullable|unique:teams,code|max:10|alpha_num',
         //add existence of head on memberdetails table, there should be a setting if the head should be unique
         'head' => 'nullable|numeric',
-        'status' => 'required|numeric',
+       // 'status' => 'required|numeric',
     ];
 
 

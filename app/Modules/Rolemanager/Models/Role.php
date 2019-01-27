@@ -66,7 +66,6 @@ class Role extends Model
 
         'church_id' => 'required|numeric|exists:churches,id',
         'name' => 'required|string|unique_with:roles,church_id',
-        'guard_name' => 'nullable|unique_with:roles,church_id',
         'status' => 'required|numeric' //add a validator to make sure status are in the allowed list
     ];
 
