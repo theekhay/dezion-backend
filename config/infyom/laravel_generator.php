@@ -6,7 +6,7 @@
   * This ought to be from the commandkine, but I don't have such time luxury to tweak the package.
   * Disadvantage: This always has to be changesd whenever you want to scaffold  for a new module
   */
-$module = "Modules/Servicemanager/";
+$module = "Modules/RoleManager/";
 
 /**
  * This creates the name space from the files generatd in the above defined module.

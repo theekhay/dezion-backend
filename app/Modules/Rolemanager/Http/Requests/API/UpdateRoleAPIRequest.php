@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Modules\Ministry\Http\Requests\API;
+namespace App\Modules\RoleManager\Http\Requests\API;
 
-use App\Modules\Ministry\Models\District;
+use App\Modules\RoleManager\Models\Role;
 use InfyOm\Generator\Request\APIRequest;
-use Illuminate\Support\Facades\Auth;
 
-class CreateDistrictAPIRequest extends APIRequest
+class UpdateRoleAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,13 +14,6 @@ class CreateDistrictAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        $admin = Auth::user();
-
-        if($admin->isBranchAdmin() ){
-
-            return false;
-        }
-
         return true;
     }
 
@@ -32,6 +24,6 @@ class CreateDistrictAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return District::$rules;
+        return Role::$rules;
     }
 }

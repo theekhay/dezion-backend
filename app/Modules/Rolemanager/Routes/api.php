@@ -13,14 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/ministry', function (Request $request) {
-    // return $request->ministry();
+Route::get('/rolemanager', function (Request $request) {
+    // return $request->rolemanager();
 })->middleware('auth:api');
 
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
-    Route::resource('teams', 'TeamAPIController');
-    Route::resource('districts', 'DistrictAPIController');
-
+    Route::resource('roles', 'RoleAPIController');
 });

@@ -4,6 +4,9 @@ namespace App\Modules\Ministry\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+use App\Traits\AddStatusTrait;
 
 /**
  * @SWG\Definition(
@@ -31,16 +34,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class District extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, UuidTrait, AddStatusTrait;
+
 
     public $table = 'districts';
-    
+
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        
+
+        'name', 'code', 'created_by', 'uuid', 'head', 'deleted_by', 'status', 'updated_by'
     ];
 
     /**
@@ -49,7 +54,7 @@ class District extends Model
      * @var array
      */
     protected $casts = [
-        
+
     ];
 
     /**
@@ -58,8 +63,13 @@ class District extends Model
      * @var array
      */
     public static $rules = [
-        
+
+        'name' => 'required|string|unique:districts,name',
+        'code' => 'nullable|unique|alpha_num|max:10|unique:districts,code',
+        'head' => 'nullable|numeric',
+        //'status' => 'required|numeric',
+       // 'uuid' => 'required|unique:districts,uuid'
     ];
 
-    
+
 }

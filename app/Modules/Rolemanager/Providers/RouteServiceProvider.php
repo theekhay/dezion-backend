@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Ministry\Providers;
+namespace App\Modules\Rolemanager\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'App\Modules\Ministry\Http\Controllers';
+    protected $namespace = 'App\Modules\Rolemanager\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -51,23 +51,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        // Route::group([
-        //     'middleware' => 'web',
-        //     'namespace'  => $this->namespace,
-        // ], function ($router) {
-        //     require module_path('ministry', 'Routes/web.php', 'app');
-        // });
-
         Route::group([
-            'middleware' => 'api',
-            //'namespace'  => $this->namespace,
-            'namespace'  => $this->namespace . "\\API",
-            'prefix'     => 'api',
+            'middleware' => 'web',
+            'namespace'  => $this->namespace,
         ], function ($router) {
-            require module_path('ministry', 'Routes/api.php', 'app');
+            require module_path('rolemanager', 'Routes/web.php', 'app');
         });
-
-
     }
 
     /**
@@ -85,7 +74,7 @@ class RouteServiceProvider extends ServiceProvider
             'namespace'  => $this->namespace . "\\API",
             'prefix'     => 'api',
         ], function ($router) {
-            require module_path('ministry', 'Routes/api.php', 'app');
+            require module_path('rolemanager', 'Routes/api.php', 'app');
         });
 
         // Route::group([
@@ -93,7 +82,7 @@ class RouteServiceProvider extends ServiceProvider
         //     'namespace'  => $this->namespace,
         //     'prefix'     => 'api',
         // ], function ($router) {
-        //     require module_path('ministry', 'Routes/api.php', 'app');
+        //     require module_path('rolemanager', 'Routes/api.php', 'app');
         // });
     }
 }

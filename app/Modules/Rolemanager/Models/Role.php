@@ -1,13 +1,18 @@
 <?php
 
-namespace App\Modules\Ministry\Models;
+namespace App\Modules\RoleManager\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\WithOnlyChurchTrait;
+use App\Traits\AddStatusTrait;
+use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+
 
 /**
  * @SWG\Definition(
- *      definition="Team",
+ *      definition="Role",
  *      required={""},
  *      @SWG\Property(
  *          property="id",
@@ -29,18 +34,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class Team extends Model
+class Role extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, WithOnlyChurchTrait, AddStatusTrait, AddCreatedBy, UuidTrait;
 
-    public $table = 'teams';
+    public $table = 'roles';
 
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-
+        'name',  'created_by', 'deleted_by', 'status', 'church_id', 'guard_name'
     ];
 
     /**
@@ -58,11 +63,11 @@ class Team extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string|unique:teams,name',
-        'code' => 'nullable|unique:teams,code|max:10|alpha_num',
-        //add existence of head on memberdetails table, there should be a setting if the head should be unique
-        'head' => 'nullable|numeric',
-        'status' => 'required|numeric',
+
+        'church_id' => 'required|numeric|exists:churches,id',
+        'name' => 'required|string|unique_with:roles,church_id',
+        'guard_name' => 'nullable|unique_with:roles,church_id',
+        'status' => 'required|numeric' //add a validator to make sure status are in the allowed list
     ];
 
 

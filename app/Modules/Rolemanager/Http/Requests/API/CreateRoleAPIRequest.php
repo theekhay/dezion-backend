@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Ministry\Http\Requests\API;
+namespace App\Modules\RoleManager\Http\Requests\API;
 
-use App\Modules\Ministry\Models\District;
+use App\Modules\RoleManager\Models\Role;
 use InfyOm\Generator\Request\APIRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CreateDistrictAPIRequest extends APIRequest
+class CreateRoleAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,8 +17,13 @@ class CreateDistrictAPIRequest extends APIRequest
     {
         $admin = Auth::user();
 
-        if($admin->isBranchAdmin() ){
+        //branch admins cannit create roles
+        if ( $admin->isBranchAdmin() ){
+            return false;
+        }
 
+        //the church must be the same as the authenticated user's church
+        if( $admin->isChurchAdmin() && $this->church_id != $admin->church_id){
             return false;
         }
 
@@ -32,6 +37,6 @@ class CreateDistrictAPIRequest extends APIRequest
      */
     public function rules()
     {
-        return District::$rules;
+        return Role::$rules;
     }
 }

@@ -203,6 +203,9 @@ return [
         //for
         '\HttpAnalyzer\Laravel\HttpAnalyzerServiceProvider',
 
+        //for laravel-permissions
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 

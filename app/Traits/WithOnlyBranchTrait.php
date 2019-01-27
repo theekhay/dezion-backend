@@ -13,7 +13,7 @@ Trait WithOnlyBranchTrait{
 
 
      /**
-     * Defines the church field for the model.
+     * Defines the branch id  field for the model.
      * @return string
      */
     public static function getBranchIdField()

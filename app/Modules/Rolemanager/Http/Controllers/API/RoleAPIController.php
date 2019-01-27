@@ -1,30 +1,34 @@
 <?php
 
-namespace App\Modules\Ministry\Http\Controllers\API;
+namespace App\Modules\RoleManager\Http\Controllers\API;
 
-use App\Modules\Ministry\Http\Requests\API\CreateDistrictAPIRequest;
-use App\Modules\Ministry\Http\Requests\API\UpdateDistrictAPIRequest;
-use App\Modules\Ministry\Models\District;
-use App\Modules\Ministry\Repositories\DistrictRepository;
+use App\Modules\RoleManager\Http\Requests\API\CreateRoleAPIRequest;
+use App\Modules\RoleManager\Http\Requests\API\UpdateRoleAPIRequest;
+use App\Modules\RoleManager\Models\Role;
+use App\Modules\RoleManager\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
+use Spatie\Permission\Models\Role as RoleProvider;
+
 /**
- * Class DistrictController
- * @package App\Modules\Ministry\Http\Controllers\API
+ * Class RoleController
+ * @package App\Modules\RoleManager\Http\Controllers\API
  */
 
-class DistrictAPIController extends AppBaseController
+class RoleAPIController extends AppBaseController
 {
-    /** @var  DistrictRepository */
-    private $districtRepository;
+    /** @var  RoleRepository */
+    private $roleRepository;
 
-    public function __construct(DistrictRepository $districtRepo)
+
+
+    public function __construct(RoleRepository $roleRepo)
     {
-        $this->districtRepository = $districtRepo;
+        $this->roleRepository = $roleRepo;
     }
 
     /**
@@ -32,10 +36,10 @@ class DistrictAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/districts",
-     *      summary="Get a listing of the Districts.",
-     *      tags={"District"},
-     *      description="Get all Districts",
+     *      path="/roles",
+     *      summary="Get a listing of the Roles.",
+     *      tags={"Role"},
+     *      description="Get all Roles",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -49,7 +53,7 @@ class DistrictAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/District")
+     *                  @SWG\Items(ref="#/definitions/Role")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -61,29 +65,29 @@ class DistrictAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->districtRepository->pushCriteria(new RequestCriteria($request));
-        $this->districtRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $districts = $this->districtRepository->all();
+        $this->roleRepository->pushCriteria(new RequestCriteria($request));
+        $this->roleRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $roles = $this->roleRepository->all();
 
-        return $this->sendResponse($districts->toArray(), 'Districts retrieved successfully');
+        return $this->sendResponse($roles->toArray(), 'Roles retrieved successfully');
     }
 
     /**
-     * @param CreateDistrictAPIRequest $request
+     * @param CreateRoleAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/districts",
-     *      summary="Store a newly created District in storage",
-     *      tags={"District"},
-     *      description="Store District",
+     *      path="/roles",
+     *      summary="Store a newly created Role in storage",
+     *      tags={"Role"},
+     *      description="Store Role",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="District that should be stored",
+     *          description="Role that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/District")
+     *          @SWG\Schema(ref="#/definitions/Role")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +100,7 @@ class DistrictAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/District"
+     *                  ref="#/definitions/Role"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,11 +110,12 @@ class DistrictAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateDistrictAPIRequest $request)
+    public function store(CreateRoleAPIRequest $request)
     {
         $input = $request->all();
-        $districts = $this->districtRepository->create($input);
-        return $this->sendResponse($districts->toArray(), 'District saved successfully');
+       // $roles = $this->roleRepository->create($input);
+       $roles = RoleProvider::create($input);
+       return $this->sendResponse($roles->toArray(), 'Role saved successfully');
     }
 
     /**
@@ -118,14 +123,14 @@ class DistrictAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/districts/{id}",
-     *      summary="Display the specified District",
-     *      tags={"District"},
-     *      description="Get District",
+     *      path="/roles/{id}",
+     *      summary="Display the specified Role",
+     *      tags={"Role"},
+     *      description="Get Role",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of District",
+     *          description="id of Role",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -141,7 +146,7 @@ class DistrictAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/District"
+     *                  ref="#/definitions/Role"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -153,30 +158,30 @@ class DistrictAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var District $district */
-        $district = $this->districtRepository->findWithoutFail($id);
+        /** @var Role $role */
+        $role = $this->roleRepository->findWithoutFail($id);
 
-        if (empty($district)) {
-            return $this->sendError('District not found');
+        if (empty($role)) {
+            return $this->sendError('Role not found');
         }
 
-        return $this->sendResponse($district->toArray(), 'District retrieved successfully');
+        return $this->sendResponse($role->toArray(), 'Role retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateDistrictAPIRequest $request
+     * @param UpdateRoleAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/districts/{id}",
-     *      summary="Update the specified District in storage",
-     *      tags={"District"},
-     *      description="Update District",
+     *      path="/roles/{id}",
+     *      summary="Update the specified Role in storage",
+     *      tags={"Role"},
+     *      description="Update Role",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of District",
+     *          description="id of Role",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -184,9 +189,9 @@ class DistrictAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="District that should be updated",
+     *          description="Role that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/District")
+     *          @SWG\Schema(ref="#/definitions/Role")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -199,7 +204,7 @@ class DistrictAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/District"
+     *                  ref="#/definitions/Role"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -209,20 +214,20 @@ class DistrictAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateDistrictAPIRequest $request)
+    public function update($id, UpdateRoleAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var District $district */
-        $district = $this->districtRepository->findWithoutFail($id);
+        /** @var Role $role */
+        $role = $this->roleRepository->findWithoutFail($id);
 
-        if (empty($district)) {
-            return $this->sendError('District not found');
+        if (empty($role)) {
+            return $this->sendError('Role not found');
         }
 
-        $district = $this->districtRepository->update($input, $id);
+        $role = $this->roleRepository->update($input, $id);
 
-        return $this->sendResponse($district->toArray(), 'District updated successfully');
+        return $this->sendResponse($role->toArray(), 'Role updated successfully');
     }
 
     /**
@@ -230,14 +235,14 @@ class DistrictAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/districts/{id}",
-     *      summary="Remove the specified District from storage",
-     *      tags={"District"},
-     *      description="Delete District",
+     *      path="/roles/{id}",
+     *      summary="Remove the specified Role from storage",
+     *      tags={"Role"},
+     *      description="Delete Role",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of District",
+     *          description="id of Role",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -265,15 +270,15 @@ class DistrictAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var District $district */
-        $district = $this->districtRepository->findWithoutFail($id);
+        /** @var Role $role */
+        $role = $this->roleRepository->findWithoutFail($id);
 
-        if (empty($district)) {
-            return $this->sendError('District not found');
+        if (empty($role)) {
+            return $this->sendError('Role not found');
         }
 
-        $district->delete();
+        $role->delete();
 
-        return $this->sendResponse($id, 'District deleted successfully');
+        return $this->sendResponse($id, 'Role deleted successfully');
     }
 }
