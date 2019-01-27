@@ -13,7 +13,7 @@ class AddHeadToDistrictTable extends Migration
      */
     public function up()
     {
-        Schema::table('district', function (Blueprint $table) {
+        Schema::table('districts', function (Blueprint $table) {
 
             $table->integer('head')->nullable();
         });
@@ -26,7 +26,7 @@ class AddHeadToDistrictTable extends Migration
      */
     public function down()
     {
-        Schema::table('district', function (Blueprint $table) {
+        Schema::table('districts', function (Blueprint $table) {
             $table->dropColumn('head');
         });
     }

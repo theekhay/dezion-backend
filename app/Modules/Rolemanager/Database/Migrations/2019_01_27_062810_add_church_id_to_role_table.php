@@ -32,7 +32,7 @@ class AddChurchIdToRoleTable extends Migration
      */
     public function down()
     {
-        Schema::table('role', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
 
             $table->dropColumn(['church_id', 'status', 'created_by', 'deleted_by', 'updated_by']);
         });
