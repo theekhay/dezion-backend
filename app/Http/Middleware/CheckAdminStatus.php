@@ -34,7 +34,7 @@ class CheckAdminStatus
             if( $admin->status != AdminStatus::ACTIVE ){
 
                 $message = isset( AdminStatus::$statusMessage[$admin->status ] ) ? AdminStatus::$statusMessage[$admin->status ] : "unable to authorize this login." ;
-                return response()->json(['message' =>  $message], 401);
+                return response()->json(['error' =>  $message], 401);
             }
         }
 
