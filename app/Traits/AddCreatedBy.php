@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 Trait AddCreatedBy
 {
@@ -13,6 +14,21 @@ Trait AddCreatedBy
      * even though attribute was present
      */
     private static $enabled = true;
+
+
+
+    /**
+     * List of routes to ignore when adding setting the created_by field
+     * Typically these are routes that do not require authentication
+     * This should be implemented in another way
+     * find a way to check if a route implements the auth guard.
+     *
+     */
+    private static $ignoreRoute = [
+
+        'api/v1/admin/branch/create',
+        'api/v1/churches/register'
+    ];
 
 
     /**
@@ -48,7 +64,7 @@ Trait AddCreatedBy
     protected static function created_by()
     {
         static::creating(function ($model) {
-            $model->{self::createdByField()} =  empty( Auth::id() ) ? 1 : Auth::id();
+            $model->{self::createdByField()} = ( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$ignoreRoute) ) ?  Auth::id() : 1;
         });
     }
 

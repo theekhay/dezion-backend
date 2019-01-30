@@ -63,9 +63,9 @@ class Team extends Model
     public static $rules = [
         'name' => 'required|string|unique:teams,name',
         'code' => 'nullable|unique:teams,code|max:10|alpha_num',
+
         //add existence of head on memberdetails table, there should be a setting if the head should be unique
         'head' => 'nullable|numeric',
-       // 'status' => 'required|numeric',
     ];
 
 

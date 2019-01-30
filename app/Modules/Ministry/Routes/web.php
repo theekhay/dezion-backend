@@ -21,3 +21,9 @@ Route::group(['prefix' => 'ministry'], function () {
 Route::resource('teams', 'TeamController');
 
 Route::resource('districts', 'DistrictController');
+
+Route::resource('cells', 'CellController');
+
+Route::resource('communities', 'CommunityController');
+
+Route::resource('zones', 'ZoneController');

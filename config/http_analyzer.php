@@ -1,7 +1,7 @@
 <?php
 return [
     // API key to sign requests to the API
-    'api_key' => 'your key goes here',
+    'api_key' => '0c4efcad-7738-4bb9-bda7-95cae141e247',
 
     // Enable recording
     'enabled' => env('APIDEVELOPERIO_RECORDING_ENABLED', true),

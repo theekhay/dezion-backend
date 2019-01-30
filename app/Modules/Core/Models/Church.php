@@ -6,7 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Modules\Membership\Models\MemberType;
-use App\Modules\Membership\Models\Administrator;
+use App\Modules\Admin\Models\Administrator;
 use Illuminate\Support\Str;
 
 use App\Traits\AddCreatedBy;

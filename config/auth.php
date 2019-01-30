@@ -69,7 +69,7 @@ return [
             'driver' => 'eloquent',
             //'model' => App\User::class,
             //'model' => App\Models\User::class, //did 'cos I changed the default location of the user model
-           'model' => App\Modules\Membership\Models\Administrator::class,
+           'model' => App\Modules\Admin\Models\Administrator::class,
         ],
 
         // 'users' => [

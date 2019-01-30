@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Route;
 Trait AddStatusTrait{
 
 
-    //
+    /**
+     * List of routes to exclude when using auto-status
+     * Typically the status would have been manually set in the controller
+     */
     public static $except = [
         'api/v1/churches/register'
 
@@ -37,7 +40,9 @@ Trait AddStatusTrait{
 
             if( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$except) ){
 
-                $model->{self::statusField()} =  ( Auth::user()->isBranchAdmin() ) ? ModelStatus::PENDING_APPROVAL : ModelStatus::ACTIVE;
+                static::creating(function ($model) {
+                    $model->{self::statusField()} =  ( Auth::user()->isBranchAdmin() ) ? ModelStatus::PENDING_APPROVAL : ModelStatus::ACTIVE;
+                });
             }
 
         });

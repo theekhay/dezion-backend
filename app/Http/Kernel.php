@@ -66,7 +66,10 @@ class Kernel extends HttpKernel
 
         //added for spatie-permissions
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-	    'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+
+        //added for checking if a admin is active
+        'checkadminstatus' => \App\Http\Middleware\CheckAdminStatus::class
     ];
 
     /**

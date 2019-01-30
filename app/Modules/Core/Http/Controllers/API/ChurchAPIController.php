@@ -14,11 +14,12 @@ use App\Modules\Core\Models\OperationMode;
 use App\Modules\Core\Models\MasterBranch;
 use App\Modules\Core\Models\Branch;
 use App\Modules\Membership\Models\MemberDetail;
-use App\Modules\Membership\Models\Administrator;
-use App\Modules\Membership\Models\AdminBranch as AssignBranch;
+use App\Modules\Admin\Models\Administrator;
+use App\Modules\Admin\Models\AdminBranch as AssignBranch;
 use App\Modules\Core\Models\AdminBranch;
-use App\Modules\Membership\Models\ChurchAdmin;
-use App\Modules\Membership\Models\AdminStatus;
+
+use App\Modules\Admin\Models\ChurchAdmin;
+use App\Modules\Admin\Models\AdminStatus;
 use App\Models\ModelStatus;
 
 //Repos
@@ -38,7 +39,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Membership\Models\BranchAdmin;
+use App\Modules\Admin\Models\BranchAdmin;
 
 
 
@@ -394,8 +395,8 @@ class ChurchAPIController extends AppBaseController
         $result =  Auth::user()->getChurch;
         $uri = $request->path();
 
-        $admin = ChurchAdmin::find(6)->pluckBranches();
-       echo json_encode(['activation_key' => $admin ]);
+        $admin = ChurchAdmin::find(6);
+       echo json_encode(['activation_key' => get_class($admin) ]);
     }
 
 }

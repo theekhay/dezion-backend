@@ -17,7 +17,6 @@ Route::get('/membership', function (Request $request) {
     // return $request->membership();
 })->middleware('auth:api');
 
-Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
@@ -31,9 +30,10 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 
     Route::resource('member_types', 'MemberTypeAPIController');
     Route::resource('member_details', 'MemberDetailAPIController');
+
     Route::resource('bulk_member_imports', 'BulkMemberImportAPIController');
-    Route::resource('admin', 'AdministratorAPIController');
-    Route::resource('admin_branches', 'AdminBranchAPIController');
+    // Route::resource('admin', 'AdministratorAPIController');
+    // Route::resource('admin_branches', 'AdminBranchAPIController');
 });
 
 

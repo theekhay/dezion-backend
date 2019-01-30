@@ -22,5 +22,10 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::resource('teams', 'TeamAPIController');
     Route::resource('districts', 'DistrictAPIController');
+    Route::resource('cells', 'CellAPIController');
+    Route::resource('communities', 'CommunityAPIController');
+    Route::resource('zones', 'ZoneAPIController');
 
 });
+
+
