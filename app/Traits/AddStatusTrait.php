@@ -34,15 +34,13 @@ Trait AddStatusTrait{
     }
 
 
-    public static function setStatus()
+    protected static function setStatus()
     {
         static::creating(function ($model) {
 
             if( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$except) ){
 
-                static::creating(function ($model) {
                     $model->{self::statusField()} =  ( Auth::user()->isBranchAdmin() ) ? ModelStatus::PENDING_APPROVAL : ModelStatus::ACTIVE;
-                });
             }
 
         });
