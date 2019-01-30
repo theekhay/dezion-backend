@@ -46,7 +46,7 @@ class MemberType extends Model
 
 
     public $fillable = [
-        'name', 'church_id', 'created_by', 'code', 'excluded_branches'
+        'name', 'church_id', 'created_by', 'code', 'excluded_branches', 'status'
     ];
 
     /**

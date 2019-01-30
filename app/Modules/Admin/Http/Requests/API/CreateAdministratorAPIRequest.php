@@ -15,15 +15,15 @@ class CreateAdministratorAPIRequest extends APIRequest
      */
     public function authorize()
     {
-        // $admin = Auth::user();
+        $admin = Auth::user();
 
-        // if( $admin->isBranchAdmin() ){
-        //     return false;
-        // }
+        if( $admin->isBranchAdmin() ){
+            return false;
+        }
 
-        // if( $admin->church_id != $this->church_id){
-        //     return false;
-        // }
+        if( $admin->church_id != $this->church_id){
+            return false;
+        }
 
         return true;
     }

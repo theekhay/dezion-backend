@@ -358,6 +358,8 @@ class ChurchAPIController extends AppBaseController
 
             DB::commit();
 
+            //send verify email to client
+            $admin->sendEmailVerificationNotification();
             return $this->sendResponse($church, "church has been registered succesfully. Kindly check your email for instructions to proceed");
         }
         catch( \Exception $e)
