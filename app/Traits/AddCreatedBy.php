@@ -64,7 +64,9 @@ Trait AddCreatedBy
     protected static function created_by()
     {
         static::creating(function ($model) {
+
             $model->{self::createdByField()} = ( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$ignoreRoute) ) ?  Auth::id() : 1;
+
         });
     }
 

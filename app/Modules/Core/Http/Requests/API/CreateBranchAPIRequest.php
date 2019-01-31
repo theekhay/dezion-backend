@@ -6,7 +6,7 @@ use App\Modules\Core\Models\Branch;
 use InfyOm\Generator\Request\APIRequest;
 
 use Illuminate\Support\Facades\Auth;
-use App\Modules\Membership\Models\AdminType;
+use App\Modules\Admin\Models\AdminType;
 
 class CreateBranchAPIRequest extends APIRequest
 {

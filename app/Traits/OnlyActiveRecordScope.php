@@ -15,4 +15,14 @@ Class OnlyActiveRecordScope implements Scope{
     {
         $builder->where( $model->getActiveColumn(), STATUS::ACTIVE);
     }
+
+
+    /**
+     * adds the models that have status pending to the retreived list.
+     *
+     */
+    public function withPending()
+    {
+
+    }
 }

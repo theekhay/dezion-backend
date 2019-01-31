@@ -13,6 +13,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
 use Spatie\Permission\Models\Role as RoleProvider;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class RoleController
@@ -114,7 +115,7 @@ class RoleAPIController extends AppBaseController
     {
         $input = $request->all();
        // $roles = $this->roleRepository->create($input);
-       $roles = RoleProvider::create($input);
+       $roles = RoleProvider::create($input );
        return $this->sendResponse($roles->toArray(), 'Role saved successfully');
     }
 
