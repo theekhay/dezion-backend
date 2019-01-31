@@ -34,7 +34,7 @@ Trait AddCreatedBy
     /**
      * Generate UUID v4 when creating model.
      */
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
 
