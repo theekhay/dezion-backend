@@ -19,3 +19,5 @@ Route::group(['prefix' => 'rolemanager'], function () {
 
 
 Route::resource('roles', 'RoleController');
+
+Route::resource('systemPermissions', 'SystemPermissionController');
