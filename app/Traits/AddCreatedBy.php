@@ -34,16 +34,16 @@ Trait AddCreatedBy
     /**
      * Generate UUID v4 when creating model.
      */
-    public static function boot()
+    public static function bootAddCreatedBy()
     {
-        parent::boot();
+        //parent::boot();
 
         /**
          * @prop $enaabled should be true for this to work
          * but false during seeding.
          * work find a better fix later
          */
-       if( self::$enabled )
+       //if( self::$enabled )
             self::created_by();
     }
 
