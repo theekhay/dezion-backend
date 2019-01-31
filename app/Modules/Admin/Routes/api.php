@@ -27,6 +27,7 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
     Route::post('admin/notify/inapp', 'AdministratorAPIController@test'); //unomment
 
     //create a new branch admin
+    Route::post('admin/logout', 'AdministratorAPIController@logout') ;
     Route::post('admin/branch/create', 'AdministratorAPIController@makeBranchAdmin');
 
     Route::resource('admin', 'AdministratorAPIController');

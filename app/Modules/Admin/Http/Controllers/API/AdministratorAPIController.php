@@ -328,6 +328,20 @@ class AdministratorAPIController extends AppBaseController
 
 
     /**
+     * Log the currently signed-in user on this device.
+     *
+     */
+    public function logout()
+    {
+        $admin = Auth::user();
+        $token = $admin->token();
+        $token->revoke();
+        return $this->sendResponse( $admin, 'log out successful');
+    }
+
+
+
+    /**
      * API for creating a new branch administrator
      * @return AdminResource
      */
