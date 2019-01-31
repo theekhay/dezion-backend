@@ -14,6 +14,8 @@ use Response;
 
 use Spatie\Permission\Models\Role as RoleProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ModelStatus;
+use Illuminate\Support\Str;
 
 /**
  * Class RoleController
@@ -115,7 +117,8 @@ class RoleAPIController extends AppBaseController
     {
         $input = $request->all();
        // $roles = $this->roleRepository->create($input);
-       $roles = RoleProvider::create($input );
+       $info = ['created_by' => Auth::id(), 'status' => ModelStatus::ACTIVE, 'uuid' => Str::uuid() ];
+       $roles = RoleProvider::create($input + $info);
        return $this->sendResponse($roles->toArray(), 'Role saved successfully');
     }
 
