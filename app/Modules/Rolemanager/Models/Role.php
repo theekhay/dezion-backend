@@ -9,6 +9,7 @@ use App\Traits\AddStatusTrait;
 use App\Traits\AddCreatedBy;
 use App\Traits\UuidTrait;
 
+use Spatie\Permission\Models\Role as SpatieRole;
 
 /**
  * @SWG\Definition(
@@ -34,15 +35,12 @@ use App\Traits\UuidTrait;
  *      )
  * )
  */
-class Role extends Model
+class Role extends SpatieRole
 {
     use SoftDeletes, WithOnlyChurchTrait, AddStatusTrait, AddCreatedBy, UuidTrait;
 
-    public $table = 'roles';
-
 
     protected $dates = ['deleted_at'];
-
 
     public $fillable = [
         'name',  'created_by', 'deleted_by', 'status', 'church_id', 'guard_name'
@@ -66,8 +64,8 @@ class Role extends Model
 
         'church_id' => 'required|numeric|exists:churches,id',
         'name' => 'required|string|unique_with:roles,church_id',
-        //'status' => 'required|numeric' //add a validator to make sure status are in the allowed list
     ];
+
 
 
 }

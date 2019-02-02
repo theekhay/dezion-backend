@@ -16,6 +16,16 @@ use Spatie\Permission\Models\Role as RoleProvider;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ModelStatus;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
+
+use App\Modules\Rolemanager\Http\Requests\API\CreatePermissionAPIRequest;
+use Spatie\Permission\Exceptions\PermissionAlreadyExists;
+
+use App\Modules\Rolemanager\Http\Resources\PermissionResource;
+use Spatie\Permission\Exceptions\RoleAlreadyExists;
+use Spatie\Permission\Exceptions\PermissionDoesNotExist;
+
 
 /**
  * Class RoleController
@@ -115,11 +125,61 @@ class RoleAPIController extends AppBaseController
      */
     public function store(CreateRoleAPIRequest $request)
     {
+        $input = $request->except('permissions');
+
+        try{
+            DB::beginTransaction();
+
+            $role = $this->roleRepository->create($input);
+
+            if( ! empty( $request->permissions) ){
+                $role->syncPermissions($request->permissions);
+            }
+
+            DB::commit();
+
+            return $this->sendResponse($role->toArray(), 'Role saved successfully');
+        }
+        catch( RoleAlreadyExists $e ){
+            return $this->sendError($e->getMessage(), 400);
+        }
+        catch( PermissionDoesNotExist $e ){
+            return $this->sendError($e->getMessage(), 400);
+        }
+        catch( \Exception $e){
+
+
+            return $this->sendError("error processing request", 400);
+        }
+        finally{
+           // DB::rollBack();
+        }
+
+    }
+
+
+
+    /**
+     * API for making a new permission.
+     */
+    public function makePermission( CreatePermissionAPIRequest $request)
+    {
         $input = $request->all();
-       // $roles = $this->roleRepository->create($input);
-       $info = ['created_by' => Auth::id(), 'status' => ModelStatus::ACTIVE, 'uuid' => Str::uuid() ];
-       $roles = RoleProvider::create($input + $info);
-       return $this->sendResponse($roles->toArray(), 'Role saved successfully');
+        $info = ['created_by' => Auth::id(), 'status' => ModelStatus::ACTIVE, 'uuid' => Str::uuid() ];
+
+        try{
+
+            $permission = Permission::create( $input + $info);
+            return $this->sendResponse( new PermissionResource($permission), 'Permission created successfully');
+        }
+        catch( PermissionAlreadyExists $e){
+
+            return $this->sendError($e->getMessage() );
+        }
+        catch( \Exception $e){
+
+            return $this->sendError("Error processing request");
+        }
     }
 
     /**
@@ -284,5 +344,10 @@ class RoleAPIController extends AppBaseController
         $role->delete();
 
         return $this->sendResponse($id, 'Role deleted successfully');
+    }
+
+
+    public function toRole( Permission $permission){
+
     }
 }

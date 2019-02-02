@@ -11,15 +11,8 @@
 |
 */
 
-Route::group(['prefix' => 'rolemanager'], function () {
+Route::group(['prefix' => 'menumanager'], function () {
     Route::get('/', function () {
-        dd('This is the Rolemanager module index page. Build something great!');
+        dd('This is the Menumanager module index page. Build something great!');
     });
 });
-
-
-Route::resource('roles', 'RoleController');
-
-Route::resource('systemPermissions', 'SystemPermissionController');
-
-Route::resource('permissionCategories', 'PermissionCategoryController');

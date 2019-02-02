@@ -342,6 +342,20 @@ class AdministratorAPIController extends AppBaseController
 
 
     /**
+     * logs a user out of all the devices they are currently logged on to.
+     */
+    public function logoutAllDevices()
+    {
+        DB::table('oauth_access_tokens')
+        ->where('user_id', Auth::user()->id)
+        ->update([
+            'revoked' => true
+        ]);
+    }
+
+
+
+    /**
      * API for creating a new branch administrator
      * @return AdminResource
      */

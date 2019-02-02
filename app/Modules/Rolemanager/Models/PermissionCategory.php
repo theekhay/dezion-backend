@@ -5,9 +5,17 @@ namespace App\Modules\rolemanager\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//Models
+use Spatie\Permission\Models\Permission;
+
+//Traits
+use App\Traits\UuidTrait;
+use App\Traits\AddCreatedBy;
+use App\Traits\AddStatusTrait;
+
 /**
  * @SWG\Definition(
- *      definition="SystemPermission",
+ *      definition="PermissionCategory",
  *      required={""},
  *      @SWG\Property(
  *          property="id",
@@ -29,19 +37,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class SystemPermission extends Model
+class PermissionCategory extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, AddStatusTrait, UuidTrait;
 
-    public $table = 'system_permissions';
-
+    public $table = 'permission_categories';
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
 
-        'name', 'alias', 'module', 'created_by', 'status'
+        'name', 'code', 'allowed', 'excluded'
     ];
 
     /**
@@ -59,8 +66,22 @@ class SystemPermission extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string'
+
+        'name' => 'required|string|unique:permission_categories',
+        'code' => 'nullable|unique:permission_categories|max:10|alpha_dash'
     ];
+
+
+
+    /**
+     * Defines the relationahip between a permission and the category/module it belongs to
+     * A module would usually have many permissions
+     * and each permisson would belong to a category/module
+     */
+    public function permisssions(){
+
+        return $this->hasMany( Permission::class, 'category_id' );
+    }
 
 
 }

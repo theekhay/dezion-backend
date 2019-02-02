@@ -2,30 +2,30 @@
 
 namespace App\Modules\rolemanager\Http\Controllers\API;
 
-use App\Modules\rolemanager\Http\Requests\API\CreateSystemPermissionAPIRequest;
-use App\Modules\rolemanager\Http\Requests\API\UpdateSystemPermissionAPIRequest;
-use App\Modules\rolemanager\Models\SystemPermission;
-use App\Modules\rolemanager\Repositories\SystemPermissionRepository;
+use App\Modules\rolemanager\Http\Requests\API\CreatePermissionCategoryAPIRequest;
+use App\Modules\rolemanager\Http\Requests\API\UpdatePermissionCategoryAPIRequest;
+use App\Modules\rolemanager\Models\PermissionCategory;
+use App\Modules\rolemanager\Repositories\PermissionCategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use App\Modules\Rolemanager\Http\Resources\SystemPermissionResource;
+use App\Modules\Rolemanager\Http\Resources\PermissionCategoryResource;
 
 /**
- * Class SystemPermissionController
+ * Class PermissionCategoryController
  * @package App\Modules\rolemanager\Http\Controllers\API
  */
 
-class SystemPermissionAPIController extends AppBaseController
+class PermissionCategoryAPIController extends AppBaseController
 {
-    /** @var  SystemPermissionRepository */
-    private $systemPermissionRepository;
+    /** @var  PermissionCategoryRepository */
+    private $permissionCategoryRepository;
 
-    public function __construct(SystemPermissionRepository $systemPermissionRepo)
+    public function __construct(PermissionCategoryRepository $permissionCategoryRepo)
     {
-        $this->systemPermissionRepository = $systemPermissionRepo;
+        $this->permissionCategoryRepository = $permissionCategoryRepo;
     }
 
     /**
@@ -33,10 +33,10 @@ class SystemPermissionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/systemPermissions",
-     *      summary="Get a listing of the SystemPermissions.",
-     *      tags={"SystemPermission"},
-     *      description="Get all SystemPermissions",
+     *      path="/permissionCategories",
+     *      summary="Get a listing of the PermissionCategories.",
+     *      tags={"PermissionCategory"},
+     *      description="Get all PermissionCategories",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -50,7 +50,7 @@ class SystemPermissionAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/SystemPermission")
+     *                  @SWG\Items(ref="#/definitions/PermissionCategory")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -62,29 +62,31 @@ class SystemPermissionAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $this->systemPermissionRepository->pushCriteria(new RequestCriteria($request));
-        $this->systemPermissionRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $systemPermissions = $this->systemPermissionRepository->all();
+        $this->permissionCategoryRepository->pushCriteria(new RequestCriteria($request));
+        $this->permissionCategoryRepository->pushCriteria(new LimitOffsetCriteria($request));
+        $permissionCategories = $this->permissionCategoryRepository->paginate(50);
 
-        return $this->sendResponse($systemPermissions->toArray(), 'System Permissions retrieved successfully');
+        return $this->sendResponse( PermissionCategoryResource::collection( $permissionCategories ), 'Permission Categories retrieved successfully');
     }
 
+
+
     /**
-     * @param CreateSystemPermissionAPIRequest $request
+     * @param CreatePermissionCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/systemPermissions",
-     *      summary="Store a newly created SystemPermission in storage",
-     *      tags={"SystemPermission"},
-     *      description="Store SystemPermission",
+     *      path="/permissionCategories",
+     *      summary="Store a newly created PermissionCategory in storage",
+     *      tags={"PermissionCategory"},
+     *      description="Store PermissionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="SystemPermission that should be stored",
+     *          description="PermissionCategory that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SystemPermission")
+     *          @SWG\Schema(ref="#/definitions/PermissionCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -97,7 +99,7 @@ class SystemPermissionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SystemPermission"
+     *                  ref="#/definitions/PermissionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -107,27 +109,28 @@ class SystemPermissionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateSystemPermissionAPIRequest $request)
+    public function store(CreatePermissionCategoryAPIRequest $request)
     {
         $input = $request->all();
-        $systemPermissions = $this->systemPermissionRepository->create($input);
-
-        return $this->sendResponse( new SystemPermissionResource($systemPermissions), 'System Permission saved successfully');
+        $permissionCategories = $this->permissionCategoryRepository->create($input);
+        return $this->sendResponse( new PermissionCategoryResource($permissionCategories), 'Permission Category saved successfully');
     }
+
+
 
     /**
      * @param int $id
      * @return Response
      *
      * @SWG\Get(
-     *      path="/systemPermissions/{id}",
-     *      summary="Display the specified SystemPermission",
-     *      tags={"SystemPermission"},
-     *      description="Get SystemPermission",
+     *      path="/permissionCategories/{id}",
+     *      summary="Display the specified PermissionCategory",
+     *      tags={"PermissionCategory"},
+     *      description="Get PermissionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SystemPermission",
+     *          description="id of PermissionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +146,7 @@ class SystemPermissionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SystemPermission"
+     *                  ref="#/definitions/PermissionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,30 +158,30 @@ class SystemPermissionAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var SystemPermission $systemPermission */
-        $systemPermission = $this->systemPermissionRepository->findWithoutFail($id);
+        /** @var PermissionCategory $permissionCategory */
+        $permissionCategory = $this->permissionCategoryRepository->findWithoutFail($id);
 
-        if (empty($systemPermission)) {
-            return $this->sendError('System Permission not found');
+        if (empty($permissionCategory)) {
+            return $this->sendError('Permission Category not found');
         }
 
-        return $this->sendResponse($systemPermission->toArray(), 'System Permission retrieved successfully');
+        return $this->sendResponse( new PermissionCategoryResource($permissionCategory), 'Permission Category retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateSystemPermissionAPIRequest $request
+     * @param UpdatePermissionCategoryAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/systemPermissions/{id}",
-     *      summary="Update the specified SystemPermission in storage",
-     *      tags={"SystemPermission"},
-     *      description="Update SystemPermission",
+     *      path="/permissionCategories/{id}",
+     *      summary="Update the specified PermissionCategory in storage",
+     *      tags={"PermissionCategory"},
+     *      description="Update PermissionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SystemPermission",
+     *          description="id of PermissionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +189,9 @@ class SystemPermissionAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="SystemPermission that should be updated",
+     *          description="PermissionCategory that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/SystemPermission")
+     *          @SWG\Schema(ref="#/definitions/PermissionCategory")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +204,7 @@ class SystemPermissionAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/SystemPermission"
+     *                  ref="#/definitions/PermissionCategory"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,20 +214,20 @@ class SystemPermissionAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateSystemPermissionAPIRequest $request)
+    public function update($id, UpdatePermissionCategoryAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var SystemPermission $systemPermission */
-        $systemPermission = $this->systemPermissionRepository->findWithoutFail($id);
+        /** @var PermissionCategory $permissionCategory */
+        $permissionCategory = $this->permissionCategoryRepository->findWithoutFail($id);
 
-        if (empty($systemPermission)) {
-            return $this->sendError('System Permission not found');
+        if (empty($permissionCategory)) {
+            return $this->sendError('Permission Category not found');
         }
 
-        $systemPermission = $this->systemPermissionRepository->update($input, $id);
+        $permissionCategory = $this->permissionCategoryRepository->update($input, $id);
 
-        return $this->sendResponse($systemPermission->toArray(), 'SystemPermission updated successfully');
+        return $this->sendResponse($permissionCategory->toArray(), 'PermissionCategory updated successfully');
     }
 
     /**
@@ -232,14 +235,14 @@ class SystemPermissionAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/systemPermissions/{id}",
-     *      summary="Remove the specified SystemPermission from storage",
-     *      tags={"SystemPermission"},
-     *      description="Delete SystemPermission",
+     *      path="/permissionCategories/{id}",
+     *      summary="Remove the specified PermissionCategory from storage",
+     *      tags={"PermissionCategory"},
+     *      description="Delete PermissionCategory",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of SystemPermission",
+     *          description="id of PermissionCategory",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +270,15 @@ class SystemPermissionAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var SystemPermission $systemPermission */
-        $systemPermission = $this->systemPermissionRepository->findWithoutFail($id);
+        /** @var PermissionCategory $permissionCategory */
+        $permissionCategory = $this->permissionCategoryRepository->findWithoutFail($id);
 
-        if (empty($systemPermission)) {
-            return $this->sendError('System Permission not found');
+        if (empty($permissionCategory)) {
+            return $this->sendError('Permission Category not found');
         }
 
-        $systemPermission->delete();
+        $permissionCategory->delete();
 
-        return $this->sendResponse($id, 'System Permission deleted successfully');
+        return $this->sendResponse($id, 'Permission Category deleted successfully');
     }
 }
