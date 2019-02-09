@@ -25,8 +25,6 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 
     //gets the members in a membertype
     Route::get('member_type/members/{id}', 'MemberTypeAPIController@getMembers');
-    Route::post('admin/notify/inapp', 'AdministratorAPIController@test'); //unomment
-
 
     Route::resource('member_types', 'MemberTypeAPIController');
     Route::resource('member_details', 'MemberDetailAPIController');

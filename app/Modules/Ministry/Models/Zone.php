@@ -4,6 +4,11 @@ namespace App\Modules\ministry\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\UuidTrait;
+use App\Traits\AddStatusTrait;
+use App\Traits\OnlyActive;
+use App\Traits\AddCreatedBy;
+
 
 /**
  * @SWG\Definition(
