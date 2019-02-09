@@ -18,7 +18,7 @@ Route::get('/admin', function (Request $request) {
 })->middleware('auth:api');
 
 //Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
-Route::post('v1/admin/login', 'AdministratorAPIController@login'); //->middleware('checkadminstatus');
+Route::post('v1/admin/login', 'AdministratorAPIController@login')->middleware('checkadminstatus');
 
 Route::post('admin/branch/create', 'AdministratorAPIController@makeBranchAdmin');
 
