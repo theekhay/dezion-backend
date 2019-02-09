@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
 
 class VerificationController extends Controller
 {
@@ -31,12 +32,12 @@ class VerificationController extends Controller
         // ->route('id') gets route user id and getKey() gets current user id()
         // do not forget that you must send Authorization header to get the user from the request
 
-        if ($request->route('id') == $request->user()->getKey() &&
-            $request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
-        }
+        // if ($request->route('id') == $request->user()->getKey() &&
+        //     $request->user()->markEmailAsVerified()) {
+        //     event(new Verified($request->user()));
+        // }
 
-        return response()->json('Email verified!');
+        return response()->json( Auth::user() );
 //        return redirect($this->redirectPath());
     }
 

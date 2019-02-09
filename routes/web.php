@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
-Auth::routes(['verify' => true]);
+//Auth::routes();
+//Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
