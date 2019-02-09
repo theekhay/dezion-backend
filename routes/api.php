@@ -21,8 +21,8 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 // Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 // {
