@@ -72,7 +72,7 @@ class Administrator extends User
 
         'firstname' => 'required|string|alpha',
         'surname' => 'required|string|alpha',
-        'email' => 'required|email|unique_with:administrators,church_id',
+        'email' => 'required|email|unique:administrators',
         'telephone' => 'required|numeric|unique_with:administrators,church_id',
         'church_id' => 'required|numeric|exists:churches,id',
         'member_id' => 'nullable|numeric|exists:member_details,id',

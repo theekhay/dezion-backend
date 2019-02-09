@@ -22,6 +22,7 @@ Route::post('v1/admin/login', 'AdministratorAPIController@login')->middleware('c
 
 Route::post('admin/branch/create', 'AdministratorAPIController@makeBranchAdmin');
 
+
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::post('admin/notify/inapp', 'AdministratorAPIController@test'); //unomment

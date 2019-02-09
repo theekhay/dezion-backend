@@ -398,7 +398,8 @@ class ChurchAPIController extends AppBaseController
         $uri = $request->path();
 
         $admin = ChurchAdmin::find(6);
-       echo json_encode(['activation_key' => get_class($admin) ]);
+        $isCorrect = true;
+       echo json_encode(['activation_key' => !!! $isCorrect ]);
     }
 
 }
