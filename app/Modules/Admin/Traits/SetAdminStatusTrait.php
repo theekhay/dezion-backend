@@ -28,7 +28,7 @@ Trait SetAdminStatusTrait{
     {
         static::creating(function ($model) {
 
-            $model->{self::statusField()} =  AdminStatus::PENDING_EMAIL_CONFIRMATION ;
+            $model->{self::statusField()} =  AdminStatus::ACTIVE ;
 
         });
     }

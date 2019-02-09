@@ -24,7 +24,7 @@ class VerificationController extends Controller
      * Mark the authenticated user's email address as verified.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respone
      */
     public function verify(Request $request)
     {
