@@ -12,6 +12,7 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Modules\Rolemanager\Http\Resources\SystemPermissionResource;
+use App\Modules\Rolemanager\Http\Resources\PermissionResource;
 
 /**
  * Class SystemPermissionController
@@ -64,9 +65,9 @@ class SystemPermissionAPIController extends AppBaseController
     {
         $this->systemPermissionRepository->pushCriteria(new RequestCriteria($request));
         $this->systemPermissionRepository->pushCriteria(new LimitOffsetCriteria($request));
-        $systemPermissions = $this->systemPermissionRepository->all();
+        $systemPermissions = $this->systemPermissionRepository->all()->groupBy('category_id');
 
-        return $this->sendResponse($systemPermissions->toArray(), 'System Permissions retrieved successfully');
+        return $this->sendResponse( new PermissionResource($systemPermissions), 'System Permissions retrieved successfully');
     }
 
     /**
@@ -110,9 +111,20 @@ class SystemPermissionAPIController extends AppBaseController
     public function store(CreateSystemPermissionAPIRequest $request)
     {
         $input = $request->all();
-        $systemPermissions = $this->systemPermissionRepository->create($input);
 
-        return $this->sendResponse( new SystemPermissionResource($systemPermissions), 'System Permission saved successfully');
+        try{
+
+            $systemPermissions = $this->systemPermissionRepository->create($input);
+            return $this->sendResponse( new PermissionResource( $systemPermissions ), 'Permission created successfully');
+        }
+        catch( PermissionAlreadyExists $e){
+
+            return $this->sendError($e->getMessage() );
+        }
+        catch( Exception $e){
+
+            return $this->sendError("Error processing request");
+        }
     }
 
     /**
@@ -158,12 +170,14 @@ class SystemPermissionAPIController extends AppBaseController
         /** @var SystemPermission $systemPermission */
         $systemPermission = $this->systemPermissionRepository->findWithoutFail($id);
 
-        if (empty($systemPermission)) {
+        if (empty($systemPermission) ) {
             return $this->sendError('System Permission not found');
         }
 
         return $this->sendResponse($systemPermission->toArray(), 'System Permission retrieved successfully');
     }
+
+
 
     /**
      * @param int $id

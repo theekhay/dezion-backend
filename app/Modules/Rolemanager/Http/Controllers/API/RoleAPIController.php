@@ -147,8 +147,6 @@ class RoleAPIController extends AppBaseController
             return $this->sendError($e->getMessage(), 400);
         }
         catch( \Exception $e){
-
-
             return $this->sendError("error processing request", 400);
         }
         finally{
@@ -157,30 +155,6 @@ class RoleAPIController extends AppBaseController
 
     }
 
-
-
-    /**
-     * API for making a new permission.
-     */
-    public function makePermission( CreatePermissionAPIRequest $request)
-    {
-        $input = $request->all();
-        $info = ['created_by' => Auth::id(), 'status' => ModelStatus::ACTIVE, 'uuid' => Str::uuid() ];
-
-        try{
-
-            $permission = Permission::create( $input + $info);
-            return $this->sendResponse( new PermissionResource($permission), 'Permission created successfully');
-        }
-        catch( PermissionAlreadyExists $e){
-
-            return $this->sendError($e->getMessage() );
-        }
-        catch( \Exception $e){
-
-            return $this->sendError("Error processing request");
-        }
-    }
 
     /**
      * @param int $id
@@ -347,7 +321,4 @@ class RoleAPIController extends AppBaseController
     }
 
 
-    public function toRole( Permission $permission){
-
-    }
 }

@@ -4,6 +4,10 @@ namespace App\Modules\rolemanager\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Models\Permission;
+use App\Traits\AddStatusTrait;
+use App\Traits\UuidTrait;
+use App\Traits\AddCreatedBy;
 
 /**
  * @SWG\Definition(
@@ -29,19 +33,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class SystemPermission extends Model
+class SystemPermission extends Permission
 {
-    use SoftDeletes;
-
-    public $table = 'system_permissions';
-
+    use SoftDeletes, AddCreatedBy, UuidTrait, AddStatusTrait;
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
 
-        'name', 'alias', 'module', 'created_by', 'status'
+        'name', 'alias', 'module', 'created_by', 'status', 'guard_name', 'category_id',
     ];
 
     /**
@@ -59,7 +60,9 @@ class SystemPermission extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string'
+
+        'name' => 'required|string|unique:permissions,name',
+        'category_id' => 'required|numeric|exists:permission_categories,id'
     ];
 
 

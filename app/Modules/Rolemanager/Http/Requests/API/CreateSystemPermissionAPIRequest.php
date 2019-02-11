@@ -5,6 +5,7 @@ namespace App\Modules\rolemanager\Http\Requests\API;
 use App\Modules\rolemanager\Models\SystemPermission;
 use InfyOm\Generator\Request\APIRequest;
 use App\Modules\Admin\Models\AdminType;
+use Illuminate\Support\Facades\Auth;
 
 class CreateSystemPermissionAPIRequest extends APIRequest
 {
@@ -22,7 +23,7 @@ class CreateSystemPermissionAPIRequest extends APIRequest
          *
          */
         if( $admin->type != AdminType::SuperAdmin )
-            return false;
+            //return false;
 
         return true;
     }
