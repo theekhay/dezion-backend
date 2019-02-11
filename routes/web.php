@@ -15,13 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('api.verification.verify');
 
 //Auth::routes();
 Auth::routes(['verify' => true]);
 
 //Route::get('/home', 'HomeController@index');
 
-Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('api.verification.verify');
+
 
 Auth::routes();
 
