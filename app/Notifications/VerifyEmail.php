@@ -20,7 +20,7 @@ class VerifyEmail extends VerifyEmailBase
     {
         $prefix = config('frontend.url') . config('frontend.email_verify_url');
         $temporarySignedURL = URL::temporarySignedRoute(
-            'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
+            'api.verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
         );
 
         // I use urlencode to pass a link to my frontend.

@@ -45,7 +45,7 @@ class VerificationController extends Controller
         // }
 
         return response()->json(['success' => true, 'message' =>'Email verified!']);
-//        return redirect($this->redirectPath());
+        //return redirect($this->redirectPath());
     }
 
     /**
