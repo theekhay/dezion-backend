@@ -291,7 +291,10 @@ class CellAPIController extends AppBaseController
     }
 
 
-
+    /**
+     * Imports cell data into the database
+     * TODO: the request  should restrict this action to just admins
+     */
     public function import(Request $request)
     {
 
@@ -337,5 +340,17 @@ class CellAPIController extends AppBaseController
         else{
             return $this->sendError("No file selected for import.");
         }
+    }
+
+
+    /**
+     * Get just addresses for all cells
+     * this is to be used in the mapping function.
+     * @return array
+     */
+    public function addresses()
+    {
+        $addresses = Cell::pluck('address');
+        return array_unique (array_map('trim', $addresses->all() ) ) ;
     }
 }

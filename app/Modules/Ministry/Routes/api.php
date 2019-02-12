@@ -21,6 +21,7 @@ Route::get('/ministry', function (Request $request) {
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
     Route::post('cells/import', 'CellAPIController@import');
+    Route::get('cells/addresses', 'CellAPIController@addresses');
 
     Route::resource('teams', 'TeamAPIController');
     Route::resource('districts', 'DistrictAPIController');
