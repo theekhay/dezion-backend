@@ -48,7 +48,7 @@ class Cell extends Model
 
         'name', 'code', 'date_created', 'uuid', 'status', 'created_by', 'updated_by', 'deleted_by',
         'district_id', 'leader_phone_number', 'leader_email', 'leader_name', 'leader_member_id', 'address',
-        'community_id', 'zone_id'
+        'community_id', 'zone_id', 'community_name', 'district_name', 'zone_name', 'leader_mobile_number',
     ];
 
     /**
@@ -69,11 +69,12 @@ class Cell extends Model
         'name' => 'nullable|string|unique:cells',
         'code' => 'nullable|string|unique:cells',
         'date_created' => 'nullable|date',
-        'district_id' => 'required|numeric|exists:districts,id',
+        'district_id' => 'nullable|numeric|exists:districts,id',
         'community_id' => 'nullable|numeric|exists:communities,id',
         'zone_id' => 'nullable|numeric|exists:zones,id',
         'leader_email' => 'nullable|email',
-        'address' => 'required|string|unique:cells'
+        //'address' => 'required|string|unique:cells'
+        'address' => 'required|string'
     ];
 
 

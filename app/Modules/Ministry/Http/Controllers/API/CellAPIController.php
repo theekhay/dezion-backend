@@ -12,6 +12,9 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\Modules\Ministry\Http\Resources\CellResource;
+use App\Modules\Ministry\Imports\CellInfoImport;
+
+use App\Modules\Membership\Models\BulkMemberImport;
 
 /**
  * Class CellController
@@ -114,6 +117,8 @@ class CellAPIController extends AppBaseController
         return $this->sendResponse( new CellResource($cells), 'Cell saved successfully');
     }
 
+
+
     /**
      * @param int $id
      * @return Response
@@ -163,6 +168,9 @@ class CellAPIController extends AppBaseController
 
         return $this->sendResponse( new CellResource($cell), 'Cell retrieved successfully');
     }
+
+
+
 
     /**
      * @param int $id
@@ -226,6 +234,10 @@ class CellAPIController extends AppBaseController
         return $this->sendResponse($cell->toArray(), 'Cell updated successfully');
     }
 
+
+
+
+
     /**
      * @param int $id
      * @return Response
@@ -276,5 +288,54 @@ class CellAPIController extends AppBaseController
         $cell->delete();
 
         return $this->sendResponse($id, 'Cell deleted successfully');
+    }
+
+
+
+    public function import(Request $request)
+    {
+
+        if( $request->file('import') )
+        {
+            $filename = $_FILES['import']['name'];
+            $ext = pathinfo($filename, PATHINFO_EXTENSION); //get the extension
+
+            try{
+
+                //check the file format
+                if( ! in_array( strtolower( $ext), BulkMemberImport::$allowedFileFormats ) )
+                   throw new exception('Invalid file type. The file you are trying to import is not supported');
+
+                    //import the file
+                ( new CellInfoImport )->import( request()->file('import'));
+
+                return response()->json(['status' => 'success', 'message' => "Import succesful" ], 200);
+
+            }
+            catch ( \Maatwebsite\Excel\Validators\ValidationException $e) {
+                $failures = $e->failures();
+
+                $error = []; //should store the errors
+
+                foreach ($failures as $failure) {
+                    $row = $failure->row();
+                    $col = $failure->attribute();
+
+                    foreach ($failure->errors() as $err) {
+                       $error[] =  "There was a problem on row $row, $err. Kindly reimport this sheet from row $row";
+                    }
+                }
+
+                return $this->sendError($error);
+            }
+            catch( \Exception $e){
+                //return $this->sendError("There was an error while trying to import this file!", 500);
+                return $this->sendError($e->getMessage(), 500);
+            }
+
+        }
+        else{
+            return $this->sendError("No file selected for import.");
+        }
     }
 }

@@ -121,7 +121,7 @@ class SystemPermissionAPIController extends AppBaseController
 
             return $this->sendError($e->getMessage() );
         }
-        catch( Exception $e){
+        catch( \Exception $e){
 
             return $this->sendError("Error processing request");
         }
