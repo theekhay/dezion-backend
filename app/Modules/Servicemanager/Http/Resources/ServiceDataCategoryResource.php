@@ -4,7 +4,7 @@ namespace App\Modules\Servicemanager\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Modules\Servicemanager\Models\ServiceDataComponent;
-use App\Modules\ServiceManager\Http\Resources\ServiceDataComponentResource;
+//use App\Modules\ServiceManager\Http\Resources\ServiceDataComponentResource;
 
 class ServiceDataCategoryResource extends JsonResource
 {
