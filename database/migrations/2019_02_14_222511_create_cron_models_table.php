@@ -34,6 +34,6 @@ class CreateCronModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cron_models');
+        Schema::dropIfExists('crons');
     }
 }
