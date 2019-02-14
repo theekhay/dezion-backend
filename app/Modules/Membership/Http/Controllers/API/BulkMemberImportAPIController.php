@@ -26,17 +26,20 @@ use Response;
 //eports and imports
 // use App\Exports\YourExport;
 // use App\Imports\YourImport;
-// use Maatwebsite\Excel\Excel;
+//use Maatwebsite\Excel\Excel;
 
 use Maatwebsite\Excel\Importer;
 use Maatwebsite\Excel\Exporter;
 use App\Modules\Membership\Imports\MemberDetailImport;
+use Maatwebsite\Excel\HeadingRowImport;
 
 /**
  * Class BulkMemberImportController
  * @package App\Modules\Membership\Http\Controllers\API
  */
 
+
+ //UPDATE THIS CLASS TO CONTACT MANAGER CLASS
 class BulkMemberImportAPIController extends AppBaseController
 {
 
@@ -99,7 +102,7 @@ class BulkMemberImportAPIController extends AppBaseController
     {
         $batch = time();
 
-        if($request->file('import') )
+        if( $request->file('import') )
         {
             $filename = $_FILES['import']['name'];
             $ext = pathinfo($filename, PATHINFO_EXTENSION); //get the extension
@@ -108,9 +111,10 @@ class BulkMemberImportAPIController extends AppBaseController
 
                 //check the file format
                 if( ! in_array( strtolower( $ext), BulkMemberImport::$allowedFileFormats ) )
-                    throw new exception('Invalid file type. The file you are trying to import is not supported');
+                   throw new exception('Invalid file type. The file you are trying to import is not supported');
 
-                (new MemberDetailImport(['member_type_id' => $request->member_type_id, 'branch_id' => 1, 'batch' => $batch ]) )->import( request()->file('import'));
+                    //import the file
+                ( new MemberDetailImport(['member_type_id' => $request->member_type_id, 'branch_id' => $request->branch_id, 'batch' => $batch ]) )->import( request()->file('import'));
 
                 return response()->json(['status' => 'success', 'message' => "Import succesful" ], 200);
 
@@ -118,7 +122,7 @@ class BulkMemberImportAPIController extends AppBaseController
             catch ( \Maatwebsite\Excel\Validators\ValidationException $e) {
                 $failures = $e->failures();
 
-                $error = [];
+                $error = []; //should store the errors
 
                 foreach ($failures as $failure) {
                     $row = $failure->row();
@@ -131,10 +135,14 @@ class BulkMemberImportAPIController extends AppBaseController
 
                 return $this->sendError($error);
             }
-            catch( Exception $e){
-                return $this->sendError("There was an error while trying to import this file!");
+            catch( \Exception $e){
+                //return $this->sendError("There was an error while trying to import this file!", 500);
+                return $this->sendError($e->getMessage(), 500);
             }
 
+        }
+        else{
+            return $this->sendError("No file selected for import.");
         }
     }
 
@@ -149,6 +157,9 @@ class BulkMemberImportAPIController extends AppBaseController
     {
 
     }
+
+
+
 
 
 }

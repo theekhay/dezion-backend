@@ -81,10 +81,19 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'api',
-            'namespace'  => $this->namespace,
+            //'namespace'  => $this->namespace,
+            'namespace'  => $this->namespace . "\\API",
             'prefix'     => 'api',
         ], function ($router) {
             require module_path('ministry', 'Routes/api.php', 'app');
         });
+
+        // Route::group([
+        //     'middleware' => 'api',
+        //     'namespace'  => $this->namespace,
+        //     'prefix'     => 'api',
+        // ], function ($router) {
+        //     require module_path('ministry', 'Routes/api.php', 'app');
+        // });
     }
 }

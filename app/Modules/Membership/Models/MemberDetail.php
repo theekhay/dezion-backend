@@ -4,6 +4,10 @@ namespace App\Modules\Membership\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AddCreatedBy;
+use App\Modules\Notify\Traits\MessageTrait;
+use App\Traits\UuidTrait;
+use App\Traits\WithOnlyBranchTrait;
 
 /**
  * @SWG\Definition(
@@ -31,7 +35,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class MemberDetail extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, UuidTrait, WithOnlyBranchTrait;
+
 
     public $table = 'member_details';
 
@@ -42,7 +47,7 @@ class MemberDetail extends Model
     public $fillable = [
 
         'firstname', 'surname', 'email', 'address', 'telephone',
-        'middlename', 'created_by', 'batch', 'is_bulk', 'branch_id', 'member_type_id',
+        'middlename', 'created_by', 'batch', 'is_bulk', 'branch_id', 'member_type_id', 'data', 'uuid', 'name'
     ];
 
     /**

@@ -23,8 +23,12 @@ class AppBaseController extends Controller
         return Response::json(ResponseUtil::makeResponse($message, $result));
     }
 
+
     public function sendError($error, $code = 404)
     {
         return Response::json(ResponseUtil::makeError($error), $code);
     }
+
+
+    //there should be a function for popups
 }

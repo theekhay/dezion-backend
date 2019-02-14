@@ -15,6 +15,8 @@ class CreateBulkMemberImportsTable extends Migration
     {
         Schema::create('bulk_member_imports', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
+            $table->string('filenaame');
             $table->timestamps();
             $table->softDeletes();
         });

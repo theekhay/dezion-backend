@@ -15,6 +15,17 @@ class CreateDistrictsTable extends Migration
     {
         Schema::create('districts', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->uuid('uuid')->unique();
+            $table->integer('status');
+
+            $table->string("name");
+            $table->string("code")->nullable();
+
+            $table->integer('created_by');
+            $table->integer('deleted_by')->nullable();
+            $table->integer('updated_by')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

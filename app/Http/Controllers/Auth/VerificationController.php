@@ -26,6 +26,7 @@ class VerificationController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+   // protected $redirectTo = 'https://dezion-frontend.herokuapp.com/#/account/signin';
 
     /**
      * Create a new controller instance.

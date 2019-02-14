@@ -123,7 +123,7 @@ class BranchAPIController extends AppBaseController
      */
     public function store(CreateBranchAPIRequest $request)
     {
-        $input = $request->all() + ['created_by' => Auth::id()];
+        $input = $request->all();
         $branches = $this->branchRepository->create($input);
         return $this->sendResponse( new BranchResource($branches), 'Branch saved successfully');
     }
@@ -169,9 +169,7 @@ class BranchAPIController extends AppBaseController
     public function show($id)
     {
         $branch = $this->branchRepository->findWithoutFail($id);
-
         if (empty($branch))  return $this->sendError('Branch not found');
-
         return $this->sendResponse( new BranchResource( $branch ), 'Branch Detail retrieved successfully' );
     }
 
@@ -286,4 +284,6 @@ class BranchAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Branch deleted successfully');
     }
+
+
 }

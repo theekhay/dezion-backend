@@ -12,6 +12,8 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
+use App\Modules\Ministry\Http\Resources\DistrictResource;
+
 /**
  * Class DistrictController
  * @package App\Modules\Ministry\Http\Controllers\API
@@ -109,10 +111,8 @@ class DistrictAPIController extends AppBaseController
     public function store(CreateDistrictAPIRequest $request)
     {
         $input = $request->all();
-
         $districts = $this->districtRepository->create($input);
-
-        return $this->sendResponse($districts->toArray(), 'District saved successfully');
+        return $this->sendResponse( new DistrictResource($districts), 'District saved successfully');
     }
 
     /**

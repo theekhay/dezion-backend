@@ -5,6 +5,12 @@ namespace App\Modules\Membership\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//traits
+use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
+use App\Traits\AddStatusTrait;
+
 /**
  * @SWG\Definition(
  *      definition="MemberType",
@@ -31,7 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class MemberType extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait;
 
     public $table = 'member_types';
 
@@ -40,7 +46,7 @@ class MemberType extends Model
 
 
     public $fillable = [
-        'name', 'church_id', 'created_by', 'code', 'excluded_branches'
+        'name', 'church_id', 'created_by', 'code', 'excluded_branches', 'status'
     ];
 
     /**
@@ -60,7 +66,7 @@ class MemberType extends Model
     public static $rules = [
 
         'church_id' => 'required|numeric|exists:churches,id',
-        'name' => 'required|alpha_dash|unique_with:member_types,church_id|not_in:First timers,Members, members, firsttimers, first timers',
+        'name' => 'required|string|unique_with:member_types,church_id|not_in:First timers,Members, members, firsttimers, first timers',
         'excluded_branches' => 'nullable|json',
         'code' => 'nullable|unique_with:member_types,church_id|max:10|alpha_num',
     ];
@@ -87,6 +93,16 @@ class MemberType extends Model
     public function getSystemDefinedMemberTypes()
     {
         return self::all()->where('type', self::SYSTEM_DEFINED);
+    }
+
+
+    /**
+     * Defines the relationship between members and member types
+     *
+     */
+    public function members()
+    {
+        return $this->hasMany( MemberDetail::class, 'member_type_id');
     }
 
 

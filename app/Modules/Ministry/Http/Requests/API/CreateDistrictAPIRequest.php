@@ -4,6 +4,7 @@ namespace App\Modules\Ministry\Http\Requests\API;
 
 use App\Modules\Ministry\Models\District;
 use InfyOm\Generator\Request\APIRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateDistrictAPIRequest extends APIRequest
 {
@@ -14,6 +15,13 @@ class CreateDistrictAPIRequest extends APIRequest
      */
     public function authorize()
     {
+        $admin = Auth::user();
+
+        if($admin->isBranchAdmin() ){
+
+            return false;
+        }
+
         return true;
     }
 

@@ -4,6 +4,7 @@ namespace App\Modules\Core\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Modules\Core\Models\Branch;
+use App\Modules\Membership\Models\AdminType;
 
 class CreateBranchRequest extends FormRequest
 {

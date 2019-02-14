@@ -16,6 +16,16 @@ Route::get('/', function () {
 });
 
 
+
+//Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('admin/email/verify/{id}', 'API\Auth\VerificationController@verify')->name('api.verification.verify');
+
+//Route::get('/home', 'HomeController@index');
+
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');

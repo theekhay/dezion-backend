@@ -5,6 +5,13 @@ namespace App\Modules\Core\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Membership\Models\MemberDetail;
+use App\Modules\Core\Models\BranchType;
+
+use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
+use App\Traits\OnlyActive;
+use App\Traits\AddStatusTrait;
+use App\Traits\WithOnlyChurchTrait;
 
 /**
  * @SWG\Definition(
@@ -30,18 +37,16 @@ use App\Modules\Membership\Models\MemberDetail;
  *      )
  * )
  */
-class Branch extends Model
+Class Branch extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, UuidTrait, OnlyActive, AddStatusTrait, WithOnlyChurchTrait;
 
     public $table = 'branches';
 
-
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
-        'name', 'code', 'church_id', 'date_established', 'address', 'created_by',
+        'name', 'code', 'church_id', 'date_established', 'address', 'created_by', 'type', 'status'
     ];
 
     /**
@@ -64,20 +69,45 @@ class Branch extends Model
         'name' => 'required|string|unique_with:branches,church_id',
         'code' => 'nullable|unique:branches,code|max:10|alpha_num',
         'date_established' => 'nullable|date|before_or_equal:today',
+        'type' => 'required|numeric',
         //this rule should make sure the branch established date is not greater than the church it belongs to
         //'date_established' => 'before_or_equal:today'
     ];
 
+    // public function __construct()
+    // {
+    //    // parent::__construct();
+    // }
 
+
+    /**
+     * Defines the relationship between a branch and the church it belongs to
+     *
+     */
     public function getChurch()
     {
-        return $this->belongsTo(App\Modules\Core\Models\Church::class);
+        return $this->belongsTo( Church::class, 'church_id');
     }
 
 
+    /**
+     * Defines the relationship between a branch and its members
+     *
+     */
     public function getMembers()
     {
-        return $this->hasMany(MemberDetail::class, 'branch_id');
+        return $this->hasMany( MemberDetail::class, 'branch_id');
+    }
+
+
+    /**
+     * Checks if a branch is a master branch of a church
+     * @param Branch
+     * @return boolean
+     */
+    public function isMaster(self $branch){
+
+        return $branch->type == BranchType::MASTER;
     }
 
 

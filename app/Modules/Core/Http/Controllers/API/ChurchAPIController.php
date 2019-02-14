@@ -6,9 +6,21 @@ namespace App\Modules\Core\Http\Controllers\API;
 use App\Modules\Core\Http\Requests\API\CreateChurchAPIRequest;
 use App\Modules\Core\Http\Requests\API\UpdateChurchAPIRequest;
 use Illuminate\Http\Request;
+use App\Modules\Core\Http\Requests\RegisterChurchAPIRequest;
 
 //models
 use App\Modules\Core\Models\Church;
+use App\Modules\Core\Models\OperationMode;
+use App\Modules\Core\Models\MasterBranch;
+use App\Modules\Core\Models\Branch;
+use App\Modules\Membership\Models\MemberDetail;
+use App\Modules\Admin\Models\Administrator;
+use App\Modules\Admin\Models\AdminBranch as AssignBranch;
+use App\Modules\Core\Models\AdminBranch;
+
+use App\Modules\Admin\Models\ChurchAdmin;
+use App\Modules\Admin\Models\AdminStatus;
+use App\Models\ModelStatus;
 
 //Repos
 use App\Modules\Core\Repositories\ChurchRepository;
@@ -23,7 +35,13 @@ use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Modules\Admin\Models\BranchAdmin;
+
+
 
 /**
  * Class ChurchController
@@ -123,7 +141,7 @@ class ChurchAPIController extends AppBaseController
      */
     public function store(CreateChurchAPIRequest $request)
     {
-        $church = Church::create( $request->all() + [ 'created_by' => Auth::id() ] );
+        $church = Church::create( $request->all() );
 
         if( $church ) {
             return $this->sendResponse( new ChurchResource( Church::find($church->id) ), 'church created successfully' );
@@ -294,4 +312,94 @@ class ChurchAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Church deleted successfully');
     }
+
+
+    public function registerChurch( RegisterChurchAPIRequest $request)
+    {
+        $church = new Church([
+
+            'name' => $request->church_name,
+            'mode' => OperationMode::LIVE,
+            'activation_key' => Church::generateAppKey(),
+            'created_by_email' => $request->email,
+            'created_by_telephone' => $request->telephone,
+            'status' => ModelStatus::ACTIVE,
+        ]);
+
+        try{
+
+            DB::beginTransaction();
+
+            $church->save();
+
+            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id, 'status' => ModelStatus::ACTIVE]);
+            $branch->save();
+
+            $details = [
+                        'firstname' => $request->firstname,
+                        'surname' => $request->surname,
+                        'email' => $request->email,
+                        'telephone' => $request->telephone,
+                    ];
+
+            $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
+            $member->save();
+
+            $admin = new ChurchAdmin( $details + ['username' => $request->username,
+                                                    'member_id' => $member->id,
+                                                    'church_id' => $church->id,
+                                                    'status' => AdminStatus::ACTIVE,
+                                                    'password' => Hash::make($request->password) ]) ;
+            $admin->save();
+
+            $admin->assignTo( $branch );
+
+           //notify admin
+
+            DB::commit();
+
+            //send verify email to client
+            $admin->sendEmailVerificationNotification();
+            return $this->sendResponse($church, "church has been registered succesfully. Kindly check your email for instructions to proceed");
+        }
+        catch( \Exception $e)
+        {
+            DB::rollBack();
+            return $this->sendError("unable to  process this request at the moment.");
+        }
+    }
+
+
+
+    /**
+     * Gets the member types for a church
+     */
+    public function churchMemberTypes()
+    {
+        $church =  Auth::user()->getChurch ;
+        $memberTypes = $church->getMemberTypes;
+        return $this->sendResponse($memberTypes, 'member types retrieved succefully');
+    }
+
+    public function test(Request $request)
+    {
+       // $branch = new MasterBranch(['name' => 'no name', 'church_id' => 1 ]);
+        //['name' => 'no name', 'church_id' => 1 ]
+       // $branch->name = "no name";
+       // $branch->save();
+
+      // $church = Church::find(2)->getMemberTypes;
+
+      $branch = Branch::find(1);
+
+       $link = Route::getFacadeRoot()->current()->uri();
+
+        $result =  Auth::user()->getChurch;
+        $uri = $request->path();
+
+        $admin = ChurchAdmin::find(6);
+        $isCorrect = true;
+       echo json_encode(['activation_key' => !!! $isCorrect ]);
+    }
+
 }

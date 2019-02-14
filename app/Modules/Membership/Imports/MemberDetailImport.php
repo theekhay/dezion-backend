@@ -21,6 +21,10 @@ use Maatwebsite\Excel\Validators\ValidationException;
 
 use Maatwebsite\Excel\Validators\Failure;
 
+use App\Modules\Membership\Models\BulkMemberImport;
+
+use Ramsey\Uuid\Uuid;
+
 
 //class MemberDetailImport implements ToCollection, WithHeadingRow, WithValidation, WithChunkReading, WithBatchInserts
 Class MemberDetailImport implements ToModel, WithHeadingRow, WithValidation, WithChunkReading, WithBatchInserts
@@ -40,37 +44,35 @@ Class MemberDetailImport implements ToModel, WithHeadingRow, WithValidation, Wit
     /**
     * @param Collection $collection
     */
-    public function collection(Collection $collection)
-    {
-        foreach ($collection as $row)
-        {
-            MemberDetail::create([
+    // public function collection(Collection $collection)
+    // {
+    //     foreach ($collection as $row)
+    //     {
+    //         MemberDetail::create([
 
-                'firstname'         => $row['firstname'],
-                'surname'           => $row['surname'],
-                'middlename'        => $row['middlename'],
-                'address'           => $row['address'],
-                'telephone'         => $row['telephone'],
-                'email'             => $row['email'],
+    //             'firstname'         => $row['firstname'],
+    //             'surname'           => $row['surname'],
+    //             'middlename'        => $row['middlename'],
+    //             'address'           => $row['address'],
+    //             'telephone'         => $row['telephone'],
+    //             'email'             => $row['email'],
 
-            ] + $this->data);
-        }
-    }
+    //         ] + $this->data);
+    //     }
+    // }
 
 
     public function model(array $row)
     {
-            $memb =  [
-                'firstname'         => $row['firstname'],
-                'surname'           => $row['surname'],
-                'middlename'        => $row['middlename'],
-                'address'           => $row['address'],
-                'telephone'         => $row['telephone'],
-                'email'             => $row['email'],
+            $memeberData = []; //initialize an empty array
 
-            ] + $this->data ;
+            foreach( $row as $heading => $value)
+            {
+                $memeberData[$heading] = $value;
+            }
 
-            return new MemberDetail($memb);
+
+           return new MemberDetail($memeberData + $this->data + ['data' => json_encode($memeberData), 'uuid' => Uuid::uuid4()->toString() ]);
 
     }
 
@@ -89,13 +91,13 @@ Class MemberDetailImport implements ToModel, WithHeadingRow, WithValidation, Wit
       //return  MemberDetail::$rules;
 
       return [
-        'firstname' => 'required|alpha',
-        'surname'   => 'required|alpha',
-        'middlename'   => 'nullable|alpha',
-        'address'   => 'nullable|string',
-        'email'   => 'nullable|email',
-        'branch_id' => 'numeric|exists:branches,id',
-        'telephone'   => 'nullable|string',
+        // 'firstname' => 'nullable|alpha',
+        // 'surname'   => 'nullable|alpha',
+        // 'middlename'   => 'nullable|alpha',
+        // 'address'   => 'nullable|string',
+        // 'email'   => 'nullable|email',
+        //'branch_id' => 'required|numeric|exists:branches,id',
+        //'telephone'   => 'nullable|string',
       ];
     }
 

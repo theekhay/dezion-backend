@@ -59,9 +59,9 @@ class BulkMemberImport extends Model
      */
     public static $rules = [
 
-        //'branch_id' => 'required|numeric|exists:branches,id',
+        'branch_id' => 'required|numeric|exists:branches,id',
         'member_type_id' => 'required|numeric|exists:member_types,id',
-        'import' => 'required|file|mimes:csv,xlsx,xls'
+        'import' => 'required|file|mimes:csv,txt,xlsx,xls',
     ];
 
 
@@ -69,6 +69,17 @@ class BulkMemberImport extends Model
      * Allowed File formats for imports
      */
     public static $allowedFileFormats = ['csv', 'xls', 'xlsx'];
+
+
+    /**
+     * gets the headers from an import
+     * this is returned as an array
+    */
+    public static function getImportHeaders( $import )
+    {
+        $headings = (new HeadingRowImport)->toArray( $import );
+        return array_filter($headings[0][0]);
+    }
 
 
 }

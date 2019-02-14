@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use App\Modules\Membership\Models\MemberDetail;
 
 /**
  * Class MemberTypeController
@@ -123,7 +124,7 @@ class MemberTypeAPIController extends AppBaseController
     public function store(CreateMemberTypeAPIRequest $request)
     {
         $input = $request->all();
-        $memberTypes = $this->memberTypeRepository->create($input + ['created_by' => Auth::id() ]);
+        $memberTypes = $this->memberTypeRepository->create($input);
         return $this->sendResponse( new MemberTypeResource($memberTypes), 'Member Type saved successfully');
     }
 
@@ -289,4 +290,17 @@ class MemberTypeAPIController extends AppBaseController
 
         return $this->sendResponse($id, 'Member Type deleted successfully');
     }
+
+
+    public function getMembers($id)
+    {
+        $members = MemberType::find($id) ;
+
+        if (empty($members)) {
+            return $this->sendError('Member Type not found');
+        }
+        return $this->sendResponse( new MemberTypeResource($members->members()->paginate(50)), 'members in this member category retreived successfully');
+    }
+
+
 }

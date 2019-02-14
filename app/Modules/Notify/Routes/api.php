@@ -18,6 +18,10 @@ Route::get('/notify', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::resource('teams', 'TeamAPIController');
+Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
+{
+    Route::post('sms/send', 'MessageAPIController@sendSms');
+    Route::post('inapp/send', 'MessageAPIController@sendInApp');
+});
 
-Route::resource('districts', 'DistrictAPIController');
+

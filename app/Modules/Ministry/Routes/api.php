@@ -18,6 +18,17 @@ Route::get('/ministry', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::resource('teams', 'TeamAPIController');
+Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
+{
+    Route::post('cells/import', 'CellAPIController@import');
+    Route::get('cells/addresses', 'CellAPIController@addresses');
 
-Route::resource('districts', 'DistrictAPIController');
+    Route::resource('teams', 'TeamAPIController');
+    Route::resource('districts', 'DistrictAPIController');
+    Route::resource('cells', 'CellAPIController');
+    Route::resource('communities', 'CommunityAPIController');
+    Route::resource('zones', 'ZoneAPIController');
+
+});
+
+

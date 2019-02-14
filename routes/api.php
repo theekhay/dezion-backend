@@ -17,10 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('register', 'API\UserController@register');
+Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 
-Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
-{
-    Route::get('details', 'UserController@details');
-});
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+// Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
+// {
+//     Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+// });
