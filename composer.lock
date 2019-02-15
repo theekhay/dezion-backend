@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49f5d4c1d2da338b4d7b852da7780025",
+    "content-hash": "ca0c34eedaf4c24c67739a3011ec9fc6",
     "packages": [
+        {
+            "name": "apimatic/jsonmapper",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/apimatic/jsonmapper.git",
+                "reference": "6925ede91d6a85a886d8e00819fe53e439d6e4c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/apimatic/jsonmapper/zipball/6925ede91d6a85a886d8e00819fe53e439d6e4c2",
+                "reference": "6925ede91d6a85a886d8e00819fe53e439d6e4c2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.2.*",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "apimatic\\jsonmapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Weiske",
+                    "email": "christian.weiske@netresearch.de",
+                    "homepage": "http://www.netresearch.de/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Mehdi Jaffery",
+                    "email": "mehdi.jaffery@apimatic.io",
+                    "homepage": "http://apimatic.io/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map nested JSON structures onto PHP classes",
+            "time": "2017-01-24T12:48:47+00:00"
+        },
         {
             "name": "appointer/swaggervel",
             "version": "dev-master",
@@ -2661,6 +2706,114 @@
                 "vector"
             ],
             "time": "2018-11-04T22:12:12+00:00"
+        },
+        {
+            "name": "mashape/unirest-php",
+            "version": "v3.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Mashape/unirest-php.git",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Mashape/unirest-php/zipball/842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "reference": "842c0f242dfaaf85f16b72e217bf7f7c19ab12cb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "0.1.*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "suggest": {
+                "ext-json": "Allows using JSON Bodies for sending and parsing requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Unirest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Unirest PHP",
+            "homepage": "https://github.com/Mashape/unirest-php",
+            "keywords": [
+                "client",
+                "curl",
+                "http",
+                "https",
+                "rest"
+            ],
+            "time": "2016-08-11T17:49:21+00:00"
+        },
+        {
+            "name": "moesif/moesif-laravel",
+            "version": "1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Moesif/moesif-laravel.git",
+                "reference": "5d4464973297cc19d97588f13364e7e3591eb49b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Moesif/moesif-laravel/zipball/5d4464973297cc19d97588f13364e7e3591eb49b",
+                "reference": "5d4464973297cc19d97588f13364e7e3591eb49b",
+                "shasum": ""
+            },
+            "require": {
+                "apimatic/jsonmapper": "~1.0.0",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "mashape/unirest-php": "~3.0.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Moesif\\": "src/Moesif"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "derric@moesif.com",
+                    "email": "derric@moesif.com",
+                    "homepage": "https://www.moesif.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "xing@moesif.com",
+                    "email": "xing@moesif.com",
+                    "homepage": "https://www.moesif.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Moesif Collection/Data Ingestion Middleware for Laravel",
+            "homepage": "https://moesif.com",
+            "keywords": [
+                "Moesif",
+                "api",
+                "debugging",
+                "laravel",
+                "log",
+                "logging",
+                "middleware"
+            ],
+            "time": "2019-01-08T00:06:09+00:00"
         },
         {
             "name": "monolog/monolog",

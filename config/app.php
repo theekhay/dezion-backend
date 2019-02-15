@@ -206,6 +206,9 @@ return [
         //for laravel-permissions
         Spatie\Permission\PermissionServiceProvider::class,
 
+        //for moesif-laravel (used for logging api requests and responses)
+        Moesif\Middleware\MoesifLaravelServiceProvider::class,
+
 
     ],
 

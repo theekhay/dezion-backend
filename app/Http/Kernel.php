@@ -21,7 +21,10 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
 
         //for cors middleware
-        \Spatie\Cors\Cors::class
+        \Spatie\Cors\Cors::class,
+
+        //for moesif-laravel (used for logging api requests and responses)
+        \Moesif\Middleware\MoesifLaravel::class,
     ];
 
     /**
