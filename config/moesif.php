@@ -100,5 +100,5 @@ return [
     'apiVersion' => '1.2.2',
     'debug' => true,
     'addTags' => $addTags,
-    'sampling_percentage' => 50,
+    'samplingPercentage' => 50,
 ];
