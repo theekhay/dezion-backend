@@ -99,5 +99,6 @@ return [
     'identifySessionId' => $identifySessionId,
     'apiVersion' => '1.2.2',
     'debug' => true,
-    'addTags' => $addTags
+    'addTags' => $addTags,
+    'sampling_percentage' => 50,
 ];
