@@ -23,7 +23,7 @@ Route::get('v1/churches/test', 'ChurchAPIController@test');
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
 {
 
-    Route::get('churches/member/types', 'ChurchAPIController@churchMemberTypes');
+    Route::get('churches/member/types', 'ChurchAPIController@churchMemberTypes')->middleware('verified');
 
     Route::resource('churches', 'ChurchAPIController');
     Route::resource('branches', 'BranchAPIController');
