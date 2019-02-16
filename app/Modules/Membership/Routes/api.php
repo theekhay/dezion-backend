@@ -26,7 +26,7 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
     //gets the members in a membertype
     Route::get('member_type/members/{id}', 'MemberTypeAPIController@getMembers');
 
-    Route::resource('member_types', 'MemberTypeAPIController');
+    Route::resource('member_types', 'MemberTypeAPIController')->middleware(['verified']);
     Route::resource('member_details', 'MemberDetailAPIController');
 
     Route::resource('bulk_member_imports', 'BulkMemberImportAPIController');
