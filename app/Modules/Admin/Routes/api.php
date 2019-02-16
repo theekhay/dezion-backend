@@ -17,10 +17,15 @@ Route::get('/admin', function (Request $request) {
     // return $request->admin();
 })->middleware('auth:api');
 
-//Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
-Route::post('v1/admin/login', 'AdministratorAPIController@login')->middleware('checkadminstatus');
 
-Route::post('admin/branch/create', 'AdministratorAPIController@makeBranchAdmin');
+
+Route::group(['prefix' => 'v1'], function()
+{
+    //Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
+    Route::post('admin/login', 'AdministratorAPIController@login')->middleware('checkadminstatus');
+
+    Route::post('admin/branch/create/{church_key}', 'AdministratorAPIController@branchAdminSignup');
+});
 
 
 Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()

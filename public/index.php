@@ -1,6 +1,6 @@
 <?php
 
-ini_set('memory_limit', '2048M');
+ini_set('memory_limit', '2048M'); //added this when there was an issue with uploading files.
 
 /**
  * Laravel - A PHP Framework For Web Artisans

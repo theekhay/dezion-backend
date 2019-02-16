@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
+use App\Modules\Admin\Http\Requests\API\AdminSignUpRequest;
+
 //use Illuminate\Support\Facades\Mail;
 
 
@@ -369,6 +371,45 @@ class AdministratorAPIController extends AppBaseController
         //this should send the admin a verification link
         $administrator->sendEmailVerificationNotification();
         return $this->sendResponse( new AdminResource($administrator) , 'Administrator saved successfully');
+    }
+
+
+
+   /**
+    * This creates administrator for a church without the need for authentication
+    * This uses the church uuid to map the admin to a church
+    * Retreives the chuch master administrator (also called church admin)
+    * @return Response
+    */
+    public function branchAdminSignup( AdminSignUpRequest $request,  $church_key)
+    {
+        $church = Church::where('uuid', $church_key )->first();
+
+        //check that the church key is valid
+        if( empty($church)){
+            return $this->sendError("This church doesn't exist. Please make sure the link is correct");
+        }
+
+        $church_admin = $church->masterAdmin;
+
+       // echo json_encode($church_admin->id); return;
+
+        if( empty($church_admin)){
+            return $this->sendError("Church Administrator not found");
+        }
+
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+        $administrator = new BranchAdmin( $input);
+        $administrator->status = AdminStatus::PENDING_APPROVAL;
+        $administrator->church_id = $church->id;
+        $administrator->created_by = $church_admin->id;
+        $administrator->save();
+
+        //this should send the admin a verification link
+        $administrator->sendEmailVerificationNotification();
+        return $this->sendResponse( new AdminResource($administrator) , 'Administrator saved successfully');
+
     }
 
 
