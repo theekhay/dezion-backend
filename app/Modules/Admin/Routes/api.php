@@ -22,7 +22,7 @@ Route::get('/admin', function (Request $request) {
 Route::group(['prefix' => 'v1'], function()
 {
     //Route::post('v1/admin/login/{church_key?}', 'AdministratorAPIController@login');
-    Route::post('admin/login', 'AdministratorAPIController@login')->middleware('checkadminstatus');
+    Route::post('admin/login', 'AdministratorAPIController@login')->middleware(['checkadminstatus', 'verified']);
 
     Route::post('admin/branch/create/{church_key}', 'AdministratorAPIController@branchAdminSignup');
 });
