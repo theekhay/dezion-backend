@@ -127,6 +127,8 @@ class RoleAPIController extends AppBaseController
     {
         $input = $request->except('permissions');
 
+        if( empty( $request->permissions)) return $this->sendError( "No permission found. Roles cannot be created without permissions", 422);
+
         try{
             DB::beginTransaction();
 
