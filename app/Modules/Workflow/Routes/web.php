@@ -18,6 +18,6 @@ Route::group(['prefix' => 'workflow'], function () {
 });
 
 
-Route::resource('workflowSteps', 'WorkflowStepsController');
+//Route::resource('workflowSteps', 'WorkflowStepsController');
 
-Route::resource('workflows', 'WorkflowController');
+//Route::resource('workflows', 'WorkflowController');

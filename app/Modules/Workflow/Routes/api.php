@@ -18,6 +18,6 @@ Route::get('/workflow', function (Request $request) {
 })->middleware('auth:api');
 
 
-Route::resource('workflow_steps', 'WorkflowStepsAPIController');
+//Route::resource('workflow_steps', 'WorkflowStepsAPIController');
 
-Route::resource('workflows', 'WorkflowAPIController');
+//Route::resource('workflows', 'WorkflowAPIController');
