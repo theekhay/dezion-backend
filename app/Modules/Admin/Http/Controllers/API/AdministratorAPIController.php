@@ -42,6 +42,7 @@ use App\Modules\Admin\Http\Requests\API\AdminSignUpRequest;
 /**
  * Class AdministratorController
  * @package App\Modules\Admin\Http\Controllers\API
+ * @group Administrator
  */
 
 class AdministratorAPIController extends AppBaseController
@@ -330,7 +331,7 @@ class AdministratorAPIController extends AppBaseController
 
 
     /**
-     * Log the currently signed-in user on this device.
+     * API to log currently authenticated user out the current device.
      *
      */
     public function logout()
@@ -344,7 +345,10 @@ class AdministratorAPIController extends AppBaseController
 
 
     /**
-     * logs a user out of all the devices they are currently logged on to.
+     * API to log currently authenticated user out of all devices they are signed in to.
+     * This is especially needed in the case of password recovery.
+     * After a successful password recovery, the user is supposed to be signed out of all
+     * the devices he is logged in to.
      */
     public function logoutAllDevices()
     {
@@ -359,7 +363,18 @@ class AdministratorAPIController extends AppBaseController
 
     /**
      * API for creating a new branch administrator
+     * @authenticated
+     *
+     * @bodyParam firstname string required The admin's lastname
+     * @bodyParam surname string required The admin's lastname
+     * @bodyParam email string required The email of the admin
+     * @bodyParam telephone string required The telephone number of the admin
+     * @bodyParam password string required The admin's password
+     * @bodyParam username string  nullable The admin's username (has to be unique)
+     * @bodyParam church_id string  required The id of the church the admin is being registered to
+     * @bodyParam memeber_id integer nullable The member id of the admin
      * @return AdminResource
+     *
      */
     public function makeBranchAdmin( CreateAdministratorAPIRequest $request ){
 
@@ -379,6 +394,14 @@ class AdministratorAPIController extends AppBaseController
     * This creates administrator for a church without the need for authentication
     * This uses the church uuid to map the admin to a church
     * Retreives the chuch master administrator (also called church admin)
+    *
+    * @bodyParam firstname string required The user's lastname
+    * @bodyParam surname string required The user's lastname
+    * @bodyParam email string required The email of the admin signing up the church
+    * @bodyParam telephone string required The telephone number of the admin signing up the church
+    * @bodyParam password string required The user's password
+    * @bodyParam c_password string required The user's password again (should be the same as password)
+    * @bodyParam username string  The admin's username (has to be unique)
     * @return Response
     */
     public function branchAdminSignup( AdminSignUpRequest $request,  $church_key)

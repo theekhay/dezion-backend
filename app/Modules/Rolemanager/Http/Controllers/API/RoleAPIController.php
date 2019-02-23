@@ -30,6 +30,7 @@ use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 /**
  * Class RoleController
  * @package App\Modules\RoleManager\Http\Controllers\API
+ * @group Role and Permission Management
  */
 
 class RoleAPIController extends AppBaseController

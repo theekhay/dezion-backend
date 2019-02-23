@@ -16,7 +16,7 @@ use function GuzzleHttp\json_encode;
 /**
  * Class CellMemberMappingController
  * @package App\Modules\Membership\Http\Controllers\API
- * @group Member Mapping
+ * @group Membership
  */
 
 class CellMemberMappingAPIController extends AppBaseController
@@ -116,6 +116,7 @@ class CellMemberMappingAPIController extends AppBaseController
      * @bodyParam mapping_data array required The mapping data for the members being mapped Ex. [{"member_id":"1","model_id":"1", "status":"190"},{"member_id":"2","model_id":"2", "status":"190"}]
      *
      * @authenticated
+     * @group Mapping
      *
      */
     public function store(CreateCellMemberMappingAPIRequest $request)

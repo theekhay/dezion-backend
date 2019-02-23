@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class BranchController
  * @package App\Modules\Core\Http\Controllers\API
+ * @group Core
  */
 
 class BranchAPIController extends AppBaseController

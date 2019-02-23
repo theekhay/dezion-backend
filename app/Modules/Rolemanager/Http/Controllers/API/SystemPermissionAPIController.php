@@ -17,6 +17,7 @@ use App\Modules\Rolemanager\Http\Resources\PermissionResource;
 /**
  * Class SystemPermissionController
  * @package App\Modules\rolemanager\Http\Controllers\API
+ * @group Role and Permission Management
  */
 
 class SystemPermissionAPIController extends AppBaseController

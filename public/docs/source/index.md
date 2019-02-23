@@ -20,7 +20,1614 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
-#Member Mapping
+#Account Management
+<!-- START_d7b7952e7fdddc07c978c9bdaf757acf -->
+## API for user registeration
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/register" \
+    -H "Content-Type: application/json" \
+    -d '{"firstname":"Sh5lHpy2PlQz4rYV","lastname":"ouj9gwvsCQRDmwV1","email":"ffzkEdLphks03ewo","password":"vxG6YQmLCXFnTXre","c_password":"3UF66F4Q1yaAlD5N"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/register");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "firstname": "Sh5lHpy2PlQz4rYV",
+    "lastname": "ouj9gwvsCQRDmwV1",
+    "email": "ffzkEdLphks03ewo",
+    "password": "vxG6YQmLCXFnTXre",
+    "c_password": "3UF66F4Q1yaAlD5N"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/register`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    firstname | string |  required  | The user's firstname
+    lastname | string |  required  | The user's lastname
+    email | string |  required  | The user's email
+    password | string |  required  | The user's password
+    c_password | string |  required  | The user's password again (should be the same as password)
+
+<!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
+
+<!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
+## API for user login
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/login" \
+    -H "Content-Type: application/json" \
+    -d '{"email":"7pP6VrBfitI3Qns7","pasword":"LehWdPPTRrmhxfzg"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/login");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "email": "7pP6VrBfitI3Qns7",
+    "pasword": "LehWdPPTRrmhxfzg"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/login`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    email | email |  required  | the user's email
+    pasword | string |  required  | The user's password
+
+<!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
+
+#Administrator
+<!-- START_356aa57a5886f377e4e6eea0dad27149 -->
+## api/v1/admin/login
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin/login" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/login");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin/login`
+
+
+<!-- END_356aa57a5886f377e4e6eea0dad27149 -->
+
+<!-- START_36a0f6b9fc478346b3aa912174bb74d4 -->
+## This creates administrator for a church without the need for authentication
+This uses the church uuid to map the admin to a church
+Retreives the chuch master administrator (also called church admin)
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin/branch/create/{church_key}" \
+    -H "Content-Type: application/json" \
+    -d '{"firstname":"i8dAGEL183yW8xb5","surname":"np84GYVif6y0Srhf","email":"1jkE0YbqLySSiSyL","telephone":"I1atPTdYNHPUZSuP","password":"I5q39jYK8oGUUkgj","c_password":"9Vi2oNi2ZVzm08Ug","username":"9UkokeMZSGQS6xtS"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/branch/create/{church_key}");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "firstname": "i8dAGEL183yW8xb5",
+    "surname": "np84GYVif6y0Srhf",
+    "email": "1jkE0YbqLySSiSyL",
+    "telephone": "I1atPTdYNHPUZSuP",
+    "password": "I5q39jYK8oGUUkgj",
+    "c_password": "9Vi2oNi2ZVzm08Ug",
+    "username": "9UkokeMZSGQS6xtS"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin/branch/create/{church_key}`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    firstname | string |  required  | The user's lastname
+    surname | string |  required  | The user's lastname
+    email | string |  required  | The email of the admin signing up the church
+    telephone | string |  required  | The telephone number of the admin signing up the church
+    password | string |  required  | The user's password
+    c_password | string |  required  | The user's password again (should be the same as password)
+    username | string |  optional  | The admin's username (has to be unique)
+
+<!-- END_36a0f6b9fc478346b3aa912174bb74d4 -->
+
+<!-- START_0a9b0727a46bf934308c61f675bd4389 -->
+## api/v1/admin/notify/inapp
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin/notify/inapp" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/notify/inapp");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin/notify/inapp`
+
+
+<!-- END_0a9b0727a46bf934308c61f675bd4389 -->
+
+<!-- START_7801d3c4fb554003f71032ee369dce50 -->
+## API to log currently authenticated user out the current device.
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/admin/logout" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/logout");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/logout`
+
+
+<!-- END_7801d3c4fb554003f71032ee369dce50 -->
+
+<!-- START_62ee0f8bb69fad2ad110394625492630 -->
+## API for creating a new branch administrator
+
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin/branch/create" \
+    -H "Content-Type: application/json" \
+    -d '{"firstname":"7l0EkdeNdDUxY7nM","surname":"F05EvOwKVCp8JTwj","email":"iF7EjLjwM0fM4yBh","telephone":"q3DYazSdHCDOiCpI","password":"4m4Xm5pqAGRInuvO","username":"bYmha1RuiVj0yDzd","church_id":"apcK6EbxWcKc3BXz","memeber_id":1}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/branch/create");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "firstname": "7l0EkdeNdDUxY7nM",
+    "surname": "F05EvOwKVCp8JTwj",
+    "email": "iF7EjLjwM0fM4yBh",
+    "telephone": "q3DYazSdHCDOiCpI",
+    "password": "4m4Xm5pqAGRInuvO",
+    "username": "bYmha1RuiVj0yDzd",
+    "church_id": "apcK6EbxWcKc3BXz",
+    "memeber_id": 1
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin/branch/create`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    firstname | string |  required  | The admin's lastname
+    surname | string |  required  | The admin's lastname
+    email | string |  required  | The email of the admin
+    telephone | string |  required  | The telephone number of the admin
+    password | string |  required  | The admin's password
+    username | string |  optional  | nullable The admin's username (has to be unique)
+    church_id | string |  required  | The id of the church the admin is being registered to
+    memeber_id | integer |  optional  | nullable The member id of the admin
+
+<!-- END_62ee0f8bb69fad2ad110394625492630 -->
+
+<!-- START_2bb6ef537d9fe81ec758e4f9486f9f87 -->
+## api/v1/admin
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/admin" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/admin`
+
+
+<!-- END_2bb6ef537d9fe81ec758e4f9486f9f87 -->
+
+<!-- START_f77312ba3799be8bcf89d1074365d7fb -->
+## api/v1/admin
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin`
+
+
+<!-- END_f77312ba3799be8bcf89d1074365d7fb -->
+
+<!-- START_72d946b89c00c1462cb564752b3df53e -->
+## api/v1/admin/{admin}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/admin/{admin}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/{admin}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/admin/{admin}`
+
+
+<!-- END_72d946b89c00c1462cb564752b3df53e -->
+
+<!-- START_5b23517d7f2ba9628e7bcc13305cf606 -->
+## api/v1/admin/{admin}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/admin/{admin}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/{admin}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/admin/{admin}`
+
+`PATCH api/v1/admin/{admin}`
+
+
+<!-- END_5b23517d7f2ba9628e7bcc13305cf606 -->
+
+<!-- START_789a39c63b2515b7f2efb0a504700c84 -->
+## api/v1/admin/{admin}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/admin/{admin}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin/{admin}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/admin/{admin}`
+
+
+<!-- END_789a39c63b2515b7f2efb0a504700c84 -->
+
+<!-- START_4ecaa340403adabad74d980c59a82e8b -->
+## api/v1/admin_branches
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/admin_branches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin_branches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/admin_branches`
+
+
+<!-- END_4ecaa340403adabad74d980c59a82e8b -->
+
+<!-- START_beb11f2555c07f6039d2b41239aab795 -->
+## api/v1/admin_branches
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/admin_branches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin_branches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/admin_branches`
+
+
+<!-- END_beb11f2555c07f6039d2b41239aab795 -->
+
+<!-- START_b7355e65acad141d7e1d4c72b191ef73 -->
+## api/v1/admin_branches/{admin_branch}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/admin_branches/{admin_branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/admin_branches/{admin_branch}`
+
+
+<!-- END_b7355e65acad141d7e1d4c72b191ef73 -->
+
+<!-- START_c163aed2b2bf5a2c9dbe5619b18a943c -->
+## api/v1/admin_branches/{admin_branch}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/admin_branches/{admin_branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/admin_branches/{admin_branch}`
+
+`PATCH api/v1/admin_branches/{admin_branch}`
+
+
+<!-- END_c163aed2b2bf5a2c9dbe5619b18a943c -->
+
+<!-- START_61771777b5b1bc609fd677e2542d495d -->
+## api/v1/admin_branches/{admin_branch}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/admin_branches/{admin_branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/admin_branches/{admin_branch}`
+
+
+<!-- END_61771777b5b1bc609fd677e2542d495d -->
+
+#Core
+<!-- START_6f7db82b51a16f0e2396b8727a397e22 -->
+## api/v1/churches/register
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/churches/register" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/register");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/churches/register`
+
+
+<!-- END_6f7db82b51a16f0e2396b8727a397e22 -->
+
+<!-- START_7fc7a777a0c540c798351dd56a566a5e -->
+## api/v1/churches/test
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/churches/test" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/test");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (200):
+
+```json
+null
+```
+
+### HTTP Request
+`GET api/v1/churches/test`
+
+
+<!-- END_7fc7a777a0c540c798351dd56a566a5e -->
+
+<!-- START_91fc8c19011177c92f076b41d3206ac4 -->
+## Gets the member types for a church
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/churches/member/types" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/member/types");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/churches/member/types`
+
+
+<!-- END_91fc8c19011177c92f076b41d3206ac4 -->
+
+<!-- START_4a40f706dac0e68d211fde89456e56da -->
+## api/v1/churches
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/churches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/churches`
+
+
+<!-- END_4a40f706dac0e68d211fde89456e56da -->
+
+<!-- START_ddf6991f4dfba12e9296ae8bc7506ff0 -->
+## api/v1/churches
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/churches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/churches`
+
+
+<!-- END_ddf6991f4dfba12e9296ae8bc7506ff0 -->
+
+<!-- START_a91413ac6aa6d7c5eb90e04fc2349a1f -->
+## api/v1/churches/{church}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/churches/{church}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/{church}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/churches/{church}`
+
+
+<!-- END_a91413ac6aa6d7c5eb90e04fc2349a1f -->
+
+<!-- START_6ddf98b4324a0b5edca7f1c1a23c3825 -->
+## api/v1/churches/{church}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/churches/{church}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/{church}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/churches/{church}`
+
+`PATCH api/v1/churches/{church}`
+
+
+<!-- END_6ddf98b4324a0b5edca7f1c1a23c3825 -->
+
+<!-- START_fe3e4d3869e5556c6215bea7b01ab793 -->
+## api/v1/churches/{church}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/churches/{church}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/churches/{church}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/churches/{church}`
+
+
+<!-- END_fe3e4d3869e5556c6215bea7b01ab793 -->
+
+<!-- START_0bacbf092031e0dba9318c174b19aa40 -->
+## api/v1/branches
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/branches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/branches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/branches`
+
+
+<!-- END_0bacbf092031e0dba9318c174b19aa40 -->
+
+<!-- START_ab1f4acaa752a08371dfc9eb20f6241e -->
+## api/v1/branches
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/branches" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/branches");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/branches`
+
+
+<!-- END_ab1f4acaa752a08371dfc9eb20f6241e -->
+
+<!-- START_861bed453b63871ea14795f41e52ad76 -->
+## api/v1/branches/{branch}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/branches/{branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/branches/{branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/branches/{branch}`
+
+
+<!-- END_861bed453b63871ea14795f41e52ad76 -->
+
+<!-- START_ef86f0b77d8e7e1f3d765bde1bb51ab5 -->
+## api/v1/branches/{branch}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/branches/{branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/branches/{branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/branches/{branch}`
+
+`PATCH api/v1/branches/{branch}`
+
+
+<!-- END_ef86f0b77d8e7e1f3d765bde1bb51ab5 -->
+
+<!-- START_c3b7bcfec72e006cdfd0e49c317a332a -->
+## api/v1/branches/{branch}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/branches/{branch}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/branches/{branch}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/branches/{branch}`
+
+
+<!-- END_c3b7bcfec72e006cdfd0e49c317a332a -->
+
+#Import
+<!-- START_eaac5b3c6acca6bc73e82bccd5eee357 -->
+## api/v1/member_details
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/member_details" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_details");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/member_details`
+
+
+<!-- END_eaac5b3c6acca6bc73e82bccd5eee357 -->
+
+#Mapping
+<!-- START_fd11d2f50e3884e3861345657324edda -->
+## api/v1/cell_member_mappings
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/cell_member_mappings" \
+    -H "Content-Type: application/json" \
+    -d '{"church_id":9,"mapped_model":"1i7io06OUlsaSx75","mapping_data":[]}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "church_id": 9,
+    "mapped_model": "1i7io06OUlsaSx75",
+    "mapping_data": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/cell_member_mappings`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    church_id | integer |  required  | The church the member belongs to
+    mapped_model | string |  required  | The model used for mapping e.g cell::class, smallGroup::class, houseFellowship::class
+    mapping_data | array |  required  | The mapping data for the members being mapped Ex. [{"member_id":"1","model_id":"1", "status":"190"},{"member_id":"2","model_id":"2", "status":"190"}]
+
+<!-- END_fd11d2f50e3884e3861345657324edda -->
+
+#Membership
+<!-- START_130a5ba30a94337ca1eb60d303a1ac8e -->
+## api/v1/members/import
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/members/import" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/members/import");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/members/import`
+
+
+<!-- END_130a5ba30a94337ca1eb60d303a1ac8e -->
+
+<!-- START_eb24812784c39724ba7d6ef3cfb915c5 -->
+## This would handle any export on the membership module
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/members/export" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/members/export");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/members/export`
+
+
+<!-- END_eb24812784c39724ba7d6ef3cfb915c5 -->
+
+<!-- START_2048182f77d1c454b8fa4c953bef1ccd -->
+## api/v1/member_type/members/{id}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/member_type/members/{id}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_type/members/{id}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/member_type/members/{id}`
+
+
+<!-- END_2048182f77d1c454b8fa4c953bef1ccd -->
+
+<!-- START_6b83ee8045f2da32609258fb7ee994ec -->
+## api/v1/member_types
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/member_types" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_types");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/member_types`
+
+
+<!-- END_6b83ee8045f2da32609258fb7ee994ec -->
+
+<!-- START_b00035817bb3a8e186f2856227787c9f -->
+## api/v1/member_types
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/member_types" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_types");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/member_types`
+
+
+<!-- END_b00035817bb3a8e186f2856227787c9f -->
+
+<!-- START_eb35d286e0d50e7c1b5209c9f0fab2db -->
+## api/v1/member_types/{member_type}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/member_types/{member_type}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_types/{member_type}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/member_types/{member_type}`
+
+
+<!-- END_eb35d286e0d50e7c1b5209c9f0fab2db -->
+
+<!-- START_947e2c6bddfbe4b1d5b9da0bda66d403 -->
+## api/v1/member_types/{member_type}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/member_types/{member_type}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_types/{member_type}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/member_types/{member_type}`
+
+`PATCH api/v1/member_types/{member_type}`
+
+
+<!-- END_947e2c6bddfbe4b1d5b9da0bda66d403 -->
+
+<!-- START_04f3a3082a02fef7fa24ea4ded614f60 -->
+## api/v1/member_types/{member_type}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/member_types/{member_type}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_types/{member_type}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/member_types/{member_type}`
+
+
+<!-- END_04f3a3082a02fef7fa24ea4ded614f60 -->
+
+<!-- START_9149c4c889a14310c73340d8ffe9bc5e -->
+## api/v1/member_details
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/member_details" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_details");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/member_details`
+
+
+<!-- END_9149c4c889a14310c73340d8ffe9bc5e -->
+
+<!-- START_03052116572e043ba7c9e7813f33caa8 -->
+## api/v1/member_details/{member_detail}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/member_details/{member_detail}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/member_details/{member_detail}`
+
+
+<!-- END_03052116572e043ba7c9e7813f33caa8 -->
+
+<!-- START_2b044fad1991db6e3e7d23a10d180d9d -->
+## api/v1/member_details/{member_detail}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/member_details/{member_detail}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/member_details/{member_detail}`
+
+`PATCH api/v1/member_details/{member_detail}`
+
+
+<!-- END_2b044fad1991db6e3e7d23a10d180d9d -->
+
+<!-- START_13280d7e51c202b543b9ef5bb901510d -->
+## api/v1/member_details/{member_detail}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/member_details/{member_detail}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/member_details/{member_detail}`
+
+
+<!-- END_13280d7e51c202b543b9ef5bb901510d -->
+
 <!-- START_f764b095f658a920a10bfe2f83e5f50c -->
 ## api/v1/cell_member_mappings
 > Example request:
@@ -58,55 +1665,6 @@ fetch(url, {
 
 
 <!-- END_f764b095f658a920a10bfe2f83e5f50c -->
-
-<!-- START_fd11d2f50e3884e3861345657324edda -->
-## api/v1/cell_member_mappings
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/cell_member_mappings" \
-    -H "Content-Type: application/json" \
-    -d '{"church_id":5,"mapped_model":"Gd81TCPqxzZGM7zy","mapping_data":[]}'
-
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/cell_member_mappings");
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
-
-let body = {
-    "church_id": 5,
-    "mapped_model": "Gd81TCPqxzZGM7zy",
-    "mapping_data": []
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/cell_member_mappings`
-
-#### Body Parameters
-
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    church_id | integer |  required  | The church the member belongs to
-    mapped_model | string |  required  | The model used for mapping e.g cell::class, smallGroup::class, houseFellowship::class
-    mapping_data | array |  required  | The mapping data for the members being mapped Ex. [{"member_id":"1","model_id":"1", "status":"190"},{"member_id":"2","model_id":"2", "status":"190"}]
-
-<!-- END_fd11d2f50e3884e3861345657324edda -->
 
 <!-- START_b5f4b9dcea9a74716bd23fd9c7b526ab -->
 ## api/v1/cell_member_mappings/{cell_member_mapping}
@@ -209,6 +1767,1268 @@ fetch(url, {
 
 
 <!-- END_a63c808fcd771da627c717e30419c95a -->
+
+#Notification Management
+<!-- START_dd2f6094afe401c126124b8f364c0dd5 -->
+## api/v1/sms/send
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/sms/send" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/sms/send");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/sms/send`
+
+
+<!-- END_dd2f6094afe401c126124b8f364c0dd5 -->
+
+<!-- START_969027761848786970fcba3ff8acfe87 -->
+## api/v1/inapp/send
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/inapp/send" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/inapp/send");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/inapp/send`
+
+
+<!-- END_969027761848786970fcba3ff8acfe87 -->
+
+#Role and Permission Management
+<!-- START_d2f16357cb4ed36dbb0e9529ea4a460c -->
+## api/v1/roles
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/roles" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/roles");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/roles`
+
+
+<!-- END_d2f16357cb4ed36dbb0e9529ea4a460c -->
+
+<!-- START_5f753b2bffb6b34b6136ddfe1be7bcce -->
+## api/v1/roles
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/roles" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/roles");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/roles`
+
+
+<!-- END_5f753b2bffb6b34b6136ddfe1be7bcce -->
+
+<!-- START_ba05db58d706b9f94944b1ab79e1e4a2 -->
+## api/v1/roles/{role}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/roles/{role}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/roles/{role}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/roles/{role}`
+
+
+<!-- END_ba05db58d706b9f94944b1ab79e1e4a2 -->
+
+<!-- START_81ac9047f8db2b92092c5a7f13e5d28d -->
+## api/v1/roles/{role}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/roles/{role}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/roles/{role}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/roles/{role}`
+
+`PATCH api/v1/roles/{role}`
+
+
+<!-- END_81ac9047f8db2b92092c5a7f13e5d28d -->
+
+<!-- START_04c524fc2f0ea8c793406426144b4c71 -->
+## api/v1/roles/{role}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/roles/{role}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/roles/{role}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/roles/{role}`
+
+
+<!-- END_04c524fc2f0ea8c793406426144b4c71 -->
+
+<!-- START_8ec2a075078e70128bf47cf32b4be5dc -->
+## api/v1/system_permissions
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/system_permissions" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/system_permissions");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/system_permissions`
+
+
+<!-- END_8ec2a075078e70128bf47cf32b4be5dc -->
+
+<!-- START_b3bd30572740cdf044559c53dfb8087a -->
+## api/v1/system_permissions
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/system_permissions" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/system_permissions");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/system_permissions`
+
+
+<!-- END_b3bd30572740cdf044559c53dfb8087a -->
+
+<!-- START_fbbe03d59175a39bb36e019971d4b8ff -->
+## api/v1/system_permissions/{system_permission}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/system_permissions/{system_permission}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/system_permissions/{system_permission}`
+
+
+<!-- END_fbbe03d59175a39bb36e019971d4b8ff -->
+
+<!-- START_d7142d25033fbff47d63eea95eca785c -->
+## api/v1/system_permissions/{system_permission}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/system_permissions/{system_permission}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/system_permissions/{system_permission}`
+
+`PATCH api/v1/system_permissions/{system_permission}`
+
+
+<!-- END_d7142d25033fbff47d63eea95eca785c -->
+
+<!-- START_829e7b537c6a914c8b32a7f26ad1e9d0 -->
+## api/v1/system_permissions/{system_permission}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/system_permissions/{system_permission}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/system_permissions/{system_permission}`
+
+
+<!-- END_829e7b537c6a914c8b32a7f26ad1e9d0 -->
+
+<!-- START_0988401e31a0e7a4d28c97d7056a8e75 -->
+## api/v1/permission_categories
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/permission_categories" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/permission_categories");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/permission_categories`
+
+
+<!-- END_0988401e31a0e7a4d28c97d7056a8e75 -->
+
+<!-- START_57072572e2dc3cd36c823cb8125a1bba -->
+## api/v1/permission_categories
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/permission_categories" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/permission_categories");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/permission_categories`
+
+
+<!-- END_57072572e2dc3cd36c823cb8125a1bba -->
+
+<!-- START_8ae9aaabae3c98240399690b5df39a90 -->
+## api/v1/permission_categories/{permission_category}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/permission_categories/{permission_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/permission_categories/{permission_category}`
+
+
+<!-- END_8ae9aaabae3c98240399690b5df39a90 -->
+
+<!-- START_ad084e9190a148e2c52d93c1ed2b09df -->
+## api/v1/permission_categories/{permission_category}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/permission_categories/{permission_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/permission_categories/{permission_category}`
+
+`PATCH api/v1/permission_categories/{permission_category}`
+
+
+<!-- END_ad084e9190a148e2c52d93c1ed2b09df -->
+
+<!-- START_e446e6c5dd8e902605888fe22e78e676 -->
+## api/v1/permission_categories/{permission_category}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/permission_categories/{permission_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/permission_categories/{permission_category}`
+
+
+<!-- END_e446e6c5dd8e902605888fe22e78e676 -->
+
+#Service Management
+<!-- START_3c8c4484a110a0ade00412f7d0833d72 -->
+## api/v1/services
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/services" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/services");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/services`
+
+
+<!-- END_3c8c4484a110a0ade00412f7d0833d72 -->
+
+<!-- START_c033867c72496b8d075badce4e3f7cfd -->
+## api/v1/services
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/services" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/services");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/services`
+
+
+<!-- END_c033867c72496b8d075badce4e3f7cfd -->
+
+<!-- START_ff62824d7658444958c89b023a8326f7 -->
+## api/v1/services/{service}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/services/{service}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/services/{service}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/services/{service}`
+
+
+<!-- END_ff62824d7658444958c89b023a8326f7 -->
+
+<!-- START_d48326c80f7a952beab3182ea5ce92da -->
+## api/v1/services/{service}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/services/{service}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/services/{service}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/services/{service}`
+
+`PATCH api/v1/services/{service}`
+
+
+<!-- END_d48326c80f7a952beab3182ea5ce92da -->
+
+<!-- START_d474edd02766b598445c1c4a790d8bc4 -->
+## api/v1/services/{service}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/services/{service}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/services/{service}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/services/{service}`
+
+
+<!-- END_d474edd02766b598445c1c4a790d8bc4 -->
+
+<!-- START_f69a19f46c408f5dc87e6a31d6e1baa3 -->
+## api/v1/service_data_category
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_category" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_category`
+
+
+<!-- END_f69a19f46c408f5dc87e6a31d6e1baa3 -->
+
+<!-- START_eba65b99a2526df868ba8d030b5f325b -->
+## api/v1/service_data_category
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/service_data_category" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/service_data_category`
+
+
+<!-- END_eba65b99a2526df868ba8d030b5f325b -->
+
+<!-- START_ac380c3034cffe7bf8ef470cf5e6f1b1 -->
+## api/v1/service_data_category/{service_data_category}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_category/{service_data_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_category/{service_data_category}`
+
+
+<!-- END_ac380c3034cffe7bf8ef470cf5e6f1b1 -->
+
+<!-- START_33412d7a089779b294d6e6bf7c6ac0c5 -->
+## api/v1/service_data_category/{service_data_category}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/service_data_category/{service_data_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/service_data_category/{service_data_category}`
+
+`PATCH api/v1/service_data_category/{service_data_category}`
+
+
+<!-- END_33412d7a089779b294d6e6bf7c6ac0c5 -->
+
+<!-- START_de851b45ab33002f11835834c61661f1 -->
+## api/v1/service_data_category/{service_data_category}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/service_data_category/{service_data_category}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/service_data_category/{service_data_category}`
+
+
+<!-- END_de851b45ab33002f11835834c61661f1 -->
+
+<!-- START_b8f75119b7a70e00e5337c0c8429a57a -->
+## api/v1/service_data_components
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_components" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_components");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_components`
+
+
+<!-- END_b8f75119b7a70e00e5337c0c8429a57a -->
+
+<!-- START_316ba4f85e345750439d710314c02183 -->
+## api/v1/service_data_components
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/service_data_components" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_components");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/service_data_components`
+
+
+<!-- END_316ba4f85e345750439d710314c02183 -->
+
+<!-- START_5bfec087b1fc3c90d822e009576030d9 -->
+## api/v1/service_data_components/{service_data_component}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_components/{service_data_component}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_components/{service_data_component}`
+
+
+<!-- END_5bfec087b1fc3c90d822e009576030d9 -->
+
+<!-- START_a4b68b5c6363a344ce6df09d6263112e -->
+## api/v1/service_data_components/{service_data_component}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/service_data_components/{service_data_component}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/service_data_components/{service_data_component}`
+
+`PATCH api/v1/service_data_components/{service_data_component}`
+
+
+<!-- END_a4b68b5c6363a344ce6df09d6263112e -->
+
+<!-- START_5d4ed77e893b652662bdeea4846c51f6 -->
+## api/v1/service_data_components/{service_data_component}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/service_data_components/{service_data_component}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/service_data_components/{service_data_component}`
+
+
+<!-- END_5d4ed77e893b652662bdeea4846c51f6 -->
+
+<!-- START_acced4b5be5a829131c2894d0307ab99 -->
+## api/v1/service_data_category_provisions
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_category_provisions" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category_provisions");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_category_provisions`
+
+
+<!-- END_acced4b5be5a829131c2894d0307ab99 -->
+
+<!-- START_9bdbba2c7bc4bbbc93dad3c1ddecf021 -->
+## api/v1/service_data_category_provisions
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/service_data_category_provisions" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category_provisions");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/service_data_category_provisions`
+
+
+<!-- END_9bdbba2c7bc4bbbc93dad3c1ddecf021 -->
+
+<!-- START_9205831f4023591387814559bcf5ebf7 -->
+## api/v1/service_data_category_provisions/{service_data_category_provision}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/service_data_category_provisions/{service_data_category_provision}`
+
+
+<!-- END_9205831f4023591387814559bcf5ebf7 -->
+
+<!-- START_75a052782d59451b6170ba3fba395ec2 -->
+## api/v1/service_data_category_provisions/{service_data_category_provision}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/service_data_category_provisions/{service_data_category_provision}`
+
+`PATCH api/v1/service_data_category_provisions/{service_data_category_provision}`
+
+
+<!-- END_75a052782d59451b6170ba3fba395ec2 -->
+
+<!-- START_dfe43b1699c58665e2db37c6b88b1133 -->
+## api/v1/service_data_category_provisions/{service_data_category_provision}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/service_data_category_provisions/{service_data_category_provision}`
+
+
+<!-- END_dfe43b1699c58665e2db37c6b88b1133 -->
 
 #general
 <!-- START_7e3072a9c6d43c05123a799823b02c6d -->
@@ -887,70 +3707,6 @@ fetch(url, {
 
 <!-- END_7e3072a9c6d43c05123a799823b02c6d -->
 
-<!-- START_d7b7952e7fdddc07c978c9bdaf757acf -->
-## Register api
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/register" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/register");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/register`
-
-
-<!-- END_d7b7952e7fdddc07c978c9bdaf757acf -->
-
-<!-- START_c3fa189a6c95ca36ad6ac4791a873d23 -->
-## login api
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/login" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/login");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/login`
-
-
-<!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
-
 <!-- START_2d698b6d6bc7441f9c1a9cf11aec4059 -->
 ## Show the email verification notice.
 
@@ -1028,515 +3784,6 @@ fetch(url, {
 
 
 <!-- END_31f430322462abe3fc3e4ba369b8f77d -->
-
-<!-- START_356aa57a5886f377e4e6eea0dad27149 -->
-## api/v1/admin/login
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin/login" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/login");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin/login`
-
-
-<!-- END_356aa57a5886f377e4e6eea0dad27149 -->
-
-<!-- START_36a0f6b9fc478346b3aa912174bb74d4 -->
-## This creates administrator for a church without the need for authentication
-This uses the church uuid to map the admin to a church
-Retreives the chuch master administrator (also called church admin)
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin/branch/create/{church_key}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/branch/create/{church_key}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin/branch/create/{church_key}`
-
-
-<!-- END_36a0f6b9fc478346b3aa912174bb74d4 -->
-
-<!-- START_0a9b0727a46bf934308c61f675bd4389 -->
-## api/v1/admin/notify/inapp
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin/notify/inapp" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/notify/inapp");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin/notify/inapp`
-
-
-<!-- END_0a9b0727a46bf934308c61f675bd4389 -->
-
-<!-- START_7801d3c4fb554003f71032ee369dce50 -->
-## Log the currently signed-in user on this device.
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/admin/logout" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/logout");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/admin/logout`
-
-
-<!-- END_7801d3c4fb554003f71032ee369dce50 -->
-
-<!-- START_62ee0f8bb69fad2ad110394625492630 -->
-## API for creating a new branch administrator
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin/branch/create" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/branch/create");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin/branch/create`
-
-
-<!-- END_62ee0f8bb69fad2ad110394625492630 -->
-
-<!-- START_2bb6ef537d9fe81ec758e4f9486f9f87 -->
-## api/v1/admin
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/admin" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/admin`
-
-
-<!-- END_2bb6ef537d9fe81ec758e4f9486f9f87 -->
-
-<!-- START_f77312ba3799be8bcf89d1074365d7fb -->
-## api/v1/admin
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin`
-
-
-<!-- END_f77312ba3799be8bcf89d1074365d7fb -->
-
-<!-- START_72d946b89c00c1462cb564752b3df53e -->
-## api/v1/admin/{admin}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/admin/{admin}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/{admin}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/admin/{admin}`
-
-
-<!-- END_72d946b89c00c1462cb564752b3df53e -->
-
-<!-- START_5b23517d7f2ba9628e7bcc13305cf606 -->
-## api/v1/admin/{admin}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/admin/{admin}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/{admin}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/admin/{admin}`
-
-`PATCH api/v1/admin/{admin}`
-
-
-<!-- END_5b23517d7f2ba9628e7bcc13305cf606 -->
-
-<!-- START_789a39c63b2515b7f2efb0a504700c84 -->
-## api/v1/admin/{admin}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/admin/{admin}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin/{admin}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/admin/{admin}`
-
-
-<!-- END_789a39c63b2515b7f2efb0a504700c84 -->
-
-<!-- START_4ecaa340403adabad74d980c59a82e8b -->
-## api/v1/admin_branches
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/admin_branches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin_branches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/admin_branches`
-
-
-<!-- END_4ecaa340403adabad74d980c59a82e8b -->
-
-<!-- START_beb11f2555c07f6039d2b41239aab795 -->
-## api/v1/admin_branches
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/admin_branches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin_branches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/admin_branches`
-
-
-<!-- END_beb11f2555c07f6039d2b41239aab795 -->
-
-<!-- START_b7355e65acad141d7e1d4c72b191ef73 -->
-## api/v1/admin_branches/{admin_branch}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/admin_branches/{admin_branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/admin_branches/{admin_branch}`
-
-
-<!-- END_b7355e65acad141d7e1d4c72b191ef73 -->
-
-<!-- START_c163aed2b2bf5a2c9dbe5619b18a943c -->
-## api/v1/admin_branches/{admin_branch}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/admin_branches/{admin_branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/admin_branches/{admin_branch}`
-
-`PATCH api/v1/admin_branches/{admin_branch}`
-
-
-<!-- END_c163aed2b2bf5a2c9dbe5619b18a943c -->
-
-<!-- START_61771777b5b1bc609fd677e2542d495d -->
-## api/v1/admin_branches/{admin_branch}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/admin_branches/{admin_branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/admin_branches/{admin_branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/admin_branches/{admin_branch}`
-
-
-<!-- END_61771777b5b1bc609fd677e2542d495d -->
 
 <!-- START_6879a75c701a3dc1458a40069650b9cc -->
 ## api/un_assimilated_buckets
@@ -1711,897 +3958,6 @@ fetch(url, {
 
 
 <!-- END_a139b5a96dc7ba75759f9f147c4eb138 -->
-
-<!-- START_6f7db82b51a16f0e2396b8727a397e22 -->
-## api/v1/churches/register
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/churches/register" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/register");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/churches/register`
-
-
-<!-- END_6f7db82b51a16f0e2396b8727a397e22 -->
-
-<!-- START_7fc7a777a0c540c798351dd56a566a5e -->
-## api/v1/churches/test
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/churches/test" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/test");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
-
-```json
-null
-```
-
-### HTTP Request
-`GET api/v1/churches/test`
-
-
-<!-- END_7fc7a777a0c540c798351dd56a566a5e -->
-
-<!-- START_91fc8c19011177c92f076b41d3206ac4 -->
-## Gets the member types for a church
-
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/churches/member/types" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/member/types");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/churches/member/types`
-
-
-<!-- END_91fc8c19011177c92f076b41d3206ac4 -->
-
-<!-- START_4a40f706dac0e68d211fde89456e56da -->
-## api/v1/churches
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/churches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/churches`
-
-
-<!-- END_4a40f706dac0e68d211fde89456e56da -->
-
-<!-- START_ddf6991f4dfba12e9296ae8bc7506ff0 -->
-## api/v1/churches
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/churches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/churches`
-
-
-<!-- END_ddf6991f4dfba12e9296ae8bc7506ff0 -->
-
-<!-- START_a91413ac6aa6d7c5eb90e04fc2349a1f -->
-## api/v1/churches/{church}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/churches/{church}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/{church}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/churches/{church}`
-
-
-<!-- END_a91413ac6aa6d7c5eb90e04fc2349a1f -->
-
-<!-- START_6ddf98b4324a0b5edca7f1c1a23c3825 -->
-## api/v1/churches/{church}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/churches/{church}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/{church}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/churches/{church}`
-
-`PATCH api/v1/churches/{church}`
-
-
-<!-- END_6ddf98b4324a0b5edca7f1c1a23c3825 -->
-
-<!-- START_fe3e4d3869e5556c6215bea7b01ab793 -->
-## api/v1/churches/{church}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/churches/{church}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/churches/{church}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/churches/{church}`
-
-
-<!-- END_fe3e4d3869e5556c6215bea7b01ab793 -->
-
-<!-- START_0bacbf092031e0dba9318c174b19aa40 -->
-## api/v1/branches
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/branches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/branches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/branches`
-
-
-<!-- END_0bacbf092031e0dba9318c174b19aa40 -->
-
-<!-- START_ab1f4acaa752a08371dfc9eb20f6241e -->
-## api/v1/branches
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/branches" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/branches");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/branches`
-
-
-<!-- END_ab1f4acaa752a08371dfc9eb20f6241e -->
-
-<!-- START_861bed453b63871ea14795f41e52ad76 -->
-## api/v1/branches/{branch}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/branches/{branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/branches/{branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/branches/{branch}`
-
-
-<!-- END_861bed453b63871ea14795f41e52ad76 -->
-
-<!-- START_ef86f0b77d8e7e1f3d765bde1bb51ab5 -->
-## api/v1/branches/{branch}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/branches/{branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/branches/{branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/branches/{branch}`
-
-`PATCH api/v1/branches/{branch}`
-
-
-<!-- END_ef86f0b77d8e7e1f3d765bde1bb51ab5 -->
-
-<!-- START_c3b7bcfec72e006cdfd0e49c317a332a -->
-## api/v1/branches/{branch}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/branches/{branch}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/branches/{branch}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/branches/{branch}`
-
-
-<!-- END_c3b7bcfec72e006cdfd0e49c317a332a -->
-
-<!-- START_130a5ba30a94337ca1eb60d303a1ac8e -->
-## api/v1/members/import
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/members/import" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/members/import");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/members/import`
-
-
-<!-- END_130a5ba30a94337ca1eb60d303a1ac8e -->
-
-<!-- START_eb24812784c39724ba7d6ef3cfb915c5 -->
-## This would handle any export on the membership module
-
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/members/export" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/members/export");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/members/export`
-
-
-<!-- END_eb24812784c39724ba7d6ef3cfb915c5 -->
-
-<!-- START_2048182f77d1c454b8fa4c953bef1ccd -->
-## api/v1/member_type/members/{id}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/member_type/members/{id}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_type/members/{id}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/member_type/members/{id}`
-
-
-<!-- END_2048182f77d1c454b8fa4c953bef1ccd -->
-
-<!-- START_6b83ee8045f2da32609258fb7ee994ec -->
-## api/v1/member_types
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/member_types" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_types");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/member_types`
-
-
-<!-- END_6b83ee8045f2da32609258fb7ee994ec -->
-
-<!-- START_b00035817bb3a8e186f2856227787c9f -->
-## api/v1/member_types
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/member_types" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_types");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/member_types`
-
-
-<!-- END_b00035817bb3a8e186f2856227787c9f -->
-
-<!-- START_eb35d286e0d50e7c1b5209c9f0fab2db -->
-## api/v1/member_types/{member_type}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/member_types/{member_type}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_types/{member_type}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/member_types/{member_type}`
-
-
-<!-- END_eb35d286e0d50e7c1b5209c9f0fab2db -->
-
-<!-- START_947e2c6bddfbe4b1d5b9da0bda66d403 -->
-## api/v1/member_types/{member_type}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/member_types/{member_type}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_types/{member_type}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/member_types/{member_type}`
-
-`PATCH api/v1/member_types/{member_type}`
-
-
-<!-- END_947e2c6bddfbe4b1d5b9da0bda66d403 -->
-
-<!-- START_04f3a3082a02fef7fa24ea4ded614f60 -->
-## api/v1/member_types/{member_type}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/member_types/{member_type}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_types/{member_type}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/member_types/{member_type}`
-
-
-<!-- END_04f3a3082a02fef7fa24ea4ded614f60 -->
-
-<!-- START_9149c4c889a14310c73340d8ffe9bc5e -->
-## api/v1/member_details
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/member_details" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_details");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/member_details`
-
-
-<!-- END_9149c4c889a14310c73340d8ffe9bc5e -->
-
-<!-- START_eaac5b3c6acca6bc73e82bccd5eee357 -->
-## api/v1/member_details
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/member_details" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_details");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/member_details`
-
-
-<!-- END_eaac5b3c6acca6bc73e82bccd5eee357 -->
-
-<!-- START_03052116572e043ba7c9e7813f33caa8 -->
-## api/v1/member_details/{member_detail}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/member_details/{member_detail}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/member_details/{member_detail}`
-
-
-<!-- END_03052116572e043ba7c9e7813f33caa8 -->
-
-<!-- START_2b044fad1991db6e3e7d23a10d180d9d -->
-## api/v1/member_details/{member_detail}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/member_details/{member_detail}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/member_details/{member_detail}`
-
-`PATCH api/v1/member_details/{member_detail}`
-
-
-<!-- END_2b044fad1991db6e3e7d23a10d180d9d -->
-
-<!-- START_13280d7e51c202b543b9ef5bb901510d -->
-## api/v1/member_details/{member_detail}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/member_details/{member_detail}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/member_details/{member_detail}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/member_details/{member_detail}`
-
-
-<!-- END_13280d7e51c202b543b9ef5bb901510d -->
 
 <!-- START_7b67b0cd63d6d7d8465e82386d6cec13 -->
 ## Imports cell data into the database
@@ -3530,1264 +4886,5 @@ fetch(url, {
 
 
 <!-- END_7d55340c0fc68ffc5eff0498137eeba1 -->
-
-<!-- START_dd2f6094afe401c126124b8f364c0dd5 -->
-## api/v1/sms/send
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/sms/send" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/sms/send");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/sms/send`
-
-
-<!-- END_dd2f6094afe401c126124b8f364c0dd5 -->
-
-<!-- START_969027761848786970fcba3ff8acfe87 -->
-## api/v1/inapp/send
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/inapp/send" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/inapp/send");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/inapp/send`
-
-
-<!-- END_969027761848786970fcba3ff8acfe87 -->
-
-<!-- START_d2f16357cb4ed36dbb0e9529ea4a460c -->
-## api/v1/roles
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/roles" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/roles");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/roles`
-
-
-<!-- END_d2f16357cb4ed36dbb0e9529ea4a460c -->
-
-<!-- START_5f753b2bffb6b34b6136ddfe1be7bcce -->
-## api/v1/roles
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/roles" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/roles");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/roles`
-
-
-<!-- END_5f753b2bffb6b34b6136ddfe1be7bcce -->
-
-<!-- START_ba05db58d706b9f94944b1ab79e1e4a2 -->
-## api/v1/roles/{role}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/roles/{role}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/roles/{role}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/roles/{role}`
-
-
-<!-- END_ba05db58d706b9f94944b1ab79e1e4a2 -->
-
-<!-- START_81ac9047f8db2b92092c5a7f13e5d28d -->
-## api/v1/roles/{role}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/roles/{role}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/roles/{role}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/roles/{role}`
-
-`PATCH api/v1/roles/{role}`
-
-
-<!-- END_81ac9047f8db2b92092c5a7f13e5d28d -->
-
-<!-- START_04c524fc2f0ea8c793406426144b4c71 -->
-## api/v1/roles/{role}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/roles/{role}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/roles/{role}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/roles/{role}`
-
-
-<!-- END_04c524fc2f0ea8c793406426144b4c71 -->
-
-<!-- START_8ec2a075078e70128bf47cf32b4be5dc -->
-## api/v1/system_permissions
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/system_permissions" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/system_permissions");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/system_permissions`
-
-
-<!-- END_8ec2a075078e70128bf47cf32b4be5dc -->
-
-<!-- START_b3bd30572740cdf044559c53dfb8087a -->
-## api/v1/system_permissions
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/system_permissions" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/system_permissions");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/system_permissions`
-
-
-<!-- END_b3bd30572740cdf044559c53dfb8087a -->
-
-<!-- START_fbbe03d59175a39bb36e019971d4b8ff -->
-## api/v1/system_permissions/{system_permission}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/system_permissions/{system_permission}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/system_permissions/{system_permission}`
-
-
-<!-- END_fbbe03d59175a39bb36e019971d4b8ff -->
-
-<!-- START_d7142d25033fbff47d63eea95eca785c -->
-## api/v1/system_permissions/{system_permission}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/system_permissions/{system_permission}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/system_permissions/{system_permission}`
-
-`PATCH api/v1/system_permissions/{system_permission}`
-
-
-<!-- END_d7142d25033fbff47d63eea95eca785c -->
-
-<!-- START_829e7b537c6a914c8b32a7f26ad1e9d0 -->
-## api/v1/system_permissions/{system_permission}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/system_permissions/{system_permission}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/system_permissions/{system_permission}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/system_permissions/{system_permission}`
-
-
-<!-- END_829e7b537c6a914c8b32a7f26ad1e9d0 -->
-
-<!-- START_0988401e31a0e7a4d28c97d7056a8e75 -->
-## api/v1/permission_categories
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/permission_categories" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/permission_categories");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/permission_categories`
-
-
-<!-- END_0988401e31a0e7a4d28c97d7056a8e75 -->
-
-<!-- START_57072572e2dc3cd36c823cb8125a1bba -->
-## api/v1/permission_categories
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/permission_categories" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/permission_categories");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/permission_categories`
-
-
-<!-- END_57072572e2dc3cd36c823cb8125a1bba -->
-
-<!-- START_8ae9aaabae3c98240399690b5df39a90 -->
-## api/v1/permission_categories/{permission_category}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/permission_categories/{permission_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/permission_categories/{permission_category}`
-
-
-<!-- END_8ae9aaabae3c98240399690b5df39a90 -->
-
-<!-- START_ad084e9190a148e2c52d93c1ed2b09df -->
-## api/v1/permission_categories/{permission_category}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/permission_categories/{permission_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/permission_categories/{permission_category}`
-
-`PATCH api/v1/permission_categories/{permission_category}`
-
-
-<!-- END_ad084e9190a148e2c52d93c1ed2b09df -->
-
-<!-- START_e446e6c5dd8e902605888fe22e78e676 -->
-## api/v1/permission_categories/{permission_category}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/permission_categories/{permission_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/permission_categories/{permission_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/permission_categories/{permission_category}`
-
-
-<!-- END_e446e6c5dd8e902605888fe22e78e676 -->
-
-<!-- START_3c8c4484a110a0ade00412f7d0833d72 -->
-## api/v1/services
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/services" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/services");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/services`
-
-
-<!-- END_3c8c4484a110a0ade00412f7d0833d72 -->
-
-<!-- START_c033867c72496b8d075badce4e3f7cfd -->
-## api/v1/services
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/services" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/services");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/services`
-
-
-<!-- END_c033867c72496b8d075badce4e3f7cfd -->
-
-<!-- START_ff62824d7658444958c89b023a8326f7 -->
-## api/v1/services/{service}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/services/{service}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/services/{service}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/services/{service}`
-
-
-<!-- END_ff62824d7658444958c89b023a8326f7 -->
-
-<!-- START_d48326c80f7a952beab3182ea5ce92da -->
-## api/v1/services/{service}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/services/{service}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/services/{service}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/services/{service}`
-
-`PATCH api/v1/services/{service}`
-
-
-<!-- END_d48326c80f7a952beab3182ea5ce92da -->
-
-<!-- START_d474edd02766b598445c1c4a790d8bc4 -->
-## api/v1/services/{service}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/services/{service}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/services/{service}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/services/{service}`
-
-
-<!-- END_d474edd02766b598445c1c4a790d8bc4 -->
-
-<!-- START_f69a19f46c408f5dc87e6a31d6e1baa3 -->
-## api/v1/service_data_category
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_category" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_category`
-
-
-<!-- END_f69a19f46c408f5dc87e6a31d6e1baa3 -->
-
-<!-- START_eba65b99a2526df868ba8d030b5f325b -->
-## api/v1/service_data_category
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/service_data_category" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/service_data_category`
-
-
-<!-- END_eba65b99a2526df868ba8d030b5f325b -->
-
-<!-- START_ac380c3034cffe7bf8ef470cf5e6f1b1 -->
-## api/v1/service_data_category/{service_data_category}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_category/{service_data_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_category/{service_data_category}`
-
-
-<!-- END_ac380c3034cffe7bf8ef470cf5e6f1b1 -->
-
-<!-- START_33412d7a089779b294d6e6bf7c6ac0c5 -->
-## api/v1/service_data_category/{service_data_category}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/service_data_category/{service_data_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/service_data_category/{service_data_category}`
-
-`PATCH api/v1/service_data_category/{service_data_category}`
-
-
-<!-- END_33412d7a089779b294d6e6bf7c6ac0c5 -->
-
-<!-- START_de851b45ab33002f11835834c61661f1 -->
-## api/v1/service_data_category/{service_data_category}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/service_data_category/{service_data_category}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category/{service_data_category}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/service_data_category/{service_data_category}`
-
-
-<!-- END_de851b45ab33002f11835834c61661f1 -->
-
-<!-- START_b8f75119b7a70e00e5337c0c8429a57a -->
-## api/v1/service_data_components
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_components" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_components");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_components`
-
-
-<!-- END_b8f75119b7a70e00e5337c0c8429a57a -->
-
-<!-- START_316ba4f85e345750439d710314c02183 -->
-## api/v1/service_data_components
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/service_data_components" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_components");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/service_data_components`
-
-
-<!-- END_316ba4f85e345750439d710314c02183 -->
-
-<!-- START_5bfec087b1fc3c90d822e009576030d9 -->
-## api/v1/service_data_components/{service_data_component}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_components/{service_data_component}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_components/{service_data_component}`
-
-
-<!-- END_5bfec087b1fc3c90d822e009576030d9 -->
-
-<!-- START_a4b68b5c6363a344ce6df09d6263112e -->
-## api/v1/service_data_components/{service_data_component}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/service_data_components/{service_data_component}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/service_data_components/{service_data_component}`
-
-`PATCH api/v1/service_data_components/{service_data_component}`
-
-
-<!-- END_a4b68b5c6363a344ce6df09d6263112e -->
-
-<!-- START_5d4ed77e893b652662bdeea4846c51f6 -->
-## api/v1/service_data_components/{service_data_component}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/service_data_components/{service_data_component}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_components/{service_data_component}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/service_data_components/{service_data_component}`
-
-
-<!-- END_5d4ed77e893b652662bdeea4846c51f6 -->
-
-<!-- START_acced4b5be5a829131c2894d0307ab99 -->
-## api/v1/service_data_category_provisions
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_category_provisions" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category_provisions");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_category_provisions`
-
-
-<!-- END_acced4b5be5a829131c2894d0307ab99 -->
-
-<!-- START_9bdbba2c7bc4bbbc93dad3c1ddecf021 -->
-## api/v1/service_data_category_provisions
-> Example request:
-
-```bash
-curl -X POST "http://localhost/api/v1/service_data_category_provisions" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category_provisions");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`POST api/v1/service_data_category_provisions`
-
-
-<!-- END_9bdbba2c7bc4bbbc93dad3c1ddecf021 -->
-
-<!-- START_9205831f4023591387814559bcf5ebf7 -->
-## api/v1/service_data_category_provisions/{service_data_category_provision}
-> Example request:
-
-```bash
-curl -X GET -G "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (401):
-
-```json
-{
-    "message": "Unauthenticated."
-}
-```
-
-### HTTP Request
-`GET api/v1/service_data_category_provisions/{service_data_category_provision}`
-
-
-<!-- END_9205831f4023591387814559bcf5ebf7 -->
-
-<!-- START_75a052782d59451b6170ba3fba395ec2 -->
-## api/v1/service_data_category_provisions/{service_data_category_provision}
-> Example request:
-
-```bash
-curl -X PUT "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`PUT api/v1/service_data_category_provisions/{service_data_category_provision}`
-
-`PATCH api/v1/service_data_category_provisions/{service_data_category_provision}`
-
-
-<!-- END_75a052782d59451b6170ba3fba395ec2 -->
-
-<!-- START_dfe43b1699c58665e2db37c6b88b1133 -->
-## api/v1/service_data_category_provisions/{service_data_category_provision}
-> Example request:
-
-```bash
-curl -X DELETE "http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}" 
-```
-
-```javascript
-const url = new URL("http://localhost/api/v1/service_data_category_provisions/{service_data_category_provision}");
-
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-
-### HTTP Request
-`DELETE api/v1/service_data_category_provisions/{service_data_category_provision}`
-
-
-<!-- END_dfe43b1699c58665e2db37c6b88b1133 -->
 
 

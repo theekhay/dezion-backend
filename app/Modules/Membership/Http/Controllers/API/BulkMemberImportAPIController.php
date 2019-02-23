@@ -36,6 +36,7 @@ use Maatwebsite\Excel\HeadingRowImport;
 /**
  * Class BulkMemberImportController
  * @package App\Modules\Membership\Http\Controllers\API
+ * @group Membership
  */
 
 

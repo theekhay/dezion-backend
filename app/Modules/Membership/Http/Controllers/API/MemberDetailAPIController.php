@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * Class MemberDetailController
  * @package App\Modules\Membership\Http\Controllers\API
+ * @group Membership
  */
 
 class MemberDetailAPIController extends AppBaseController
@@ -118,6 +119,7 @@ class MemberDetailAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @group Import
      */
     public function store(CreateMemberDetailAPIRequest $request)
     {

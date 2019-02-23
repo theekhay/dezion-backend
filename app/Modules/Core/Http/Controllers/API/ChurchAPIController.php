@@ -47,6 +47,7 @@ use App\Modules\Admin\Models\BranchAdmin;
 /**
  * Class ChurchController
  * @package App\Modules\Core\Http\Controllers\API
+ * @group Core
  */
 
 class ChurchAPIController extends AppBaseController
@@ -315,6 +316,19 @@ class ChurchAPIController extends AppBaseController
     }
 
 
+
+    /*
+     * API to register a new church
+     * This registers thge chucrch, creates the master branch for the church, creates a church-level admin for the church and registers the admin as a member of the church
+     *
+     * @bodyParam church_name string required The name of the church
+     * @bodyParam firstname string required The user's lastname
+     * @bodyParam surname string required The user's lastname
+     * @bodyParam email string required The email of the admin signing up the church
+     * @bodyParam telephone string required The telephone number of the admin signing up the church
+     * @bodyParam password string required The user's password
+     * @bodyParam c_password string required The user's password again (should be the same as password)
+     */
     public function registerChurch( RegisterChurchAPIRequest $request)
     {
         $church = new Church([

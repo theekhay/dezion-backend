@@ -16,6 +16,7 @@ use App\Modules\Rolemanager\Http\Resources\PermissionCategoryResource;
 /**
  * Class PermissionCategoryController
  * @package App\Modules\rolemanager\Http\Controllers\API
+ * @group Role and Permission Management
  */
 
 class PermissionCategoryAPIController extends AppBaseController

@@ -30,6 +30,7 @@ use App\Modules\Membership\Models\MemberDetail;
 /**
  * Class MemberTypeController
  * @package App\Modules\Membership\Http\Controllers\API
+ * @group Membership
  */
 
 class MemberTypeAPIController extends AppBaseController
