@@ -201,7 +201,7 @@ return [
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         //for
-        //'\HttpAnalyzer\Laravel\HttpAnalyzerServiceProvider',
+        '\HttpAnalyzer\Laravel\HttpAnalyzerServiceProvider',
 
         //for laravel-permissions
         Spatie\Permission\PermissionServiceProvider::class,

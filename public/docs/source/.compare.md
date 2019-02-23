@@ -20,6 +20,196 @@ Welcome to the generated API reference.
 
 <!-- END_INFO -->
 
+#Member Mapping
+<!-- START_f764b095f658a920a10bfe2f83e5f50c -->
+## api/v1/cell_member_mappings
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/cell_member_mappings" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/cell_member_mappings`
+
+
+<!-- END_f764b095f658a920a10bfe2f83e5f50c -->
+
+<!-- START_fd11d2f50e3884e3861345657324edda -->
+## api/v1/cell_member_mappings
+<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/v1/cell_member_mappings" \
+    -H "Content-Type: application/json" \
+    -d '{"church_id":5,"mapped_model":"Gd81TCPqxzZGM7zy","mapping_data":[]}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "church_id": 5,
+    "mapped_model": "Gd81TCPqxzZGM7zy",
+    "mapping_data": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`POST api/v1/cell_member_mappings`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    church_id | integer |  required  | The church the member belongs to
+    mapped_model | string |  required  | The model used for mapping e.g cell::class, smallGroup::class, houseFellowship::class
+    mapping_data | array |  required  | The mapping data for the members being mapped Ex. [{"member_id":"1","model_id":"1", "status":"190"},{"member_id":"2","model_id":"2", "status":"190"}]
+
+<!-- END_fd11d2f50e3884e3861345657324edda -->
+
+<!-- START_b5f4b9dcea9a74716bd23fd9c7b526ab -->
+## api/v1/cell_member_mappings/{cell_member_mapping}
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/v1/cell_member_mappings/{cell_member_mapping}`
+
+
+<!-- END_b5f4b9dcea9a74716bd23fd9c7b526ab -->
+
+<!-- START_f9e34c1c3d230d88b5682b3a17e68b6b -->
+## api/v1/cell_member_mappings/{cell_member_mapping}
+> Example request:
+
+```bash
+curl -X PUT "http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "PUT",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`PUT api/v1/cell_member_mappings/{cell_member_mapping}`
+
+`PATCH api/v1/cell_member_mappings/{cell_member_mapping}`
+
+
+<!-- END_f9e34c1c3d230d88b5682b3a17e68b6b -->
+
+<!-- START_a63c808fcd771da627c717e30419c95a -->
+## api/v1/cell_member_mappings/{cell_member_mapping}
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/v1/cell_member_mappings/{cell_member_mapping}");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+
+### HTTP Request
+`DELETE api/v1/cell_member_mappings/{cell_member_mapping}`
+
+
+<!-- END_a63c808fcd771da627c717e30419c95a -->
+
 #general
 <!-- START_7e3072a9c6d43c05123a799823b02c6d -->
 ## api/docs
@@ -357,7 +547,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Barryvdh\\Debugbar\\Middleware\\InjectDebugbar",
             "type": "->"
@@ -378,7 +568,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Moesif\\Middleware\\MoesifLaravel",
             "type": "->"
@@ -399,7 +589,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Spatie\\Cors\\Cors",
             "type": "->"
@@ -420,7 +610,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Fideloper\\Proxy\\TrustProxies",
             "type": "->"
@@ -441,7 +631,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
@@ -462,7 +652,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest",
             "type": "->"
@@ -483,7 +673,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize",
             "type": "->"
@@ -504,7 +694,7 @@ fetch(url, {
         },
         {
             "file": "C:\\workspace\\dezion\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php",
-            "line": 151,
+            "line": 163,
             "function": "handle",
             "class": "Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode",
             "type": "->"
