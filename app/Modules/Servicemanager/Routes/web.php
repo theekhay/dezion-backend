@@ -26,4 +26,4 @@ Route::resource('serviceDataComponents', 'ServiceDataComponentController');
 
 Route::resource('serviceDataCategoryProvisions', 'ServiceDataCategoryProvisionController');
 
-Route::resource('serviceDataComponentProvisions', 'ServiceDataComponentProvisionController');
+//Route::resource('serviceDataComponentProvisions', 'ServiceDataComponentProvisionController');
