@@ -17,6 +17,7 @@ use App\Modules\ServiceManager\Models\Service;
 /**
  * Class ServiceDataCategoryController
  * @package App\Modules\Servicemanager\Http\Controllers\API
+ * @group Service Management
  */
 
 class ServiceDataCategoryAPIController extends AppBaseController

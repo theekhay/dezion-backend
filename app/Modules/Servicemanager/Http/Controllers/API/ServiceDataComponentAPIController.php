@@ -16,6 +16,7 @@ use App\Modules\ServiceManager\Http\Resources\ServiceDataComponentResource;
 /**
  * Class ServiceDataComponentController
  * @package App\Modules\Servicemanager\Http\Controllers\API
+ * @group Service Management
  */
 
 class ServiceDataComponentAPIController extends AppBaseController

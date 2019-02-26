@@ -18,8 +18,4 @@ Route::group(['prefix' => 'notify'], function () {
 });
 
 
-Route::resource('teams', 'TeamController');
-
-Route::resource('districts', 'DistrictController');
-
 Route::resource('messages', 'MessageController');

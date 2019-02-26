@@ -16,6 +16,7 @@ use App\Modules\Servicemanager\Http\Resources\ServiceResource;
 /**
  * Class ServiceController
  * @package App\Modules\ServiceManager\Http\Controllers\API
+ * @group Service Management
  */
 
 class ServiceAPIController extends AppBaseController

@@ -21,6 +21,7 @@ use App\Modules\Core\Models\AdminBranch;
 use App\Modules\Admin\Models\ChurchAdmin;
 use App\Modules\Admin\Models\AdminStatus;
 use App\Models\ModelStatus;
+use App\Modules\Admin\Models\AdminType;
 
 //Repos
 use App\Modules\Core\Repositories\ChurchRepository;
@@ -46,6 +47,7 @@ use App\Modules\Admin\Models\BranchAdmin;
 /**
  * Class ChurchController
  * @package App\Modules\Core\Http\Controllers\API
+ * @group Core
  */
 
 class ChurchAPIController extends AppBaseController
@@ -314,6 +316,19 @@ class ChurchAPIController extends AppBaseController
     }
 
 
+
+    /*
+     * API to register a new church
+     * This registers thge chucrch, creates the master branch for the church, creates a church-level admin for the church and registers the admin as a member of the church
+     *
+     * @bodyParam church_name string required The name of the church
+     * @bodyParam firstname string required The user's lastname
+     * @bodyParam surname string required The user's lastname
+     * @bodyParam email string required The email of the admin signing up the church
+     * @bodyParam telephone string required The telephone number of the admin signing up the church
+     * @bodyParam password string required The user's password
+     * @bodyParam c_password string required The user's password again (should be the same as password)
+     */
     public function registerChurch( RegisterChurchAPIRequest $request)
     {
         $church = new Church([
@@ -332,29 +347,29 @@ class ChurchAPIController extends AppBaseController
 
             $church->save();
 
-            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id, 'status' => ModelStatus::ACTIVE]);
-            $branch->save();
-
             $details = [
-                        'firstname' => $request->firstname,
-                        'surname' => $request->surname,
-                        'email' => $request->email,
-                        'telephone' => $request->telephone,
-                    ];
-
-            $member = new MemberDetail($details + ['branch_id' => $branch->id, 'member_type_id' => 1 ]);
-            $member->save();
+                'firstname' => $request->firstname,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'telephone' => $request->telephone,
+            ];
 
             $admin = new ChurchAdmin( $details + ['username' => $request->username,
-                                                    'member_id' => $member->id,
+                                                    //'member_id' => $member->id,
                                                     'church_id' => $church->id,
                                                     'status' => AdminStatus::ACTIVE,
-                                                    'password' => Hash::make($request->password) ]) ;
+                                                    'password' => Hash::make($request->password),
+                                                    'created_by' => AdminType::SuperAdmin, ]);
+
             $admin->save();
 
-            $admin->assignTo( $branch );
+            $branch = new MasterBranch(['name' => $church->name, 'church_id' => $church->id, 'status' => ModelStatus::ACTIVE, 'created_by' => $admin->id]);
+            $branch->save();
 
-           //notify admin
+
+
+            $member = new MemberDetail( $details + ['branch_id' => $branch->id, 'member_type_id' => 1, 'created_by' => $admin->id ]);
+            $member->save();
 
             DB::commit();
 
@@ -390,16 +405,16 @@ class ChurchAPIController extends AppBaseController
 
       // $church = Church::find(2)->getMemberTypes;
 
-      $branch = Branch::find(1);
+      //$branch = Branch::find(1);
 
-       $link = Route::getFacadeRoot()->current()->uri();
+      // $link = Route::getFacadeRoot()->current()->uri();
 
-        $result =  Auth::user()->getChurch;
+       // $result =  Auth::user()->getChurch;
         $uri = $request->path();
 
-        $admin = ChurchAdmin::find(6);
+        $church = Church::find(15);
         $isCorrect = true;
-       echo json_encode(['activation_key' => !!! $isCorrect ]);
+       echo json_encode(['activation_key' => $church->masterAdmin ]);
     }
 
 }

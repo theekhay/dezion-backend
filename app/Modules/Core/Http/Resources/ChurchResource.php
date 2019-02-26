@@ -25,7 +25,7 @@ class ChurchResource extends JsonResource
             'name' => $this->name,
             'code' => $this->code,
             'active' => $this->active,
-            'created_by' => $this->created_by,
+            //'created_by' => $this->created_by,
             'headquarters' => $this->headquaters,
             'logo' => $this->logo,
             'deleted_by' => $this->deleted_by,

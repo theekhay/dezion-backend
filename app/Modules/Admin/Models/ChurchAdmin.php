@@ -11,10 +11,11 @@ use App\Models\ModelStatus;
 use App\Traits\WithOnlyChurchTrait;
 use App\Modules\Core\Models\Church;
 use App\Modules\Admin\Concerns\IAdmin;
+use App\Traits\OnlyChurchAdmin;
 
 class ChurchAdmin extends Administrator implements IAdmin
 {
-    use WithOnlyChurchTrait;
+    use WithOnlyChurchTrait, OnlyChurchAdmin;
 
     public function __construct( $attributes = [] )
     {

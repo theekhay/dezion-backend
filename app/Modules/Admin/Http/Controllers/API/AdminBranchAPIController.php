@@ -32,6 +32,7 @@ use Response;
 /**
  * Class AdminBranchController
  * @package App\Modules\Admin\Http\Controllers\API
+ * @group Administrator
  */
 
 class AdminBranchAPIController extends AppBaseController

@@ -23,6 +23,7 @@ use App\Modules\Notify\Methods\InApp as InAppMsg;
 /**
  * Class MessageController
  * @package App\Modules\Notify\Http\Controllers\API
+ * @group Notification Management
  */
 
 class MessageAPIController extends AppBaseController

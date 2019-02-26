@@ -25,7 +25,7 @@ class CreatePermissionCategoriesTable extends Migration
 
             $table->integer("status");
 
-            $table->string('allowed')->default("*");
+            $table->string('allowed')->default('*');
             $table->string('excluded')->nullable();
 
             $table->timestamps();

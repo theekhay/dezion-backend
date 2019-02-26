@@ -15,6 +15,7 @@ use App\Modules\ServiceManager\Models\Service;
 use App\Traits\UuidTrait;
 use App\Traits\OnCreateTrait;
 use App\Traits\OnlyActive;
+use App\Modules\Admin\Models\ChurchAdmin;
 
 /**
  * @SWG\Definition(
@@ -51,7 +52,7 @@ class Church extends Model
 
 
     public $fillable = [
-        'name', 'code', 'date_established', 'logo', 'slogan', 'created_by', 'mode', 'activation_key', 'created_by_email', 'created_by_telephone',
+        'name', 'code', 'date_established', 'logo', 'slogan', 'mode', 'activation_key', 'created_by_email', 'created_by_telephone',
         'status'
     ];
 
@@ -167,6 +168,18 @@ class Church extends Model
     public function getServices()
     {
         return $this->hasMany( Service::class, 'church_id', 'id' );
+    }
+
+
+    /**
+     * Every church as a church Admin.
+     * Think of this as the super admin for the church
+     * This admin would have all the privileges allowed the church
+     * @return ChurchAdmin
+     */
+    public function masterAdmin()
+    {
+        return $this->hasOne( ChurchAdmin::class, 'church_id' );
     }
 
 }

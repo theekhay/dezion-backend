@@ -30,6 +30,7 @@ use Spatie\Permission\Exceptions\PermissionDoesNotExist;
 /**
  * Class RoleController
  * @package App\Modules\RoleManager\Http\Controllers\API
+ * @group Role and Permission Management
  */
 
 class RoleAPIController extends AppBaseController
@@ -126,6 +127,8 @@ class RoleAPIController extends AppBaseController
     public function store(CreateRoleAPIRequest $request)
     {
         $input = $request->except('permissions');
+
+        if( empty( $request->permissions)) return $this->sendError( "No permission found. Roles cannot be created without permissions", 422);
 
         try{
             DB::beginTransaction();

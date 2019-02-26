@@ -350,7 +350,7 @@ class CellAPIController extends AppBaseController
      */
     public function addresses()
     {
-        $addresses = Cell::pluck('address');
+        $addresses = Cell::pluck('address', 'id');
         return array_unique (array_map('trim', $addresses->all() ) ) ;
     }
 }

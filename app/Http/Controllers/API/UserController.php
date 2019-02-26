@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
-
+/**
+ * @group Account Management
+ */
 class UserController extends Controller
 {
     public $successStatus = 200;
@@ -20,10 +22,12 @@ class UserController extends Controller
 
 
     /**
-     * login api
+     * API for user login
      *
+     * @bodyParam email email required the user's email
+     * @bodyParam pasword string required The user's password
      * @return \Illuminate\Http\Response
-     */
+    */
     public function login()
     {
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')]))
@@ -42,9 +46,14 @@ class UserController extends Controller
 
 
     /**
-    * Register api
-    *
-    * @return \Illuminate\Http\Response
+     * API for user registeration
+     *
+     * @bodyParam firstname string required The user's firstname
+     * @bodyParam lastname string required The user's lastname
+     * @bodyParam email string required The user's email
+     * @bodyParam password string required The user's password
+     * @bodyParam c_password string required The user's password again (should be the same as password)
+     *
     */
 
     public function register(registerUserRequest $request)

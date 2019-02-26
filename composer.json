@@ -25,6 +25,8 @@
         "laravelcollective/html": "^5.7.0",
         "lezhnev74/apideveloperio-laravel": "~4.0",
         "maatwebsite/excel": "^3.1",
+        "moesif/moesif-laravel": "^1.3",
+        "mpociot/laravel-apidoc-generator": "^3.3",
         "ramsey/uuid": "^3.8",
         "spatie/laravel-cors": "^1.3",
         "spatie/laravel-permission": "^2.29"

@@ -24,10 +24,11 @@ Trait AddCreatedBy
      * find a way to check if a route implements the auth guard.
      *
      */
-    private static $ignoreRoute = [
+    private static $excludeRoute = [
 
         'api/v1/admin/branch/create',
-        'api/v1/churches/register'
+        'api/v1/churches/register',
+        'api/v1/admin/branch/create/{church_key}'
     ];
 
 
@@ -65,8 +66,9 @@ Trait AddCreatedBy
     {
         static::creating(function ($model) {
 
-            $model->{self::createdByField()} = ( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$ignoreRoute) ) ?  Auth::id() : 1;
-
+            if( ( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$excludeRoute) )){
+                $model->{self::createdByField()} = Auth::id() ;
+            }
         });
     }
 

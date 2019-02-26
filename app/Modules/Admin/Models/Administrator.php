@@ -51,7 +51,7 @@ class Administrator extends User
 
 
     public $fillable = [
-        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password', 'type', 'status'
+        'firstname', 'surname', 'email', 'telephone', 'member_id', 'church_id', 'password', 'type', 'status', 'created_by'
     ];
 
     /**
