@@ -11,6 +11,7 @@ use Flash;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
+
 class CellMemberMappingController extends AppBaseController
 {
     /** @var  CellMemberMappingRepository */

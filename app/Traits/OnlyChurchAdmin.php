@@ -12,7 +12,7 @@ Trait OnlyChurchAdmin{
 
 
     /**
-     * Get the fully qualified "active" column.
+     * Get the fully qualified "type" column.
      *
      * @return string
      */

@@ -25,6 +25,8 @@ Route::group(['prefix' => 'v1'], function()
     Route::post('admin/login', 'AdministratorAPIController@login')->middleware(['checkadminstatus']);
 
     Route::post('admin/branch/create/{church_key}', 'AdministratorAPIController@branchAdminSignup');
+
+    Route::get('admin/logout', 'AdministratorAPIController@logout') ;
 });
 
 
@@ -33,7 +35,7 @@ Route::group(['middleware'=> ['auth:api'], 'prefix' => 'v1'], function()
     Route::post('admin/notify/inapp', 'AdministratorAPIController@test'); //unomment
 
     //create a new branch admin
-    Route::get('admin/logout', 'AdministratorAPIController@logout') ;
+
     Route::post('admin/branch/create', 'AdministratorAPIController@makeBranchAdmin');
 
     Route::resource('admin', 'AdministratorAPIController');
