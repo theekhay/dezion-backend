@@ -4,6 +4,7 @@ namespace App\Modules\Rolemanager\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Spatie\Permission\Models\Permission;
+use App\Modules\Core\Models\Church;
 
 class RoleResource extends JsonResource
 {
@@ -15,11 +16,12 @@ class RoleResource extends JsonResource
      */
     public function toArray($request)
     {
-        //return parent::toArray($request);
         return [
-            'name' => $name,
-            'guard_name' => $guard_name,
-            'church_id' => $church_id,
+            'id' => $this->id,
+            'uuid' => $this->uuid,
+            'name' => $this->name,
+            'guard_name' => $this->guard_name,
+            'church' => Church::find( $this->church_id ),
             'permissions' => PermissionResource::collection( $this->permissions),
         ];
     }

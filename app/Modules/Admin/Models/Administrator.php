@@ -185,7 +185,7 @@ class Administrator extends User
 
 
     /**
-     * Gets a list of branch is an admin has access to
+     * Gets a list of branches an admin has access to
      * this list varies based on the type of admin;
      * SuperAdmin > ChurchAdmin > BranchAdmin
      *

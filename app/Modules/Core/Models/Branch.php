@@ -70,18 +70,12 @@ Class Branch extends Model
         'code' => 'nullable|unique:branches,code|max:10|alpha_num',
         'date_established' => 'nullable|date|before_or_equal:today',
         'type' => 'required|numeric',
-        //this rule should make sure the branch established date is not greater than the church it belongs to
-        //'date_established' => 'before_or_equal:today'
     ];
-
-    // public function __construct()
-    // {
-    //    // parent::__construct();
-    // }
 
 
     /**
      * Defines the relationship between a branch and the church it belongs to
+     * @return Church
      *
      */
     public function getChurch()
