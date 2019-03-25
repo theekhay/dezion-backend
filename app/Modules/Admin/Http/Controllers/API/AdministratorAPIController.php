@@ -332,14 +332,14 @@ class AdministratorAPIController extends AppBaseController
 
     /**
      * API to log currently authenticated user out the current device.
-     *
+     * @authenticated
      */
     public function logout()
     {
         $admin = Auth::user();
         $token = $admin->token();
         $token->revoke();
-        return $this->sendResponse( $admin, 'log out successful');
+        return $this->sendResponse( $admin, 'user logged out successfully');
     }
 
 
