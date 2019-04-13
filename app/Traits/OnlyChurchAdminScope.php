@@ -23,6 +23,6 @@ Class OnlyChurchAdminScope implements Scope{
      */
     public function withPending()
     {
-
+        //
     }
 }

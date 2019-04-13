@@ -25,6 +25,8 @@ use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use App\Modules\Rolemanager\Http\Resources\PermissionResource;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
+use App\Modules\Rolemanager\Http\Resources\RoleResource;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 
 /**
@@ -76,6 +78,7 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     * @authenticated
      */
     public function index(Request $request)
     {
@@ -83,7 +86,7 @@ class RoleAPIController extends AppBaseController
         $this->roleRepository->pushCriteria(new LimitOffsetCriteria($request));
         $roles = $this->roleRepository->all();
 
-        return $this->sendResponse($roles->toArray(), 'Roles retrieved successfully');
+        return $this->sendResponse(  RoleResource::collection( $roles ), 'Roles retrieved successfully');
     }
 
     /**
@@ -141,7 +144,7 @@ class RoleAPIController extends AppBaseController
 
             DB::commit();
 
-            return $this->sendResponse($role->toArray(), 'Role saved successfully');
+            return $this->sendResponse( $role->toArray(), 'Role saved successfully');
         }
         catch( RoleAlreadyExists $e ){
             return $this->sendError($e->getMessage(), 400);
@@ -196,6 +199,10 @@ class RoleAPIController extends AppBaseController
      *          )
      *      )
      * )
+     *
+     * API to get details about a role
+     * @authenticated
+     * @queryParam id integer  The id of the role
      */
     public function show($id)
     {
@@ -206,7 +213,7 @@ class RoleAPIController extends AppBaseController
             return $this->sendError('Role not found');
         }
 
-        return $this->sendResponse($role->toArray(), 'Role retrieved successfully');
+        return $this->sendResponse( new RoleResource($role), 'Role retrieved successfully');
     }
 
     /**

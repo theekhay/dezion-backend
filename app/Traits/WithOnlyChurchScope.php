@@ -13,7 +13,7 @@ Class WithOnlyChurchScope implements Scope{
 
 
     /**
-     * These are the routes to be ignored when applying this scop
+     * These are the routes to be ignored when applying this scope
      * A better approach would be to use non-authenticated routed approach
      */
     private static $excludeRoute = [
@@ -29,7 +29,7 @@ Class WithOnlyChurchScope implements Scope{
          * The superadmin should be able to see all resources from every church
          */
        // if( ! Auth::user()->isSuperAdmin() ){
-            if( ( ! in_array(Route::getFacadeRoot()->current()->uri(), self::$excludeRoute) )){
+            if( ( ! in_array( Route::getFacadeRoot()->current()->uri(), self::$excludeRoute) )){
 
                 $builder->where( $model->getChurchIdField(), Auth::user()->getChurch->id );
             }

@@ -11,6 +11,8 @@ use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Auth;
 use function GuzzleHttp\json_encode;
 
 /**
@@ -73,6 +75,8 @@ class CellMemberMappingAPIController extends AppBaseController
     /**
      * @param CreateCellMemberMappingAPIRequest $request
      * @return Response
+     *  API to save members and the cells/fellowship/smallgroup they have been mapped to
+     * The mapping is done based on proximity of location to the member's
      *
      * @SWG\Post(
      *      path="/cellMemberMappings",
@@ -108,8 +112,7 @@ class CellMemberMappingAPIController extends AppBaseController
      *      )
      * )
      *
-     * API to save members and the cells/fellowship/smallgroup they have been mapped to
-     * The mapping is done based on proximity of location to the member's
+     *
      *
      * @bodyParam church_id integer required The church the member belongs to
      * @bodyParam mapped_model string required The model used for mapping e.g cell::class, smallGroup::class, houseFellowship::class
@@ -121,13 +124,11 @@ class CellMemberMappingAPIController extends AppBaseController
      */
     public function store(CreateCellMemberMappingAPIRequest $request)
     {
-        //$input = $request->all();
-
         $cell_data =  $request->mapping_data ;
 
         $size = count($cell_data);
 
-        $data = []; //to hold the final data to be saved
+        if( $size < 1) return $this->sendError("Error: Can't process request, mapping data empty!");
 
         for( $i = 0; $i < $size; $i++){
 
@@ -138,6 +139,11 @@ class CellMemberMappingAPIController extends AppBaseController
                 'mapped_model' => $request->mapped_model,
                 'mapped_model_id' => $cell_data[$i]['model_id'],
                 'status' => $cell_data[$i]['status'],
+                'created_by' => date('Y-m-d H:i:s'),
+                'updated' => date('Y-m-d H:i:s'),
+                'uuid' => Uuid::uuid4()->toString(),
+                'created_by' => Auth::id(),
+
             ];
 
             CellMemberMapping::updateOrCreate( ['member_id' => $cell_data[$i]['member_id'] ], $r );

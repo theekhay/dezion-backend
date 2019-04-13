@@ -6,10 +6,10 @@
   * This ought to be from the commandkine, but I don't have such time luxury to tweak the package.
   * Disadvantage: This always has to be changesd whenever you want to scaffold  for a new module
   */
-$module = "Modules/Membership/";
+$module = "Modules/memberlocationmapping/";
 
 /**
- * This creates the name space from the files generatd in the above defined module.
+ * This creates the namespace from the files generatd in the above defined module.
  * This was needed because the files were getting wrongly namespaced
  */
 $nspace =  str_replace('/', '\\', $module);

@@ -4,6 +4,8 @@ namespace App\Modules\Membership\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\AddCreatedBy;
+use App\Traits\UuidTrait;
 
 /**
  * @SWG\Definition(
@@ -31,7 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class CellMemberMapping extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, AddCreatedBy, UuidTrait;
 
     public $table = 'cell_member_mappings';
 
@@ -63,7 +65,6 @@ class CellMemberMapping extends Model
         'church_id' => 'required|numeric|exists:churches,id',
         'mapped_model' => 'required|string',
         'mapping_data' => 'required'
-
     ];
 
 

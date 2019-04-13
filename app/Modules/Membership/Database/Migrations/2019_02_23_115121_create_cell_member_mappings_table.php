@@ -15,12 +15,16 @@ class CreateCellMemberMappingsTable extends Migration
     {
         Schema::create('cell_member_mappings', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
 
             $table->integer('church_id');
             $table->integer('member_id');
             $table->integer('mapped_model_id');
             $table->string('mapped_model');
             $table->integer('status');
+
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullbale();
 
             $table->timestamps();
             $table->softDeletes();

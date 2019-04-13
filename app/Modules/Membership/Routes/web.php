@@ -24,5 +24,4 @@ Route::resource('memberDetails', 'MemberDetailController');
 
 Route::resource('bulkMemberImports', 'BulkMemberImportController');
 
-
 Route::resource('cellMemberMappings', 'CellMemberMappingController');

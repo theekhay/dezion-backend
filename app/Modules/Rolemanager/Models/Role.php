@@ -10,6 +10,7 @@ use App\Traits\AddCreatedBy;
 use App\Traits\UuidTrait;
 
 use Spatie\Permission\Models\Role as SpatieRole;
+use App\Modules\Core\Models\Church;
 
 /**
  * @SWG\Definition(
@@ -65,6 +66,17 @@ class Role extends SpatieRole
         'church_id' => 'required|numeric|exists:churches,id',
         'name' => 'required|string|unique_with:roles,church_id',
     ];
+
+
+
+    /**
+     * Gets the church a role belongs to
+     * @return Church
+     */
+    public function church()
+    {
+        return $this->belongsTo( Church::class, 'id', 'church_id');
+    }
 
 
 
